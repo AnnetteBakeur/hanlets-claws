@@ -296,3 +296,4 @@ export async function getCurrentUser() {
 
   return data?.user || null
 }
+export const EMAIL_CONTACT = 'annettebakeur@gmail.com';
