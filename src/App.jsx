@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { Sparkles, Upload, X, Plus, Lock, Mail, Camera, Trash2, ArrowLeft, Heart, Check, ImagePlus, Send, Package, LogOut, Edit3, Menu, ChevronRight, Search, Download, Home, Settings, Eye, EyeOff } from 'lucide-react';
 import * as db from './db';
-import { EMAIL_CONTACT } from './db';
 
 // ===== CONFIG (à personnaliser) =====
 const BRAND = "Annettebakeur";
 const INSTAGRAM = '@Annettebakeur';
+const EMAIL_CONTACT = 'axellehanlet@free.fr';
 // ===== PASSWORD RESET STATE (à rajouter dans le composant App) =====
 // (tu verras c'est utilisé dans le return)
 
