@@ -347,23 +347,87 @@ export default function App() {
 }
 
 function Header({ page, goTo, menuOpen, setMenuOpen }) {
-  const links = [{ id: 'home', label: 'Accueil' }, { id: 'designs', label: 'Designs' }, { id: 'custom', label: 'Sur mesure' }];
+  const links = [
+    { id: 'home', label: 'LA BAKEURY' },
+    { id: 'designs', label: 'DESIGNS' },
+    { id: 'custom', label: 'SUR-MESURE' }
+  ];
+
+  const navigate = (id) => {
+    goTo(id);
+    setMenuOpen(false);
+  };
+
   return (
-    <header className="sticky top-0 z-40 bg-neutral-950/85 backdrop-blur-md border-b border-neutral-800/60">
-      <div className="max-w-7xl mx-auto px-5 lg:px-10 h-16 flex items-center justify-between">
-        <button onClick={() => goTo('home')} className="font-serif text-xl lg:text-2xl tracking-wide text-neutral-50 hover:text-white transition-colors" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>{BRAND}</button>
-        <nav className="hidden md:flex items-center gap-8">
-          {links.map(l => <button key={l.id} onClick={() => goTo(l.id)} className={`text-sm tracking-wide transition-colors ${page === l.id ? 'text-neutral-50' : 'text-neutral-400 hover:text-neutral-50'}`}>{l.label}</button>)}
-          <button onClick={() => goTo('admin')} className="text-neutral-600 hover:text-neutral-300 transition-colors" title="Espace admin"><Lock className="w-4 h-4" /></button>
+    <header className="ab-header">
+      <div className="ab-header-inner">
+
+        <button
+          onClick={() => navigate('home')}
+          className="ab-header-brand"
+        >
+          <span>ANNETTE</span>
+          <span>BAKEUR</span>
+        </button>
+
+        <nav className="ab-header-nav">
+          {links.map((link, index) => (
+            <button
+              key={link.id}
+              onClick={() => navigate(link.id)}
+              className={`ab-header-link ${
+                page === link.id ? 'is-active' : ''
+              }`}
+            >
+              <span className="ab-header-number">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              {link.label}
+            </button>
+          ))}
         </nav>
-        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden p-2 text-neutral-100">{menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}</button>
+
+        <div className="ab-header-actions">
+          <button
+            onClick={() => goTo('admin')}
+            className="ab-header-admin"
+            title="Espace admin"
+            aria-label="Espace admin"
+          >
+            <Lock />
+          </button>
+
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="ab-header-menu-button"
+            aria-label="Menu"
+          >
+            {menuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+
       </div>
+
       {menuOpen && (
-        <div className="md:hidden border-t border-neutral-800 bg-neutral-950">
-          <div className="px-5 py-3 space-y-1">
-            {links.map(l => <button key={l.id} onClick={() => goTo(l.id)} className={`block w-full text-left py-3 text-sm ${page === l.id ? 'text-neutral-50 font-medium' : 'text-neutral-400'}`}>{l.label}</button>)}
-            <button onClick={() => goTo('admin')} className="flex items-center gap-2 w-full text-left py-3 text-sm text-neutral-500"><Lock className="w-3.5 h-3.5" /> Admin</button>
-          </div>
+        <div className="ab-mobile-menu">
+          {links.map((link, index) => (
+            <button
+              key={link.id}
+              onClick={() => navigate(link.id)}
+              className={page === link.id ? 'is-active' : ''}
+            >
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <strong>{link.label}</strong>
+            </button>
+          ))}
+
+          <button
+            onClick={() => navigate('admin')}
+            className="ab-mobile-admin"
+          >
+            <Lock />
+            <strong>ADMIN</strong>
+          </button>
         </div>
       )}
     </header>

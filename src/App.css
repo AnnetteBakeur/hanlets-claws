@@ -1087,3 +1087,255 @@
     display: none;
   }
 }
+/* =========================================================
+   ANNETTE BAKEUR — HEADER
+   ========================================================= */
+
+.ab-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: #050505;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f0ede5;
+}
+
+.ab-header-inner {
+  min-height: 76px;
+  padding: 0 2.2vw;
+  display: grid;
+  grid-template-columns: minmax(190px, 1fr) auto minmax(190px, 1fr);
+  align-items: center;
+  gap: 30px;
+}
+
+/* BRAND */
+
+.ab-header-brand {
+  justify-self: start;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f21b1b;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: clamp(18px, 1.7vw, 28px);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.07em;
+  cursor: pointer;
+}
+
+.ab-header-brand span:last-child {
+  color: transparent;
+  -webkit-text-stroke: 1px #f21b1b;
+}
+
+/* NAVIGATION */
+
+.ab-header-nav {
+  display: flex;
+  align-items: stretch;
+  align-self: stretch;
+}
+
+.ab-header-link {
+  position: relative;
+  min-width: 135px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  border: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+
+  color: #f0ede5;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.ab-header-link:last-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.ab-header-number {
+  color: #777;
+  font-size: 8px;
+  font-weight: 500;
+  align-self: flex-start;
+  margin-top: 22px;
+}
+
+.ab-header-link:hover {
+  background: #1746ff;
+  color: white;
+}
+
+.ab-header-link.is-active {
+  background: #f21b1b;
+  color: #050505;
+}
+
+.ab-header-link.is-active .ab-header-number {
+  color: #050505;
+}
+
+/* ADMIN + MOBILE */
+
+.ab-header-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ab-header-admin,
+.ab-header-menu-button {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: transparent;
+  color: #aaa;
+
+  cursor: pointer;
+  transition: 160ms ease;
+}
+
+.ab-header-admin svg,
+.ab-header-menu-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ab-header-admin:hover,
+.ab-header-menu-button:hover {
+  border-color: #ffd514;
+  background: #ffd514;
+  color: #050505;
+}
+
+.ab-header-menu-button {
+  display: none;
+}
+
+/* MENU MOBILE */
+
+.ab-mobile-menu {
+  display: none;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+  .ab-header-inner {
+    min-height: 66px;
+    padding: 0 18px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .ab-header-brand {
+    font-size: 21px;
+  }
+
+  .ab-header-nav {
+    display: none;
+  }
+
+  .ab-header-menu-button {
+    display: grid;
+  }
+
+  .ab-mobile-menu {
+    display: block;
+    background: #050505;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .ab-mobile-menu button {
+    width: 100%;
+    min-height: 64px;
+    padding: 0 18px;
+
+    display: grid;
+    grid-template-columns: 45px 1fr;
+    align-items: center;
+
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+    background: #050505;
+    color: #f0ede5;
+
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .ab-mobile-menu button span {
+    color: #777;
+    font-size: 9px;
+  }
+
+  .ab-mobile-menu button strong {
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+  }
+
+  .ab-mobile-menu button.is-active {
+    background: #f21b1b;
+    color: #050505;
+  }
+
+  .ab-mobile-menu button.is-active span {
+    color: #050505;
+  }
+
+  .ab-mobile-menu .ab-mobile-admin {
+    grid-template-columns: 45px 1fr;
+    color: #777;
+  }
+
+  .ab-mobile-admin svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+/* AJUSTEMENTS HEADER V2 */
+
+.ab-header-inner {
+  min-height: 64px;
+  grid-template-columns: minmax(230px, 1fr) auto minmax(230px, 1fr);
+}
+
+.ab-header-brand {
+  font-size: clamp(20px, 1.8vw, 30px);
+}
+
+.ab-header-link {
+  min-width: 125px;
+  padding: 0 19px;
+  font-size: 10px;
+}
+
+.ab-header-number {
+  font-size: 7px;
+  margin-top: 17px;
+}
