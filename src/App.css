@@ -1338,4 +1338,25 @@
 .ab-header-number {
   font-size: 7px;
   margin-top: 17px;
+}/* LES TROIS ENTRÉES — TEST ÉDITORIAL */
+
+.ab2-menu-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 0.8fr;
+  gap: 12px;
+  align-items: end;
+}
+
+.ab2-card-custom {
+  min-height: 350px;
+  transform: translateY(-55px);
+}
+
+
+.ab2-card-original {
+  min-height: 390px;
+}
+
+.ab2-card-soft {
+  min-height: 260px;
 }
