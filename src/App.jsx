@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Sparkles, Upload, X, Plus, Lock, Mail, Camera, Trash2, ArrowLeft, Heart, Check, ImagePlus, Send, Package, LogOut, Edit3, Menu, ChevronRight, Search, Download, Home, Settings, Eye, EyeOff } from 'lucide-react';
 import * as db from './db';
-
+import HomePage from './pages/HomePage';
+import './App.css';
 // ===== CONFIG (à personnaliser) =====
 const BRAND = "Annettebakeur";
 const INSTAGRAM = '@Annettebakeur';
@@ -333,7 +334,7 @@ export default function App() {
         </div>
       ) : (
         <>
-          {page === 'home' && <HomePage hero={hero} gallery={gallery} goTo={goTo} />}
+          {page === 'home' && <HomePage hero={hero} gallery={gallery} designs={designs} goTo={goTo} />}
           {page === 'designs' && <DesignsPage designs={designs} goTo={goTo} />}
           {page === 'order' && <OrderForm design={selectedDesign} saveOrder={saveOrder} goTo={goTo} />}
           {page === 'custom' && <CustomOrderForm saveOrder={saveOrder} goTo={goTo} />}
@@ -375,68 +376,6 @@ function BackButton({ onClick, label = "Retour à l'accueil", icon = 'home' }) {
       {icon === 'home' ? <Home className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" /> : <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />}
       {label}
     </button>
-  );
-}
-
-function HomePage({ hero, gallery, goTo }) {
-  return (
-    <div>
-      <section className="relative">
-        <div className="max-w-7xl mx-auto px-5 lg:px-10 pt-8 lg:pt-16 pb-16 lg:pb-24">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            <div className="order-2 lg:order-1">
-              <p className="text-xs tracking-[0.3em] uppercase text-neutral-500 mb-4">Press-on nails artisanales</p>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-tight text-neutral-50 mb-6" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>Des ongles d'exception, <em className="italic text-neutral-300">réutilisables</em> et faits main.</h1>
-              <p className="text-neutral-400 text-base lg:text-lg leading-relaxed mb-8 max-w-lg">Chaque set est unique, conçu avec soin pour sublimer vos mains au quotidien comme pour vos moments d'exception.</p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <button onClick={() => goTo('designs')} className="px-7 py-3.5 bg-neutral-50 text-neutral-950 text-sm tracking-wide hover:bg-white transition-colors flex items-center justify-center gap-2 rounded-full">Voir les designs <ChevronRight className="w-4 h-4" /></button>
-                <button onClick={() => goTo('custom')} className="px-7 py-3.5 border border-neutral-700 text-neutral-100 text-sm tracking-wide hover:border-neutral-50 hover:bg-neutral-900 transition-colors rounded-full">Sur mesure</button>
-              </div>
-            </div>
-            <div className="order-1 lg:order-2 aspect-[3/4] lg:aspect-[4/5] rounded-2xl overflow-hidden bg-neutral-900 shadow-2xl border border-neutral-800">
-              {hero ? <img src={hero} alt="Hero" className="w-full h-full object-cover" /> : <Placeholder label="Votre photo ici" className="w-full h-full" />}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-neutral-900 bg-neutral-900/30">
-        <div className="max-w-6xl mx-auto px-5 lg:px-10 py-16 lg:py-24">
-          <div className="grid md:grid-cols-2 gap-5 lg:gap-8">
-            <div className="bg-neutral-900 rounded-2xl p-7 lg:p-10 border border-neutral-800 flex flex-col hover:border-neutral-700 transition-colors">
-              <div className="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center mb-5"><Sparkles className="w-5 h-5 text-neutral-200" /></div>
-              <h2 className="font-serif text-2xl lg:text-3xl mb-3 text-neutral-50" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>Designs disponibles</h2>
-              <p className="text-neutral-400 leading-relaxed mb-6 flex-1">Si vous souhaitez un set mais que vous n'avez pas d'inspiration, voici les créations uniques que je propose.</p>
-              <button onClick={() => goTo('designs')} className="self-start px-6 py-3 bg-neutral-50 text-neutral-950 text-sm tracking-wide hover:bg-white transition-colors rounded-full flex items-center gap-2">Voir les designs <ChevronRight className="w-4 h-4" /></button>
-            </div>
-            <div className="bg-neutral-900 rounded-2xl p-7 lg:p-10 border border-neutral-800 flex flex-col hover:border-neutral-700 transition-colors">
-              <div className="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center mb-5"><Heart className="w-5 h-5 text-neutral-200" /></div>
-              <h2 className="font-serif text-2xl lg:text-3xl mb-3 text-neutral-50" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>Commande personnalisée</h2>
-              <p className="text-neutral-400 leading-relaxed mb-6 flex-1">Si vous avez des inspirations (ex : des poses existantes, films, livres, photos, images…), je vous crée un set personnalisé.</p>
-              <button onClick={() => goTo('custom')} className="self-start px-6 py-3 bg-neutral-50 text-neutral-950 text-sm tracking-wide hover:bg-white transition-colors rounded-full flex items-center gap-2">Commande personnalisée <ChevronRight className="w-4 h-4" /></button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="max-w-7xl mx-auto px-5 lg:px-10 py-16 lg:py-24 border-t border-neutral-900">
-        <div className="text-center mb-10 lg:mb-14">
-          <p className="text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">Portfolio</p>
-          <h2 className="font-serif text-3xl lg:text-4xl text-neutral-50" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>Mes réalisations</h2>
-        </div>
-        {gallery.length === 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
-            {[...Array(8)].map((_, i) => <div key={i} className="aspect-square rounded-xl overflow-hidden border border-neutral-900"><Placeholder label={`Set ${i + 1}`} className="w-full h-full" /></div>)}
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
-            {gallery.map((img, i) => <div key={i} className="aspect-square rounded-xl overflow-hidden bg-neutral-900 group cursor-pointer border border-neutral-800"><img src={img} alt={`Set ${i + 1}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" /></div>)}
-          </div>
-        )}
-      </section>
-
-
-    </div>
   );
 }
 
