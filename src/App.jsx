@@ -544,7 +544,7 @@ function OrderForm({ design, saveOrder, goTo }) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
+    <div className="ab-order-page max-w-3xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
       <BackButton onClick={() => goTo('designs')} label="Retour aux designs" icon="arrow" />
       <div className="ab-order-product bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden mb-8">
         <div className="ab-order-product-inner flex flex-col sm:flex-row gap-5 p-5 lg:p-7">

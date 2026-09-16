@@ -1978,19 +1978,19 @@ html {
    PAGE COMMANDE — DEUX COLONNES SUR ORDINATEUR
    ========================================================= */
 
-@media (min-width: 951px) {
+@media (min-width: 780px) {
   .site-shell.site-shell-order .ab-order-page {
     display: grid !important;
 
     grid-template-columns:
-      minmax(380px, 0.85fr)
-      minmax(560px, 1.15fr);
+  minmax(280px, 0.8fr)
+  minmax(0, 1.2fr);
 
     grid-template-areas:
       "back back"
       "product form";
 
-    column-gap: clamp(55px, 6vw, 115px);
+    column-gap: clamp(30px, 4vw, 75px);
     align-items: start;
 
     max-width: 1600px !important;
@@ -2030,9 +2030,16 @@ html {
   .site-shell.site-shell-order .ab-order-image {
     width: 100% !important;
     max-width: none !important;
+height: min(55vh, 560px) !important;
+aspect-ratio: auto !important;
 
     aspect-ratio: 4 / 5 !important;
   }
+  .site-shell.site-shell-order .ab-order-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
 
   .site-shell.site-shell-order .ab-order-summary {
     width: 100%;
@@ -2275,4 +2282,104 @@ html {
   border-color: rgba(240, 237, 229, 0.28) !important;
 
   color: #f0ede5 !important;
+}
+/* =========================================================
+   FICHE COMMANDE — DEUX COLONNES
+   ========================================================= */
+
+.site-shell.site-shell-order .ab-order-page {
+  display: grid !important;
+
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr) !important;
+  grid-template-areas:
+    "back back"
+    "product form" !important;
+
+  column-gap: clamp(35px, 4vw, 70px) !important;
+  align-items: start !important;
+
+  width: 100% !important;
+  max-width: 1550px !important;
+
+  margin: 0 auto !important;
+  padding-left: 4vw !important;
+  padding-right: 4vw !important;
+}
+
+.site-shell.site-shell-order .ab-order-page > button:first-child {
+  grid-area: back !important;
+}
+
+.site-shell.site-shell-order .ab-order-product {
+  grid-area: product !important;
+
+  position: sticky !important;
+  top: 105px !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+}
+
+.site-shell.site-shell-order .ab-order-product-inner {
+  display: block !important;
+}
+
+.site-shell.site-shell-order .ab-order-image {
+  width: 100% !important;
+height: auto !important;
+
+max-width: 560px !important;
+aspect-ratio: 4 / 5 !important;
+}
+
+.site-shell.site-shell-order .ab-order-image img {
+  width: 100% !important;
+  height: 100% !important;
+
+  object-fit: cover !important;
+}
+
+.site-shell.site-shell-order .ab-order-summary {
+  width: 100% !important;
+  margin-top: 28px !important;
+}
+
+.site-shell.site-shell-order .ab-order-form {
+  grid-area: form !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border-top: 0 !important;
+}
+
+/* Téléphone */
+
+@media (max-width: 700px) {
+  .site-shell.site-shell-order .ab-order-page {
+    display: block !important;
+
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .site-shell.site-shell-order .ab-order-product {
+    position: static !important;
+    margin-bottom: 55px !important;
+  }
+
+  .site-shell.site-shell-order .ab-order-image {
+    height: auto !important;
+    aspect-ratio: 4 / 5 !important;
+  }
+
+  .site-shell.site-shell-order .ab-order-page > button:first-child {
+    margin-bottom: 35px;
+  }
 }
