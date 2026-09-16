@@ -447,7 +447,7 @@ function DesignsPage({ designs, goTo }) {
   const [sort, setSort] = useState('recent');
   const sorted = [...designs].sort((a, b) => sort === 'price-asc' ? a.price - b.price : sort === 'price-desc' ? b.price - a.price : 0);
   return (
-    <div className="max-w-7xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
+    <div className="ab-designs-page max-w-7xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
       <BackButton onClick={() => goTo('home')} />
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10 lg:mb-14">
         <div>
@@ -467,9 +467,13 @@ function DesignsPage({ designs, goTo }) {
       {designs.length === 0 ? (
         <p className="text-neutral-500 text-center py-20">Aucun design disponible pour l'instant.</p>
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:gap-7">
+        <div className="ab-designs-grid grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:gap-7">
           {sorted.map(d => (
-            <div key={d.id} className="group cursor-pointer" onClick={() => goTo('order', d)}>
+            <div
+  key={d.id}
+  className="ab-design-card group cursor-pointer"
+  onClick={() => goTo('order', d)}
+>
               <div className="aspect-[4/5] rounded-xl overflow-hidden bg-neutral-900 mb-3 lg:mb-4 border border-neutral-800 group-hover:border-neutral-600 transition-colors">
                 {d.image ? <img src={d.image} alt={d.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" /> : <Placeholder label={d.name} className="w-full h-full" />}
               </div>
