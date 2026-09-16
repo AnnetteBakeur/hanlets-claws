@@ -1479,3 +1479,164 @@
 .site-shell .ab-designs-title {
   color: #f21b1b !important;
 }
+/* =========================================================
+   PAGE DESIGNS — CARTES ÉDITORIALES
+   ========================================================= */
+
+.ab-designs-grid {
+  counter-reset: design-figure;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 60px 34px !important;
+
+  align-items: start;
+}
+
+.ab-design-card {
+  counter-increment: design-figure;
+
+  position: relative;
+  padding-top: 25px;
+}
+
+/* FIG. 01 / FIG. 02 / ... */
+
+.ab-design-card::before {
+  content: "FIG. " counter(design-figure, decimal-leading-zero);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  color: #777;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+/* IMAGE */
+
+.ab-design-card > div:first-child {
+  border-radius: 0 !important;
+
+  border: 1px solid rgba(240, 237, 229, 0.3) !important;
+
+  background: #0a0a0a !important;
+
+  box-shadow:
+    9px 11px 0 rgba(240, 237, 229, 0.07);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.ab-design-card:hover > div:first-child {
+  transform: translateY(-5px);
+
+  box-shadow:
+    13px 16px 0 rgba(240, 237, 229, 0.1);
+}
+
+/* DÉCALAGE VOLONTAIRE DES CARTES */
+
+.ab-design-card:nth-child(3n + 2) {
+  margin-top: 55px;
+}
+
+.ab-design-card:nth-child(3n + 3) {
+  margin-top: 20px;
+}
+
+/* NOM DU DESIGN */
+
+.ab-design-card h3 {
+  margin-top: 18px !important;
+
+  color: #f0ede5 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: clamp(20px, 2vw, 31px) !important;
+  font-weight: 900 !important;
+
+  line-height: 0.95 !important;
+  letter-spacing: -0.04em !important;
+
+  text-transform: uppercase;
+}
+
+/* DESCRIPTION */
+
+.ab-design-card > p {
+  min-height: 20px;
+
+  color: #777 !important;
+
+  font-size: 10px !important;
+  line-height: 1.5;
+
+  letter-spacing: 0.03em;
+}
+
+/* PRIX + COMMANDER */
+
+.ab-design-card > div:last-child {
+  margin-top: 14px;
+  padding-top: 11px;
+
+  border-top: 1px solid rgba(240, 237, 229, 0.18);
+}
+
+.ab-design-card > div:last-child span:first-child {
+  color: #f0ede5 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.ab-design-card > div:last-child span:last-child {
+  color: #777 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 9px !important;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* TABLETTE */
+
+@media (max-width: 1100px) {
+  .ab-designs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .ab-design-card:nth-child(3n + 2),
+  .ab-design-card:nth-child(3n + 3) {
+    margin-top: 0;
+  }
+
+  .ab-design-card:nth-child(even) {
+    margin-top: 45px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+  .ab-designs-grid {
+    grid-template-columns: 1fr !important;
+    gap: 50px !important;
+  }
+
+  .ab-design-card,
+  .ab-design-card:nth-child(even),
+  .ab-design-card:nth-child(3n + 2),
+  .ab-design-card:nth-child(3n + 3) {
+    margin-top: 0;
+  }
+}
