@@ -335,7 +335,19 @@ export default function App() {
       ) : (
         <>
           {page === 'home' && <HomePage hero={hero} gallery={gallery} designs={designs} goTo={goTo} />}
-          {page === 'designs' && <DesignsPage designs={designs} goTo={goTo} />}
+          {(page === 'designs' || page === 'designs-original' || page === 'designs-soft') && (
+  <DesignsPage
+    designs={designs}
+    goTo={goTo}
+    category={
+      page === 'designs-original'
+        ? 'original'
+        : page === 'designs-soft'
+        ? 'soft'
+        : 'all'
+    }
+  />
+)}
           {page === 'order' && <OrderForm design={selectedDesign} saveOrder={saveOrder} goTo={goTo} />}
           {page === 'custom' && <CustomOrderForm saveOrder={saveOrder} goTo={goTo} />}
           {page === 'admin' && <AdminPage user={user} setUser={setUser} orders={orders} setOrders={setOrders} hero={hero} setHero={setHero} gallery={gallery} setGallery={setGallery} designs={designs} setDesigns={setDesigns} goTo={goTo} />}
@@ -443,9 +455,22 @@ function BackButton({ onClick, label = "Retour à l'accueil", icon = 'home' }) {
   );
 }
 
-function DesignsPage({ designs, goTo }) {
+function DesignsPage({ designs, goTo, category = 'all' }) {
   const [sort, setSort] = useState('recent');
-  const sorted = [...designs].sort((a, b) => sort === 'price-asc' ? a.price - b.price : sort === 'price-desc' ? b.price - a.price : 0);
+
+  const filteredDesigns =
+    category === 'all'
+      ? designs
+      : designs.filter(
+          d => (d.category || 'original') === category
+        );
+  const pageTitle =
+    category === 'soft'
+      ? 'Prix doux'
+      : category === 'original'
+      ? 'Designs originaux'
+      : 'Designs disponibles';
+  const sorted = [...filteredDesigns].sort((a, b) => sort === 'price-asc' ? a.price - b.price : sort === 'price-desc' ? b.price - a.price : 0);
   return (
     <div className="ab-designs-page max-w-7xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
       <BackButton onClick={() => goTo('home')} />
@@ -456,7 +481,7 @@ function DesignsPage({ designs, goTo }) {
   className="ab-designs-title font-serif text-4xl lg:text-5xl text-neutral-50 mb-3"
   style={{ fontFamily: 'ui-serif, Georgia, serif' }}
 >
-  Designs disponibles
+  {pageTitle}
 </h1>
           <p className="text-neutral-400 max-w-xl">Chaque set est fait main et personnalisable selon vos mesures.</p>
         </div>
@@ -469,7 +494,7 @@ function DesignsPage({ designs, goTo }) {
           </select>
         </div>
       </div>
-      {designs.length === 0 ? (
+      {filteredDesigns.length === 0 ? (
         <p className="text-neutral-500 text-center py-20">Aucun design disponible pour l'instant.</p>
       ) : (
         <div className="ab-designs-grid grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:gap-7">
@@ -1381,7 +1406,13 @@ function DesignsManager({ designs, setDesigns }) {
           <h3 className="font-serif text-xl text-neutral-50" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>Catalogue de designs</h3>
           <p className="text-neutral-500 text-sm mt-1">Vos croquis disponibles à la commande.</p>
         </div>
-        <button onClick={() => setEditing({ name: '', price: '', desc: '', image: null })} className="px-4 py-2 bg-neutral-50 text-neutral-950 rounded-full text-sm hover:bg-white flex items-center gap-1.5 font-medium"><Plus className="w-4 h-4" /> Nouveau</button>
+        <button onClick={() => setEditing({
+  name: '',
+  price: '',
+  desc: '',
+  image: null,
+  category: 'original'
+})} className="px-4 py-2 bg-neutral-50 text-neutral-950 rounded-full text-sm hover:bg-white flex items-center gap-1.5 font-medium"><Plus className="w-4 h-4" /> Nouveau</button>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         {designs.map(d => (
@@ -1403,7 +1434,11 @@ function DesignsManager({ designs, setDesigns }) {
 }
 
 function DesignEditor({ design, onSave, onCancel }) {
-  const [d, setD] = useState({ ...design, price: design.price || '' });
+  const [d, setD] = useState({
+  ...design,
+  price: design.price || '',
+  category: design.category || 'original'
+});
   async function handleImage(e) {
     const file = e.target.files?.[0]; if (!file) return;
     const compressed = await compressImage(file, 1000, 0.75);
@@ -1435,6 +1470,20 @@ function DesignEditor({ design, onSave, onCancel }) {
         </div>
         <div><label className="text-xs tracking-widest uppercase text-neutral-500 block mb-1.5">Nom</label><input value={d.name} onChange={e => setD({ ...d, name: e.target.value })} className="w-full px-4 py-2.5 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 text-neutral-100" /></div>
         <div><label className="text-xs tracking-widest uppercase text-neutral-500 block mb-1.5">Prix (€)</label><input type="number" value={d.price} onChange={e => setD({ ...d, price: e.target.value })} className="w-full px-4 py-2.5 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 text-neutral-100" /></div>
+        <div>
+  <label className="text-xs tracking-widest uppercase text-neutral-500 block mb-1.5">
+    Catégorie
+  </label>
+
+  <select
+    value={d.category}
+    onChange={e => setD({ ...d, category: e.target.value })}
+    className="w-full px-4 py-2.5 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 text-neutral-100"
+  >
+    <option value="original">Designs originaux</option>
+    <option value="soft">Prix doux</option>
+  </select>
+</div>
         <div><label className="text-xs tracking-widest uppercase text-neutral-500 block mb-1.5">Description courte</label><textarea value={d.desc} onChange={e => setD({ ...d, desc: e.target.value })} rows={2} className="w-full px-4 py-2.5 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 resize-none text-neutral-100" /></div>
         <div className="flex gap-2 pt-3">
           <button onClick={submit} className="px-5 py-2.5 bg-neutral-50 text-neutral-950 rounded-full text-sm hover:bg-white font-medium">Enregistrer</button>

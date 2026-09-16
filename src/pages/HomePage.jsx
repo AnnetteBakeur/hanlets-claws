@@ -94,7 +94,7 @@ export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
 
           <button
             className="ab2-card ab2-card-original"
-            onClick={() => goTo('designs')}
+            onClick={() => goTo('designs-original')}
           >
             <span className="ab2-card-number">02</span>
 
@@ -112,7 +112,7 @@ export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
 
           <button
             className="ab2-card ab2-card-soft"
-            onClick={() => goTo('designs')}
+            onClick={() => goTo('designs-soft')}
           >
             <span className="ab2-card-number">03</span>
 
