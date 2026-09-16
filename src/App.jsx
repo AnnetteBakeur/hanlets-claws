@@ -541,20 +541,25 @@ function OrderForm({ design, saveOrder, goTo }) {
   return (
     <div className="max-w-3xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
       <BackButton onClick={() => goTo('designs')} label="Retour aux designs" icon="arrow" />
-      <div className="bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden mb-8">
-        <div className="flex flex-col sm:flex-row gap-5 p-5 lg:p-7">
-          <div className="w-full sm:w-40 aspect-square rounded-xl overflow-hidden bg-neutral-800 flex-shrink-0 border border-neutral-800">
+      <div className="ab-order-product bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden mb-8">
+        <div className="ab-order-product-inner flex flex-col sm:flex-row gap-5 p-5 lg:p-7">
+          <div className="ab-order-image w-full sm:w-40 aspect-square rounded-xl overflow-hidden bg-neutral-800 flex-shrink-0 border border-neutral-800">
             {design.image ? <img src={design.image} alt={design.name} className="w-full h-full object-cover" /> : <Placeholder label={design.name} className="w-full h-full" />}
           </div>
-          <div className="flex-1">
-            <p className="text-xs tracking-[0.2em] uppercase text-neutral-500 mb-2">Commande</p>
-            <h1 className="font-serif text-2xl lg:text-3xl text-neutral-50 mb-2" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>{design.name}</h1>
-            <p className="text-neutral-400 text-sm mb-2">{design.desc}</p>
-            <p className="text-xl text-neutral-50 font-medium">{design.price} €</p>
+          <div className="ab-order-summary flex-1">
+            <p className="ab-order-kicker text-xs tracking-[0.2em] uppercase text-neutral-500 mb-2">Commande</p>
+            <h1
+  className="ab-order-title font-serif text-2xl lg:text-3xl text-neutral-50 mb-2"
+  style={{ fontFamily: 'ui-serif, Georgia, serif' }}
+>
+  {design.name}
+</h1>
+            <p className="ab-order-desc text-neutral-400 text-sm mb-2">{design.desc}</p>
+            <p className="ab-order-price text-xl text-neutral-50 font-medium">{design.price} €</p>
           </div>
         </div>
       </div>
-      <div className="space-y-5">
+      <div className="ab-order-form space-y-5">
         <Section num="0" title="Votre contact">
           <p className="text-neutral-500 text-sm mb-3">Mail ou Instagram pour que je puisse vous recontacter.</p>
           <input value={contact} onChange={e => setContact(e.target.value)} placeholder="email@exemple.com ou @votrepseudo" className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600" />
@@ -566,7 +571,7 @@ function OrderForm({ design, saveOrder, goTo }) {
             <button onClick={() => setShowMeasurements(true)} className="px-5 py-2.5 border border-neutral-700 hover:border-neutral-300 text-neutral-100 text-sm rounded-full transition-colors">Renseigner mes mesures</button>
           ) : <MeasurementsBlock measurements={measurements} setMeasurements={setMeasurements} />}
         </Section>
-        <button onClick={submit} disabled={submitting} className="w-full px-6 py-4 bg-neutral-50 text-neutral-950 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-full flex items-center justify-center gap-2 text-sm tracking-wide font-medium">
+        <button onClick={submit} disabled={submitting} className="ab-order-submit w-full px-6 py-4 bg-neutral-50 text-neutral-950 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-full flex items-center justify-center gap-2 text-sm tracking-wide font-medium">
           {submitting ? 'Envoi en cours...' : <>Envoyer ma commande <Send className="w-4 h-4" /></>}
         </button>
       </div>
@@ -604,7 +609,7 @@ function CustomOrderForm({ saveOrder, goTo }) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
+    <div className="ab-order-page max-w-3xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
       <BackButton onClick={() => goTo('home')} />
       <div className="mb-10">
         <p className="text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">Sur mesure</p>
