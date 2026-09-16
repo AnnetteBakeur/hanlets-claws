@@ -449,15 +449,20 @@ function DesignsPage({ designs, goTo }) {
   return (
     <div className="ab-designs-page max-w-7xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
       <BackButton onClick={() => goTo('home')} />
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10 lg:mb-14">
-        <div>
-          <p className="text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">Boutique</p>
-          <h1 className="font-serif text-4xl lg:text-5xl text-neutral-50 mb-3" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>Designs disponibles</h1>
+      <div className="ab-designs-head flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10 lg:mb-14">
+        <div className="ab-designs-intro">
+          <p className="ab-designs-kicker text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">Boutique</p>
+          <h1
+  className="ab-designs-title font-serif text-4xl lg:text-5xl text-neutral-50 mb-3"
+  style={{ fontFamily: 'ui-serif, Georgia, serif' }}
+>
+  Designs disponibles
+</h1>
           <p className="text-neutral-400 max-w-xl">Chaque set est fait main et personnalisable selon vos mesures.</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="ab-designs-sort flex items-center gap-2">
           <span className="text-xs text-neutral-500 uppercase tracking-widest">Trier</span>
-          <select value={sort} onChange={e => setSort(e.target.value)} className="bg-neutral-900 border border-neutral-800 text-neutral-100 text-sm rounded-full px-4 py-2 focus:outline-none focus:border-neutral-600">
+          <select value={sort} onChange={e => setSort(e.target.value)} className="ab-designs-select bg-neutral-900 border border-neutral-800 text-neutral-100 text-sm rounded-full px-4 py-2 focus:outline-none focus:border-neutral-600">
             <option value="recent">Plus récents</option>
             <option value="price-asc">Prix croissant</option>
             <option value="price-desc">Prix décroissant</option>
