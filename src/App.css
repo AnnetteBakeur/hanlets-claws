@@ -1640,3 +1640,639 @@
     margin-top: 0;
   }
 }
+/* =========================================================
+   PAGE COMMANDE DESIGN — FICHE ÉDITORIALE
+   ========================================================= */
+
+.ab-order-page {
+  max-width: none !important;
+  width: 100%;
+  padding-left: 5vw !important;
+  padding-right: 5vw !important;
+  background: #050505;
+}
+
+/* RETOUR */
+
+.ab-order-page > button:first-child {
+  margin-bottom: 42px;
+
+  color: #777 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 9px !important;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+/* FICHE DU DESIGN */
+
+.ab-order-product {
+  max-width: 1550px;
+
+  margin: 0 auto 70px !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+}
+
+.ab-order-product-inner {
+  display: grid !important;
+  grid-template-columns: minmax(420px, 1fr) minmax(500px, 1fr);
+
+  align-items: end;
+
+  gap: clamp(45px, 7vw, 120px) !important;
+
+  padding: 0 !important;
+}
+
+/* IMAGE */
+
+.ab-order-image {
+  width: 100% !important;
+  max-width: 650px;
+
+  aspect-ratio: 4 / 5 !important;
+
+  border: 1px solid rgba(240, 237, 229, 0.32) !important;
+  border-radius: 0 !important;
+
+  background: #0a0a0a !important;
+
+  box-shadow:
+    13px 15px 0 rgba(240, 237, 229, 0.07);
+
+  transform: rotate(-1.2deg);
+}
+
+/* INFOS */
+
+.ab-order-summary {
+  padding-bottom: 25px;
+}
+
+.ab-order-kicker {
+  margin-bottom: 20px !important;
+
+  color: #777 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 8px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.25em !important;
+}
+
+.site-shell .ab-order-title {
+  margin: 0 0 25px !important;
+
+  color: #f21b1b !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: clamp(58px, 7vw, 118px) !important;
+  font-weight: 900 !important;
+
+  line-height: 0.8 !important;
+  letter-spacing: -0.075em !important;
+
+  text-transform: uppercase;
+}
+
+.ab-order-desc {
+  max-width: 520px;
+
+  margin-bottom: 30px !important;
+
+  color: #898989 !important;
+
+  font-size: 13px !important;
+  line-height: 1.6;
+}
+
+.ab-order-price {
+  padding-top: 14px;
+
+  border-top: 1px solid rgba(240, 237, 229, 0.25);
+
+  color: #f0ede5 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+}
+
+/* FORMULAIRE */
+
+.ab-order-form {
+  max-width: 1450px;
+
+  margin: 0 auto;
+  padding-top: 65px;
+
+  border-top: 1px solid rgba(240, 237, 229, 0.22);
+}
+
+/* Les blocs créés par le composant Section */
+
+.ab-order-form > div {
+  padding: 30px 0 !important;
+
+  border: 0 !important;
+  border-bottom: 1px solid rgba(240, 237, 229, 0.18) !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+}
+
+/* Numéros 0 / 1 / 2 */
+
+.ab-order-form > div > div:first-child > span:first-child {
+  width: auto !important;
+  height: auto !important;
+
+  border-radius: 0 !important;
+  background: transparent !important;
+
+  color: #1746ff !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+}
+
+/* Titres Votre contact / Longueur & forme / Vos mesures */
+
+.ab-order-form > div > div:first-child h3 {
+  color: #f0ede5 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: clamp(24px, 3vw, 42px) !important;
+  font-weight: 900 !important;
+
+  letter-spacing: -0.04em !important;
+}
+
+/* BOUTON FINAL */
+
+.ab-order-submit {
+  margin-top: 25px;
+
+  border-radius: 0 !important;
+
+  background: #f21b1b !important;
+  color: #050505 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase;
+
+  transition:
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.ab-order-submit:hover {
+  background: #ffd514 !important;
+  transform: translateY(-3px);
+}
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+  .ab-order-page {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .ab-order-product {
+    margin-bottom: 50px !important;
+  }
+
+  .ab-order-product-inner {
+    grid-template-columns: 1fr !important;
+    gap: 45px !important;
+  }
+
+  .ab-order-image {
+    max-width: none;
+  }
+
+  .site-shell .ab-order-title {
+    font-size: clamp(52px, 17vw, 90px) !important;
+  }
+
+  .ab-order-form {
+    padding-top: 40px;
+  }
+}
+/* CORRECTIONS PAGE COMMANDE — anciens styles globaux */
+
+.site-shell:has(.ab-order-page) {
+  background: #050505 !important;
+  background-image: none !important;
+}
+
+.site-shell .ab-order-page {
+  background: #050505 !important;
+  background-image: none !important;
+}
+
+.site-shell .ab-order-form > div {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+
+  border-radius: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 1px solid rgba(240, 237, 229, 0.18) !important;
+}
+
+.site-shell .ab-order-summary {
+  min-width: 0 !important;
+  width: 100% !important;
+
+  background: transparent !important;
+  background-image: none !important;
+}
+
+.site-shell .ab-order-title {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  color: #f21b1b !important;
+
+  font-size: clamp(48px, 5.4vw, 92px) !important;
+  line-height: 0.82 !important;
+
+  white-space: normal !important;
+  overflow: visible !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+/* Désactive l'ancien thème violet sur la page commande */
+
+.site-shell.site-shell-order {
+  background: #050505 !important;
+  background-image: none !important;
+}
+
+.site-shell.site-shell-order::before,
+.site-shell.site-shell-order::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Fiche produit */
+
+.site-shell.site-shell-order .ab-order-product,
+.site-shell.site-shell-order .ab-order-summary {
+  background: transparent !important;
+  background-image: none !important;
+
+  box-shadow: none !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Étapes du formulaire */
+
+.site-shell.site-shell-order .ab-order-form > .bg-neutral-900 {
+  background: transparent !important;
+  background-image: none !important;
+
+  box-shadow: none !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+/* Scrollbar neutre pour la nouvelle identité */
+
+::-webkit-scrollbar-thumb {
+  background: #3a3a3a !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505 !important;
+}
+
+html {
+  scrollbar-color: #3a3a3a #050505;
+}
+/* =========================================================
+   PAGE COMMANDE — DEUX COLONNES SUR ORDINATEUR
+   ========================================================= */
+
+@media (min-width: 951px) {
+  .site-shell.site-shell-order .ab-order-page {
+    display: grid !important;
+
+    grid-template-columns:
+      minmax(380px, 0.85fr)
+      minmax(560px, 1.15fr);
+
+    grid-template-areas:
+      "back back"
+      "product form";
+
+    column-gap: clamp(55px, 6vw, 115px);
+    align-items: start;
+
+    max-width: 1600px !important;
+    margin: 0 auto;
+
+    padding-left: 4vw !important;
+    padding-right: 4vw !important;
+  }
+
+  /* Retour aux designs */
+
+  .site-shell.site-shell-order .ab-order-page > button:first-child {
+    grid-area: back;
+  }
+
+  /* COLONNE GAUCHE — PRODUIT */
+
+  .site-shell.site-shell-order .ab-order-product {
+    grid-area: product;
+
+    position: sticky;
+    top: 110px;
+
+    width: 100%;
+    max-width: none !important;
+
+    margin: 0 !important;
+  }
+
+  .site-shell.site-shell-order .ab-order-product-inner {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+
+    gap: 30px !important;
+  }
+
+  .site-shell.site-shell-order .ab-order-image {
+    width: 100% !important;
+    max-width: none !important;
+
+    aspect-ratio: 4 / 5 !important;
+  }
+
+  .site-shell.site-shell-order .ab-order-summary {
+    width: 100%;
+    padding-bottom: 0;
+  }
+
+  .site-shell.site-shell-order .ab-order-title {
+    font-size: clamp(48px, 4.2vw, 82px) !important;
+
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+
+  /* COLONNE DROITE — FORMULAIRE */
+
+  .site-shell.site-shell-order .ab-order-form {
+    grid-area: form;
+
+    width: 100%;
+    max-width: none !important;
+
+    margin: 0 !important;
+    padding-top: 0 !important;
+
+    border-top: 0 !important;
+  }
+
+  .site-shell.site-shell-order .ab-order-form > div:first-child {
+    padding-top: 0 !important;
+  }
+}
+
+/* Le vieux thème violet ne doit plus recolorer le bouton final */
+
+.site-shell.site-shell-order .ab-order-submit {
+  background: #f21b1b !important;
+  color: #050505 !important;
+
+  box-shadow: none !important;
+}
+
+.site-shell.site-shell-order .ab-order-submit:hover {
+  background: #ffd514 !important;
+}
+/* =========================================================
+   PAGE COMMANDE — SUPPRESSION TOTALE DE L'ANCIEN VIOLET
+   ========================================================= */
+
+.site-shell.site-shell-order {
+  --site-border: rgba(240, 237, 229, 0.22);
+  --site-border-hover: rgba(240, 237, 229, 0.55);
+  --site-surface: #050505;
+  --site-purple: #f21b1b;
+  --site-purple-light: #f21b1b;
+  --site-purple-dark: #f21b1b;
+}
+
+/* Toutes les anciennes bordures neutres deviennent réellement neutres */
+
+.site-shell.site-shell-order .border-neutral-900,
+.site-shell.site-shell-order .border-neutral-800,
+.site-shell.site-shell-order .border-neutral-700 {
+  border-color: rgba(240, 237, 229, 0.22) !important;
+}
+
+.site-shell.site-shell-order .hover\:border-neutral-600:hover,
+.site-shell.site-shell-order .hover\:border-neutral-500:hover,
+.site-shell.site-shell-order .hover\:border-neutral-400:hover {
+  border-color: rgba(240, 237, 229, 0.6) !important;
+}
+
+/* Cases 1 à 10 */
+
+.site-shell.site-shell-order label.border-neutral-800 {
+  border-color: rgba(240, 237, 229, 0.22) !important;
+  background: #070707 !important;
+  box-shadow: none !important;
+}
+
+.site-shell.site-shell-order label.border-neutral-50 {
+  border-color: #f21b1b !important;
+  background: rgba(242, 27, 27, 0.08) !important;
+  box-shadow: none !important;
+}
+
+/* Petit rond de validation d'un modèle sélectionné */
+
+.site-shell.site-shell-order label .bg-neutral-50 {
+  background: #f21b1b !important;
+  background-image: none !important;
+  color: #050505 !important;
+}
+
+/* Champs texte */
+
+.site-shell.site-shell-order input,
+.site-shell.site-shell-order textarea,
+.site-shell.site-shell-order select {
+  background: #070707 !important;
+  background-image: none !important;
+
+  border-color: rgba(240, 237, 229, 0.22) !important;
+
+  box-shadow: none !important;
+}
+
+.site-shell.site-shell-order input:focus,
+.site-shell.site-shell-order textarea:focus,
+.site-shell.site-shell-order select:focus {
+  background: #070707 !important;
+
+  border-color: #f21b1b !important;
+
+  box-shadow: 0 0 0 1px #f21b1b !important;
+}
+
+/* Boutons secondaires */
+
+.site-shell.site-shell-order button.border-neutral-700 {
+  border-color: rgba(240, 237, 229, 0.3) !important;
+  background: transparent !important;
+}
+
+.site-shell.site-shell-order button.border-neutral-700:hover {
+  border-color: #f0ede5 !important;
+}
+
+/* Le bouton final reste rouge */
+
+.site-shell.site-shell-order .ab-order-submit {
+  background: #f21b1b !important;
+  background-image: none !important;
+  border-color: #f21b1b !important;
+  color: #050505 !important;
+  box-shadow: none !important;
+}
+/* =========================================================
+   IDENTITÉ PUBLIQUE — SUPPRESSION DE L'ANCIEN VIOLET
+   ========================================================= */
+
+.site-shell.site-shell-public {
+  --site-border: rgba(240, 237, 229, 0.2);
+  --site-border-hover: rgba(240, 237, 229, 0.55);
+  --site-surface: #0a0a0a;
+
+  background: #050505 !important;
+}
+
+/* HEADER */
+
+.site-shell.site-shell-public header {
+  background: #08070d !important;
+  background-image: none !important;
+
+  border-color: rgba(240, 237, 229, 0.16) !important;
+
+  box-shadow: none !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* FOOTER */
+
+.site-shell.site-shell-public footer {
+  background: #050505 !important;
+  background-image: none !important;
+
+  border-color: rgba(240, 237, 229, 0.16) !important;
+
+  box-shadow: none !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ANCIENNES BORDURES TAILWIND */
+
+.site-shell.site-shell-public .border-neutral-900,
+.site-shell.site-shell-public .border-neutral-800,
+.site-shell.site-shell-public .border-neutral-700 {
+  border-color: rgba(240, 237, 229, 0.2) !important;
+}
+
+.site-shell.site-shell-public .hover\:border-neutral-600:hover,
+.site-shell.site-shell-public .hover\:border-neutral-500:hover,
+.site-shell.site-shell-public .hover\:border-neutral-400:hover {
+  border-color: rgba(240, 237, 229, 0.55) !important;
+}
+
+/* ANCIENS FONDS */
+
+.site-shell.site-shell-public .bg-neutral-900 {
+  background: #0a0a0a !important;
+  background-image: none !important;
+
+  box-shadow: none !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.site-shell.site-shell-public .bg-neutral-950 {
+  background: #050505 !important;
+  background-image: none !important;
+}
+
+.site-shell.site-shell-public .bg-neutral-800 {
+  background: #141414 !important;
+  background-image: none !important;
+}
+
+/* INPUTS / SELECTS */
+
+.site-shell.site-shell-public input,
+.site-shell.site-shell-public textarea,
+.site-shell.site-shell-public select {
+  background: #070707 !important;
+  background-image: none !important;
+
+  border-color: rgba(240, 237, 229, 0.22) !important;
+
+  box-shadow: none !important;
+}
+
+.site-shell.site-shell-public input:focus,
+.site-shell.site-shell-public textarea:focus,
+.site-shell.site-shell-public select:focus {
+  border-color: #f21b1b !important;
+
+  box-shadow: 0 0 0 1px #f21b1b !important;
+}
+
+/* PAGE DESIGNS — TRI */
+
+.site-shell.site-shell-public .ab-designs-select {
+  background: #050505 !important;
+  background-image: none !important;
+
+  border-color: rgba(240, 237, 229, 0.28) !important;
+
+  color: #f0ede5 !important;
+}

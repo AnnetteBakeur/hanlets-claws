@@ -324,7 +324,12 @@ export default function App() {
   }
 
   return (
-    <div className="site-shell min-h-screen text-neutral-100" style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>
+    <div
+  className={`site-shell min-h-screen text-neutral-100 ${
+  page !== 'admin' ? 'site-shell-public' : ''
+} ${page === 'order' ? 'site-shell-order' : ''}`}
+  style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}
+>
       <Header page={page} goTo={goTo} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       {confirmation ? (
         <ConfirmationScreen order={confirmation} goTo={goTo} />
