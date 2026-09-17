@@ -621,6 +621,14 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
 
 function OrderForm({ design, saveOrder, goTo }) {
   const [contact, setContact] = useState('');
+  const [shipping, setShipping] = useState({
+  name: '',
+  address: '',
+  address2: '',
+  postalCode: '',
+  city: '',
+  country: 'France',
+});
   const [modifications, setModifications] = useState('');
   const [shape, setShape] = useState(null);
   const [measurements, setMeasurements] = useState({});
@@ -631,6 +639,10 @@ function OrderForm({ design, saveOrder, goTo }) {
 
   async function submit() {
     if (!contact.trim()) return alert('Renseignez un contact');
+    if (!shipping.name.trim()) return alert('Renseignez votre prénom et votre nom');
+    if (!shipping.address.trim()) return alert('Renseignez votre adresse');
+    if (!shipping.postalCode.trim()) return alert('Renseignez votre code postal');
+    if (!shipping.city.trim()) return alert('Renseignez votre ville');
     if (!shape) return alert('Choisissez une forme/longueur');
     setSubmitting(true);
     await saveOrder({
@@ -639,6 +651,7 @@ function OrderForm({ design, saveOrder, goTo }) {
   designName: design.name,
   designPrice: design.price,
   contact: contact.trim(),
+  shipping,
   modifications: modifications.trim(),
   shape,
   measurements
@@ -668,7 +681,10 @@ function OrderForm({ design, saveOrder, goTo }) {
         </div>
       </div>
       <div className="ab-order-form space-y-5">
-        <Section title="Votre contact" className="ab-order-contact">
+        <Section
+  title="Votre contact"
+  className="ab-order-contact"
+>
   <p className="text-neutral-500 text-sm mb-3">
     Mail ou Instagram pour que je puisse vous recontacter.
   </p>
@@ -679,6 +695,75 @@ function OrderForm({ design, saveOrder, goTo }) {
     placeholder="email@exemple.com ou @votrepseudo"
     className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600"
   />
+</Section>
+
+<Section
+  title="Informations de livraison"
+  className="ab-order-shipping"
+>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+    <input
+      type="text"
+      value={shipping.name}
+      onChange={(e) =>
+        setShipping({ ...shipping, name: e.target.value })
+      }
+      placeholder="Prénom et nom"
+      className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 md:col-span-2"
+    />
+
+    <input
+      type="text"
+      value={shipping.address}
+      onChange={(e) =>
+        setShipping({ ...shipping, address: e.target.value })
+      }
+      placeholder="Adresse"
+      className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 md:col-span-2"
+    />
+
+    <input
+      type="text"
+      value={shipping.address2}
+      onChange={(e) =>
+        setShipping({ ...shipping, address2: e.target.value })
+      }
+      placeholder="Complément d’adresse (optionnel)"
+      className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 md:col-span-2"
+    />
+
+    <input
+      type="text"
+      value={shipping.postalCode}
+      onChange={(e) =>
+        setShipping({ ...shipping, postalCode: e.target.value })
+      }
+      placeholder="Code postal"
+      className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600"
+    />
+
+    <input
+      type="text"
+      value={shipping.city}
+      onChange={(e) =>
+        setShipping({ ...shipping, city: e.target.value })
+      }
+      placeholder="Ville"
+      className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600"
+    />
+
+    <input
+      type="text"
+      value={shipping.country}
+      onChange={(e) =>
+        setShipping({ ...shipping, country: e.target.value })
+      }
+      placeholder="Pays"
+      className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 md:col-span-2"
+    />
+
+  </div>
 </Section>
 
 <Section
@@ -699,7 +784,10 @@ function OrderForm({ design, saveOrder, goTo }) {
   />
 </Section>
 
-<Section title="Longueur & forme" className="ab-order-shape">
+<Section
+  title="Longueur & forme"
+  className="ab-order-shape"
+>
   <ShapeSelector value={shape} onChange={setShape} />
 </Section>
 
@@ -736,6 +824,14 @@ function OrderForm({ design, saveOrder, goTo }) {
 
 function CustomOrderForm({ saveOrder, goTo }) {
   const [contact, setContact] = useState('');
+  const [shipping, setShipping] = useState({
+  name: '',
+  address: '',
+  address2: '',
+  postalCode: '',
+  city: '',
+  country: 'France',
+});
   const [colors, setColors] = useState('');
   const [chrome, setChrome] = useState('');
   const [jewelry, setJewelry] = useState('');
@@ -756,12 +852,48 @@ function CustomOrderForm({ saveOrder, goTo }) {
   }
 
   async function submit() {
-    if (!contact.trim()) return alert('Renseignez un contact');
-    if (!shape) return alert('Choisissez une forme/longueur');
-    setSubmitting(true);
-    await saveOrder({ type: 'custom', contact: contact.trim(), colors, chrome, jewelry, relief, desc, shape, inspirations, measurements });
-    setSubmitting(false);
+  if (!contact.trim()) {
+    return alert('Renseignez un contact');
   }
+
+  if (!shipping.name.trim()) {
+    return alert('Renseignez votre prénom et votre nom');
+  }
+
+  if (!shipping.address.trim()) {
+    return alert('Renseignez votre adresse');
+  }
+
+  if (!shipping.postalCode.trim()) {
+    return alert('Renseignez votre code postal');
+  }
+
+  if (!shipping.city.trim()) {
+    return alert('Renseignez votre ville');
+  }
+
+  if (!shape) {
+    return alert('Choisissez une forme/longueur');
+  }
+
+  setSubmitting(true);
+
+  await saveOrder({
+    type: 'custom',
+    contact: contact.trim(),
+    shipping,
+    colors,
+    chrome,
+    jewelry,
+    relief,
+    desc,
+    shape,
+    inspirations,
+    measurements
+  });
+
+  setSubmitting(false);
+}
 
   return (
     <div className="ab-custom-page">
@@ -776,6 +908,74 @@ function CustomOrderForm({ saveOrder, goTo }) {
           <p className="text-neutral-500 text-sm mb-3">Mail ou Instagram pour que je puisse vous recontacter.</p>
           <input value={contact} onChange={e => setContact(e.target.value)} placeholder="email@exemple.com ou @votrepseudo" className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600" />
         </Section>
+        <Section
+  title="Informations de livraison"
+  className="ab-custom-shipping"
+>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+    <input
+      type="text"
+      value={shipping.name}
+      onChange={(e) =>
+        setShipping({ ...shipping, name: e.target.value })
+      }
+      placeholder="Prénom et nom"
+      className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 md:col-span-2"
+    />
+
+    <input
+      type="text"
+      value={shipping.address}
+      onChange={(e) =>
+        setShipping({ ...shipping, address: e.target.value })
+      }
+      placeholder="Adresse"
+      className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 md:col-span-2"
+    />
+
+    <input
+      type="text"
+      value={shipping.address2}
+      onChange={(e) =>
+        setShipping({ ...shipping, address2: e.target.value })
+      }
+      placeholder="Complément d’adresse (optionnel)"
+      className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 md:col-span-2"
+    />
+
+    <input
+      type="text"
+      value={shipping.postalCode}
+      onChange={(e) =>
+        setShipping({ ...shipping, postalCode: e.target.value })
+      }
+      placeholder="Code postal"
+      className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600"
+    />
+
+    <input
+      type="text"
+      value={shipping.city}
+      onChange={(e) =>
+        setShipping({ ...shipping, city: e.target.value })
+      }
+      placeholder="Ville"
+      className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600"
+    />
+
+    <input
+      type="text"
+      value={shipping.country}
+      onChange={(e) =>
+        setShipping({ ...shipping, country: e.target.value })
+      }
+      placeholder="Pays"
+      className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 md:col-span-2"
+    />
+
+  </div>
+</Section>
         <Section num="1" title="Couleurs" className="ab-custom-colors">
           <textarea value={colors} onChange={e => setColors(e.target.value)} rows={2} placeholder="Décrivez les couleurs souhaitées..." className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 resize-none" />
         </Section>
@@ -805,7 +1005,15 @@ function CustomOrderForm({ saveOrder, goTo }) {
           <input ref={inspRef} type="file" accept="image/*" multiple onChange={handleInspirations} className="hidden" />
           <p className="text-neutral-600 text-xs">{inspirations.length}/10 photos</p>
         </Section>
-        <Section num="8" title="Vos mesures" className="ab-custom-measurements">
+        <Section
+  title="Vos mesures"
+  optional
+  className="ab-custom-measurements"
+>
+  <p className="text-neutral-500 text-sm mb-4">
+    À renseigner uniquement si je n’ai pas déjà vos mesures enregistrées.
+  </p>
+
   <MeasurementsBlock
     measurements={measurements}
     setMeasurements={setMeasurements}

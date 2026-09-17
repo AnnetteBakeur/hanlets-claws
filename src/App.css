@@ -3577,9 +3577,10 @@ aspect-ratio: 4 / 5 !important;
       minmax(280px, 0.85fr) !important;
 
     grid-template-rows:
-      auto
-      auto
-      auto !important;
+  auto
+  auto
+  auto
+  auto !important;
 
     column-gap: 30px !important;
     row-gap: 0 !important;
@@ -3600,23 +3601,23 @@ aspect-ratio: 4 / 5 !important;
      COLONNE 2 — LONGUEUR & FORME
      ===================================================== */
 
-  .site-shell.site-shell-order
-    .ab-order-form
-    > :nth-child(2) {
+  /* Colonne centrale — modifications */
+.site-shell.site-shell-order .ab-order-modifications {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  padding-top: 0 !important;
+}
 
-    grid-column: 1 !important;
-    grid-row: 1 / span 3 !important;
-
-    padding-top: 0 !important;
-  }
-
+/* Colonne centrale — longueur & forme */
+.site-shell.site-shell-order .ab-order-shape {
+  grid-column: 1 !important;
+  grid-row: 2 / span 3 !important;
+  padding-top: 0 !important;
+}
 
   /* Guides moins gigantesques */
 
-  .site-shell.site-shell-order
-    .ab-order-form
-    > :nth-child(2)
-    img {
+  .site-shell.site-shell-order .ab-order-shape img {
 
     width: 100% !important;
 
@@ -3628,58 +3629,48 @@ aspect-ratio: 4 / 5 !important;
 
   /* Cases 1–10 compactes */
 
-  .site-shell.site-shell-order
-    .ab-order-form
-    > :nth-child(2)
-    label.rounded-xl {
+  .site-shell.site-shell-order .ab-order-shape label.rounded-xl {
+  min-height: 58px !important;
+  aspect-ratio: auto !important;
+}
 
-    min-height: 58px !important;
+/* =========================================
+   COLONNE DROITE
+   ========================================= */
 
-    aspect-ratio: auto !important;
-  }
+/* Contact */
+.site-shell.site-shell-order .ab-order-contact {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  padding-top: 0 !important;
+}
 
+/* Adresse de livraison */
+.site-shell.site-shell-order .ab-order-shipping {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  margin-top: 0 !important;
+}
 
-  /* =====================================================
-     COLONNE 3 — CONTACT
-     ===================================================== */
+/* Mesures */
+.site-shell.site-shell-order .ab-order-measurements {
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  margin-top: 0 !important;
+}
 
-  .site-shell.site-shell-order
-    .ab-order-form
-    > :nth-child(1) {
-
-    grid-column: 2 !important;
-    grid-row: 1 !important;
-
-    padding-top: 0 !important;
-  }
-
-
-  /* =====================================================
-     COLONNE 3 — MESURES
-     ===================================================== */
-
-  .site-shell.site-shell-order
-    .ab-order-form
-    > :nth-child(3) {
-
-    grid-column: 2 !important;
-    grid-row: 2 !important;
-
-    margin-top: 24px !important;
-  }
-
+/* Bouton d'envoi */
+.site-shell.site-shell-order .ab-order-submit {
+  grid-column: 2 !important;
+  grid-row: 4 !important;
+  margin-top: 24px !important;
+}
 
   /* =====================================================
      COLONNE 3 — ENVOYER
      ===================================================== */
 
-  .site-shell.site-shell-order .ab-order-submit {
-    grid-column: 2 !important;
-    grid-row: 3 !important;
-
-    margin-top: 24px !important;
-  }
-
+  
 
   /* Titres un peu moins imposants */
 
@@ -3780,26 +3771,6 @@ aspect-ratio: 4 / 5 !important;
   }
 
 
-  /* COLONNE DROITE — MESURES */
-
-  .site-shell.site-shell-order
-    .ab-order-form > .ab-order-measurements {
-
-    grid-column: 2 !important;
-    grid-row: 2 !important;
-
-    margin-top: 28px !important;
-  }
-
-
-  /* COLONNE DROITE — ENVOI */
-
-  .site-shell.site-shell-order .ab-order-submit {
-    grid-column: 2 !important;
-    grid-row: 3 !important;
-
-    margin-top: 24px !important;
-  }
 }
 /* =========================================================
    SÉLECTEUR DE FORMES — CARTES PHOTOGRAPHIQUES
@@ -4042,4 +4013,14 @@ aspect-ratio: 4 / 5 !important;
     width: 100% !important;
     margin-bottom: 24px !important;
   }
+}
+/* Informations de livraison — commande personnalisée */
+.site-shell.site-shell-public .ab-custom-shipping {
+  grid-column: 7 / 13 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+.site-shell.site-shell-public .ab-custom-shipping input {
+  width: 100% !important;
+  min-width: 0 !important;
 }
