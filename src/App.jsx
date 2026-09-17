@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Sparkles, Upload, X, Plus, Lock, Mail, Camera, Trash2, ArrowLeft, Heart, Check, ImagePlus, Send, Package, LogOut, Edit3, Menu, ChevronRight, Search, Download, Home, Settings, Eye, EyeOff } from 'lucide-react';
 import * as db from './db';
 import HomePage from './pages/HomePage';
@@ -323,13 +323,49 @@ export default function App() {
     return true;
   }
 
-  function goTo(p, d = null) {
-    setSelectedDesign(d);
-    setPage(p);
+  useEffect(() => {
+  // On enregistre l'écran initial dans l'historique
+  window.history.replaceState(
+    { page: 'home', design: null },
+    '',
+    window.location.href
+  );
+
+  const handlePopState = (event) => {
+    const state = event.state;
+
+    setPage(state?.page || 'home');
+    setSelectedDesign(state?.design || null);
     setMenuOpen(false);
     setConfirmation(null);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto',
+    });
+  };
+
+  window.addEventListener('popstate', handlePopState);
+
+  return () => {
+    window.removeEventListener('popstate', handlePopState);
+  };
+}, []);
+
+  function goTo(p, d = null) {
+  setSelectedDesign(d);
+  setPage(p);
+  setMenuOpen(false);
+  setConfirmation(null);
+
+  window.history.pushState(
+    { page: p, design: d },
+    '',
+    window.location.href
+  );
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
   return (
     <div
@@ -491,7 +527,6 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
 >
   {pageTitle}
 </h1>
-          <p className="text-neutral-400 max-w-xl">Chaque set est fait main et personnalisable selon vos mesures.</p>
         </div>
         <div className="ab-designs-sort flex items-center gap-2">
           <span className="text-xs text-neutral-500 uppercase tracking-widest">Trier</span>
@@ -507,7 +542,7 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
   <button
     type="button"
     onClick={() => goTo('designs')}
-    className={`ab-designs-filter-button ${category === 'all' ? 'is-active' : ''}`}
+    className={`ab-designs-filter-button ab-filter-all ${category === 'all' ? 'is-active' : ''}`}
   >
     <span>00</span>
     TOUS
@@ -516,7 +551,7 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
   <button
     type="button"
     onClick={() => goTo('designs-original')}
-    className={`ab-designs-filter-button ${category === 'original' ? 'is-active' : ''}`}
+    className={`ab-designs-filter-button ab-filter-original ${category === 'original' ? 'is-active' : ''}`}
   >
     <span>01</span>
     DESIGNS ORIGINAUX
@@ -525,7 +560,7 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
   <button
     type="button"
     onClick={() => goTo('designs-soft')}
-    className={`ab-designs-filter-button ${category === 'soft' ? 'is-active' : ''}`}
+    className={`ab-designs-filter-button ab-filter-soft ${category === 'soft' ? 'is-active' : ''}`}
   >
     <span>02</span>
     PRIX DOUX
@@ -756,7 +791,7 @@ function OrderForm({ design, saveOrder, goTo }) {
     />
   )}
 </Section>
-        <button onClick={submit} disabled={submitting} className="ab-order-submit w-full px-6 py-4 bg-neutral-50 text-neutral-950 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-full flex items-center justify-center gap-2 text-sm tracking-wide font-medium">
+        <button onClick={submit} disabled={submitting} className="ab-custom-submit w-full px-6 py-4 bg-neutral-50 text-neutral-950 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-full flex items-center justify-center gap-2 text-sm tracking-wide font-medium">
           {submitting ? 'Envoi en cours...' : <>Envoyer ma commande <Send className="w-4 h-4" /></>}
         </button>
       </div>
@@ -838,14 +873,26 @@ function CustomOrderForm({ saveOrder, goTo }) {
 }
 
   return (
-    <div className="ab-custom-page">
+    <div className="ab-designs-page ab-custom-page-v2 max-w-7xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
       <BackButton onClick={() => goTo('home')} />
-      <div className="ab-custom-header mb-10">
-        <p className="text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">Personnalisé</p>
-        <h1 className="font-serif text-4xl lg:text-5xl text-neutral-50 mb-3" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>Commande personnalisée</h1>
-        <p className="text-neutral-400">Décrivez-moi votre vision, je crée votre set unique.</p>
-      </div>
+      <div className="ab-designs-head flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10 lg:mb-14">
+  <div className="ab-designs-intro">
+
+    <p className="ab-designs-kicker text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">
+      PERSONNALISÉ
+    </p>
+
+    <h1
+      className="ab-designs-title ab-custom-title-red font-serif text-4xl lg:text-5xl mb-3"
+      style={{ fontFamily: 'ui-serif, Georgia, serif' }}
+    >
+      COMMANDE PERSONNALISÉE
+    </h1>
+
+  </div>
+</div>
       <div className="ab-custom-form space-y-5">
+        <div className="ab-custom-panel ab-custom-panel-contact">
         <Section num="0" title="Votre contact" className="ab-custom-contact">
           <p className="text-neutral-500 text-sm mb-3">Mail ou Instagram pour que je puisse vous recontacter.</p>
           <input value={contact} onChange={e => setContact(e.target.value)} placeholder="email@exemple.com ou @votrepseudo" className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600" />
@@ -918,6 +965,7 @@ function CustomOrderForm({ saveOrder, goTo }) {
 
   </div>
 </Section>
+</div>
 
 <div className="ab-custom-options">
         <Section num="1" title="Couleurs" className="ab-custom-colors">
@@ -927,11 +975,13 @@ function CustomOrderForm({ saveOrder, goTo }) {
         <Section num="3" title="Bijoux (strass, perles)" className="ab-custom-jewelry"><ChoiceRow options={['Oui', 'Non']} value={jewelry} onChange={setJewelry} /></Section>
         <Section num="4" title="Relief" className="ab-custom-relief"><ChoiceRow options={['Oui', 'Non']} value={relief} onChange={setRelief} /></Section>
         </div>
+        <div className="ab-custom-panel-details">
         <Section num="5" title="Descriptif personnel" className="ab-custom-description">
           <textarea value={desc} onChange={e => setDesc(e.target.value)} rows={4} placeholder="Décrivez-moi le niveau de détails que vous souhaitez pour vos ongles + requêtes complémentaires" className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 resize-none mb-2" />
           <p className="text-neutral-500 text-sm italic">Exemple : j'aimerais des ongles tous différents, avec des spirales, mais pas d'étoiles. </p>
         </Section>
-        <Section num="6" title="Longueur & forme" className="ab-custom-shape"><ShapeSelector value={shape} onChange={setShape} /></Section>
+        <Section num="6" title="Longueur & forme" className="ab-custom-shape"><ShapeSelector value={shape} onChange={setShape} /></Section></div>
+        <div className="ab-custom-panel-inspirations">
         <Section num="7" title="Inspirations" className="ab-custom-inspirations">
           <p className="text-neutral-500 text-sm mb-4">Importez vos photos / inspirations (10 maximum)</p>
           <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 mb-3">
@@ -950,6 +1000,8 @@ function CustomOrderForm({ saveOrder, goTo }) {
           <input ref={inspRef} type="file" accept="image/*" multiple onChange={handleInspirations} className="hidden" />
           <p className="text-neutral-600 text-xs">{inspirations.length}/10 photos</p>
         </Section>
+        </div>
+        <div className="ab-custom-panel-measurements">
         <Section
   title="Vos mesures"
   optional
@@ -964,9 +1016,21 @@ function CustomOrderForm({ saveOrder, goTo }) {
     setMeasurements={setMeasurements}
   />
 </Section>
-        <button onClick={submit} disabled={submitting} className="ab-custom-submit w-full px-6 py-4 bg-neutral-50 text-neutral-950 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-full flex items-center justify-center gap-2 text-sm tracking-wide font-medium">
-          {submitting ? 'Envoi en cours...' : <>Envoyer ma commande <Send className="w-4 h-4" /></>}
-        </button>
+</div>
+        <button
+  onClick={submit}
+  disabled={submitting}
+  className="ab-custom-submit"
+>
+  {submitting ? (
+    'Envoi en cours...'
+  ) : (
+    <>
+      ENVOYER MA COMMANDE
+      <Send className="w-4 h-4" />
+    </>
+  )}
+</button>
       </div>
     </div>
   );
@@ -1829,7 +1893,7 @@ function Footer({ goTo }) {
         <div className="grid sm:grid-cols-2 gap-8">
           <div>
             <p className="font-serif text-2xl mb-3 text-neutral-50" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>{BRAND}</p>
-            <p className="text-neutral-500 text-sm leading-relaxed max-w-xs">Press-on nails artisanales et réutilisables, faites main avec passion.</p>
+            <p className="text-neutral-500 text-sm leading-relaxed max-w-xs">Faits main, personnalisés et réutilisables.</p>
             <div className="flex gap-3 mt-5">
               <a href={`https://instagram.com/${INSTAGRAM.replace('@', '')}`} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full border border-neutral-800 flex items-center justify-center hover:border-neutral-400"><svg className="w-4 h-4 text-neutral-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
               <a href={`mailto:${EMAIL_CONTACT}`} className="w-9 h-9 rounded-full border border-neutral-800 flex items-center justify-center hover:border-neutral-400"><Mail className="w-4 h-4 text-neutral-300" /></a>

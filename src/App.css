@@ -187,9 +187,9 @@
 ========================================================= */
 
 .ab2-home {
-  --red: #f21b1b;
-  --blue: #1746ff;
-  --yellow: #ffd514;
+  --red: #c51f1f;
+  --blue: #102f78;
+  --yellow: #d3a91e;
   --green: #15b96a;
   --pink: #ff4d9b;
   --paper: #f0ede5;
@@ -491,6 +491,14 @@
 
   background: var(--red);
   color: white;
+
+  top: -150px;
+}
+
+.ab2-card-custom h2 {
+  font-size: clamp(2.3rem, 4.2vw, 4.6rem) !important;
+  letter-spacing: -0.07em !important;
+  white-space: nowrap;
 }
 
 .ab2-card-original {
@@ -588,11 +596,7 @@
 
   padding: 105px 5vw 135px;
 
-  background:
-    radial-gradient(circle at 18% 22%, rgba(70, 45, 25, 0.055), transparent 24%),
-    radial-gradient(circle at 82% 70%, rgba(70, 45, 25, 0.045), transparent 28%),
-    linear-gradient(rgba(240, 237, 229, 0.96), rgba(240, 237, 229, 0.96)),
-    var(--paper);
+  background: #c8c2b8;
 
   color: var(--black);
 }
@@ -2517,27 +2521,6 @@ aspect-ratio: 4 / 5 !important;
     14px 16px 0 rgba(255, 255, 255, 0.045);
 }
 
-/* Petit détail floral */
-
-.site-shell.site-shell-public .ab-custom-form::before {
-  content: "✿";
-
-  position: absolute;
-  top: 25px;
-  right: 35px;
-
-  color: #f21b1b;
-
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(42px, 5vw, 78px);
-  font-weight: 400;
-
-  line-height: 1;
-
-  opacity: 0.9;
-
-  transform: rotate(9deg);
-}
 
 /* =========================================================
    SECTIONS 0 → 8
@@ -4625,4 +4608,1041 @@ aspect-ratio: 4 / 5 !important;
   .ab-confirmation-message {
     padding: 24px 0 !important;
   }
+}
+.site-shell.site-shell-public .ab-home-hero {
+  position: relative;
+  background: #050505;
+  overflow: hidden;
+  padding: 35px 0 0;;
+}
+
+.site-shell.site-shell-public .ab-home-hero-inner {
+  position: relative;
+  width: min(1400px, calc(100% - 64px));
+  margin: 0 auto;
+  min-height: clamp(420px, 52vw, 760px);
+}
+
+.site-shell.site-shell-public .ab-home-title-wrap {
+  position: relative;
+  z-index: 1;
+  width: min(900px, 100%);
+  padding-top: 0;
+}
+
+.site-shell.site-shell-public .ab-home-kicker {
+  margin: 0 0 18px 0;
+  color: rgba(255,255,255,0.65);
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.site-shell.site-shell-public .ab-home-title {
+  margin: 0;
+  color: #c51f1f;
+  font-family: Impact, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(80px, 12vw, 200px);
+  line-height: 0.86;
+  text-transform: uppercase;
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+  font-weight: 900;
+  transform: scaleX(0.90) scaleY(1.20);
+  transform-origin: left top;
+  letter-spacing: 0.001em;
+-webkit-text-stroke: 4px #c51f1f;
+  paint-order: stroke fill;
+text-shadow:
+    2px 0 #c51f1f,
+    -2px 0 #c51f1f,
+    0 2px #c51f1f,
+    0 -2px #c51f1f;
+left: 18px;
+  top: 8px;
+}
+
+.site-shell.site-shell-public .ab-home-subtitle {
+  margin: 28px 0 0 0;
+  max-width: 480px;
+  color: rgba(255,255,255,0.72);
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.5;
+}
+
+.site-shell.site-shell-public .ab-home-cutout {
+  position: absolute;
+
+  right: clamp(620px, 43vw, 850px);
+
+  bottom: 30px;
+
+  height: clamp(360px, 39vw, 560px);
+  width: auto;
+
+  z-index: 3;
+
+  object-fit: contain;
+  pointer-events: none;
+
+  transform: none ;
+
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.18));
+
+  clip-path: inset(0 0 31% 0);
+}
+
+@media (max-width: 850px) {
+  .site-shell.site-shell-public .ab-home-hero-inner {
+    width: calc(100% - 32px);
+    min-height: auto;
+    padding-bottom: 260px;
+  }
+
+  .site-shell.site-shell-public .ab-home-title-wrap {
+    width: 100%;
+    padding-top: 10px;
+  }
+
+  .site-shell.site-shell-public .ab-home-title {
+    font-size: clamp(54px, 16vw, 96px);
+    line-height: 0.9;
+    max-width: 100%;
+  }
+
+  .site-shell.site-shell-public .ab-home-subtitle {
+    max-width: 100%;
+  }
+
+  .site-shell.site-shell-public .ab-home-cutout {
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 0;
+    height: 250px;
+  }
+}
+
+/* =========================================================
+   HOME — rapprocher catégories + nouveautés
+   ========================================================= */
+
+@media (min-width: 801px) {
+  .site-shell.site-shell-public .ab2-menu {
+    padding: 10px 5vw 5px !important;
+  }
+}
+
+@media (min-width: 801px) {
+  .site-shell.site-shell-public .ab2-new {
+    margin-top: -70px !important;
+  }
+}
+
+.site-shell.site-shell-public .ab2-card-arrow {
+  display: none !important;
+}
+
+.site-shell.site-shell-public .ab-home-welcome {
+  margin: 75px 0 0 40px;
+
+  font-family: "Nothing You Could Do", cursive;
+  font-size: clamp(1.8rem, 2.6vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0;
+
+  color: #b7b3ac !important;
+}
+
+@media (min-width: 801px) {
+  .site-shell.site-shell-public .ab2-menu {
+    margin-top: -180px !important;
+  }
+}
+
+/* =========================================================
+   HEADER — LOGO ANNETTE BAKEUR
+   ========================================================= */
+
+.site-shell.site-shell-public .ab-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-family: Impact, "Arial Narrow Bold", sans-serif !important;
+  font-size: clamp(1.7rem, 2.2vw, 2.35rem) !important;
+  font-weight: 900 !important;
+
+  letter-spacing: -0.035em !important;
+  line-height: 1 !important;
+}
+
+/* ANNETTE — plein */
+.site-shell.site-shell-public .ab-header-brand span:first-child,
+.site-shell.site-shell-public .ab-header-brand span:last-child {
+  color: #c51f1f !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+.site-shell.site-shell-public .ab-header-link.is-active {
+  background: #c8c2b8 !important;
+  color: #050505 !important;
+}
+
+.site-shell.site-shell-public .ab-header-link.is-active .ab-header-number {
+  color: #050505 !important;
+}
+
+.site-shell.site-shell-public .ab-header-link:not(.is-active):hover {
+  background: rgba(200, 194, 184, 0.10) !important;
+}
+
+/* PAGE DESIGNS — titre vert */
+.site-shell.site-shell-public .ab-designs-title {
+  color: #c8c2b8 !important;
+}
+
+.site-shell.site-shell-public .ab-designs-kicker {
+  color: #9e9991 !important;
+}
+
+/* =========================================================
+   DESIGNS — COULEURS DES FILTRES ACTIFS
+   ========================================================= */
+
+/* TOUS — vert */
+.site-shell.site-shell-public
+.ab-designs-filter-button.ab-filter-all.is-active {
+  background: #176B3A !important;
+  color: #f0ede5 !important;
+}
+
+/* DESIGNS ORIGINAUX — bleu */
+.site-shell.site-shell-public
+.ab-designs-filter-button.ab-filter-original.is-active {
+  background: #17388f !important;
+  color: #f0ede5 !important;
+}
+
+/* PRIX DOUX — jaune */
+.site-shell.site-shell-public
+.ab-designs-filter-button.ab-filter-soft.is-active {
+  background: #d3a91e !important;
+  color: #050505 !important;
+}
+
+.site-shell.site-shell-public .ab-custom-title {
+  margin: 0 0 12px;
+
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif !important;
+  font-size: clamp(4rem, 6.3vw, 7rem) !important;
+  font-weight: 900 !important;
+  line-height: 0.9 !important;
+  letter-spacing: -0.045em !important;
+  text-transform: uppercase;
+
+  color: #c51f1f !important;
+}
+.site-shell.site-shell-public .ab-custom-submit {
+  width: fit-content !important;
+  min-width: 300px;
+
+  margin-left: auto !important;
+  padding: 17px 34px !important;
+
+  background: #c51f1f !important;
+  color: #050505 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+.site-shell.site-shell-public .ab-custom-submit:hover {
+  background: #b91d1d !important;
+}
+
+.site-shell.site-shell-public
+.ab-custom-form > button:last-child {
+  background: #c51f1f !important;
+  background-image: none !important;
+
+  color: #050505 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+
+.site-shell.site-shell-public .ab-custom-title {
+  margin: 0 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: clamp(4.2rem, 6vw, 7rem) !important;
+  font-weight: 900 !important;
+
+  line-height: 0.9 !important;
+  letter-spacing: -0.055em !important;
+
+  color: #c51f1f !important;
+  text-transform: uppercase !important;
+}
+
+/* CUSTOM — entête harmonisé avec la page Designs */
+
+.site-shell.site-shell-public .ab-custom-kicker {
+  margin-bottom: 18px !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.3em !important;
+
+  color: #9e9991 !important;
+
+  text-transform: uppercase !important;
+}
+
+.site-shell.site-shell-public .ab-custom-title {
+  margin: 0 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: clamp(4.5rem, 6vw, 7.5rem) !important;
+  font-weight: 900 !important;
+
+  line-height: 0.88 !important;
+  letter-spacing: -0.055em !important;
+
+  color: #c51f1f !important;
+
+  text-transform: uppercase !important;
+}
+
+.site-shell.site-shell-public .ab-custom-subtitle {
+  margin: 24px 0 0 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0 !important;
+
+  color: #9e9991 !important;
+
+  text-transform: none !important;
+  transform: none !important;
+}
+
+/* =========================================================
+   CUSTOM — même structure d'en-tête que DESIGNS
+   ========================================================= */
+
+.site-shell.site-shell-public .ab-custom-head {
+  width: 100% !important;
+
+  margin-bottom: 58px !important;
+
+  padding-bottom: 18px !important;
+
+  border-bottom: 1px solid #343434 !important;
+}
+
+.site-shell.site-shell-public .ab-custom-kicker {
+  margin: 0 0 28px !important;
+}
+
+.site-shell.site-shell-public .ab-custom-title {
+  margin: 0 !important;
+
+  font-size: clamp(4rem, 6.2vw, 7rem) !important;
+  line-height: 0.88 !important;
+}
+
+.site-shell.site-shell-public .ab-custom-subtitle {
+  margin: 22px 0 0 !important;
+}
+
+/* CUSTOM — même titre que DESIGNS, mais rouge */
+
+.site-shell.site-shell-public .ab-custom-title-red {
+  color: #c51f1f !important;
+}
+
+.site-shell.site-shell-public .ab-custom-subtitle-clean {
+  margin-top: 0 !important;
+  color: #9e9991 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* CUSTOM — titre sur une ligne comme DESIGNS */
+
+@media (min-width: 900px) {
+  .site-shell.site-shell-public .ab-custom-title-red {
+    font-size: clamp(3.8rem, 5vw, 6.4rem) !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.055em !important;
+
+    white-space: nowrap !important;
+  }
+}
+
+/* =========================================================
+   CUSTOM — PANNEAUX 1 + 2
+   Contact/Livraison | Options
+   ========================================================= */
+
+/* Le formulaire n'est plus lui-même la grande feuille crème */
+.site-shell.site-shell-public .ab-custom-form {
+  background: transparent !important;
+  background-image: none !important;
+
+  padding: 0 !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+
+  column-gap: 24px !important;
+  row-gap: 24px !important;
+}
+
+
+/* =========================
+   PANNEAU 1 — CONTACT
+   + LIVRAISON
+   ========================= */
+
+.site-shell.site-shell-public .ab-custom-panel-contact {
+  display: block !important;
+
+  grid-column: 1 / 7 !important;
+  grid-row: 1 !important;
+
+  min-width: 0 !important;
+
+  padding: 34px !important;
+
+  background: #c8c2b8 !important;
+  color: #111 !important;
+}
+
+
+/* Contact + Livraison ne sont plus deux cartes noires */
+.site-shell.site-shell-public
+.ab-custom-panel-contact .ab-custom-contact,
+
+.site-shell.site-shell-public
+.ab-custom-panel-contact .ab-custom-shipping {
+  display: block !important;
+
+  width: 100% !important;
+
+  grid-column: auto !important;
+  grid-row: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+  background-image: none !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  color: #111 !important;
+}
+
+
+/* Ligne entre Contact et Livraison */
+.site-shell.site-shell-public
+.ab-custom-panel-contact .ab-custom-shipping {
+  margin-top: 32px !important;
+  padding-top: 32px !important;
+
+  border-top: 1px solid rgba(5, 5, 5, 0.22) !important;
+}
+
+
+/* =========================
+   PANNEAU 2 — OPTIONS
+   ========================= */
+
+.site-shell.site-shell-public .ab-custom-options {
+  grid-column: 7 / 13 !important;
+  grid-row: 1 !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+
+  min-width: 0 !important;
+
+  padding: 34px !important;
+
+  background: #c8c2b8 !important;
+  color: #111 !important;
+}
+
+
+/* Couleurs / Chrome / Bijoux / Relief
+   deviennent des rubriques internes */
+.site-shell.site-shell-public
+.ab-custom-options > div {
+  width: 100% !important;
+
+  grid-column: auto !important;
+  grid-row: auto !important;
+
+  margin: 0 !important;
+  padding: 28px 0 !important;
+
+  background: transparent !important;
+  background-image: none !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  color: #111 !important;
+}
+
+
+/* Pas d'espace inutile en haut du premier */
+.site-shell.site-shell-public
+.ab-custom-options > div:first-child {
+  padding-top: 0 !important;
+}
+
+
+/* Séparateurs entre les rubriques */
+.site-shell.site-shell-public
+.ab-custom-options > div + div {
+  border-top: 1px solid rgba(5, 5, 5, 0.22) !important;
+}
+
+/* =========================================================
+   CUSTOM — rendre transparents les blocs internes
+   des panneaux 1 et 2
+   ========================================================= */
+
+.site-shell.site-shell-public
+.ab-custom-panel-contact > .ab-custom-contact,
+.site-shell.site-shell-public
+.ab-custom-panel-contact > .ab-custom-shipping,
+.site-shell.site-shell-public
+.ab-custom-options > .ab-custom-colors,
+.site-shell.site-shell-public
+.ab-custom-options > .ab-custom-chrome,
+.site-shell.site-shell-public
+.ab-custom-options > .ab-custom-jewelry,
+.site-shell.site-shell-public
+.ab-custom-options > .ab-custom-relief {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.site-shell.site-shell-public .ab-custom-panel-contact,
+.site-shell.site-shell-public .ab-custom-options {
+  background: #c8c2b8 !important;
+  background-image: none !important;
+}
+
+/* CUSTOM — forcer le fond des 2 premiers panneaux */
+
+.site-shell.site-shell-public
+.ab-custom-form > .ab-custom-panel-contact,
+.site-shell.site-shell-public
+.ab-custom-form > .ab-custom-options {
+  background: #c8c2b8 !important;
+  background-color: #c8c2b8 !important;
+  background-image: none !important;
+
+  color: #111 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* CUSTOM — padding intérieur des panneaux 1 et 2 */
+
+.site-shell.site-shell-public
+.ab-custom-form > .ab-custom-panel-contact,
+.site-shell.site-shell-public
+.ab-custom-form > .ab-custom-options {
+  padding: 34px !important;
+}
+
+/* =========================================================
+   CUSTOM — PANNEAU 3
+   Description + Longueur / forme
+   ========================================================= */
+
+.site-shell.site-shell-public
+.ab-custom-form > .ab-custom-panel-details {
+  grid-column: 1 / 13 !important;
+
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0 !important;
+
+  padding: 34px !important;
+
+  background: #c8c2b8 !important;
+  background-image: none !important;
+
+  color: #111 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+
+/* Les 2 anciennes sections deviennent transparentes */
+.site-shell.site-shell-public
+.ab-custom-panel-details > .ab-custom-description,
+.site-shell.site-shell-public
+.ab-custom-panel-details > .ab-custom-shape {
+  grid-column: auto !important;
+  grid-row: auto !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  color: #111 !important;
+}
+
+
+/* Partie forme à droite */
+.site-shell.site-shell-public
+.ab-custom-panel-details > .ab-custom-shape {
+  margin-left: 34px !important;
+  padding-left: 34px !important;
+
+  border-left: 1px solid rgba(5, 5, 5, 0.22) !important;
+}
+
+/* =========================================================
+   CUSTOM — FINITIONS PANNEAUX 1 + 2
+   ========================================================= */
+
+/* 1 — Descendre légèrement "Votre contact" */
+.site-shell.site-shell-public
+.ab-custom-panel-contact .ab-custom-contact {
+  padding-top: 32px !important;
+}
+
+
+/* 2 — Retirer la fleur décorative du panneau droit */
+.site-shell.site-shell-public .ab-custom-options::before,
+.site-shell.site-shell-public .ab-custom-options::after {
+  content: none !important;
+  display: none !important;
+}
+
+.site-shell.site-shell-public .ab-custom-options > svg {
+  display: none !important;
+}
+
+
+/* 3 — Même couleur pour tous les champs des deux panneaux */
+.site-shell.site-shell-public
+.ab-custom-panel-contact input,
+.site-shell.site-shell-public
+.ab-custom-panel-contact textarea,
+.site-shell.site-shell-public
+.ab-custom-options input,
+.site-shell.site-shell-public
+.ab-custom-options textarea,
+.site-shell.site-shell-public
+.ab-custom-options select {
+  background: #d6d0c6 !important;
+  background-color: #d6d0c6 !important;
+
+  color: #111 !important;
+
+  border: 1px solid rgba(17, 17, 17, 0.35) !important;
+  box-shadow: none !important;
+}
+
+
+/* Placeholders identiques */
+.site-shell.site-shell-public
+.ab-custom-panel-contact input::placeholder,
+.site-shell.site-shell-public
+.ab-custom-panel-contact textarea::placeholder,
+.site-shell.site-shell-public
+.ab-custom-options input::placeholder,
+.site-shell.site-shell-public
+.ab-custom-options textarea::placeholder {
+  color: #817d76 !important;
+  opacity: 1 !important;
+}
+
+
+/* Pas de changement violet quand on clique dans un champ */
+.site-shell.site-shell-public
+.ab-custom-panel-contact input:focus,
+.site-shell.site-shell-public
+.ab-custom-panel-contact textarea:focus,
+.site-shell.site-shell-public
+.ab-custom-options input:focus,
+.site-shell.site-shell-public
+.ab-custom-options textarea:focus,
+.site-shell.site-shell-public
+.ab-custom-options select:focus {
+  background: #c8c2b8 !important;
+  border-color: #55514b !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* CUSTOM — panneau 3 : descriptif + longueur/forme côte à côte */
+
+.site-shell.site-shell-public
+.ab-custom-form > .ab-custom-panel-details {
+  display: grid !important;
+  grid-template-columns: 44% 56% !important;
+
+  column-gap: 28px !important;
+  align-items: start !important;
+}
+
+.site-shell.site-shell-public
+.ab-custom-panel-details > .ab-custom-description,
+.site-shell.site-shell-public
+.ab-custom-panel-details > .ab-custom-shape {
+  width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+}
+
+/* colonne droite */
+.site-shell.site-shell-public
+.ab-custom-panel-details > .ab-custom-shape {
+  padding-left: 28px !important;
+
+  border-left: 1px solid rgba(5, 5, 5, 0.22) !important;
+}
+
+/* =========================================================
+   CUSTOM — PANNEAU 4 : INSPIRATIONS
+   ========================================================= */
+
+.site-shell.site-shell-public
+.ab-custom-form > .ab-custom-panel-inspirations {
+  grid-column: 1 / 13 !important;
+
+  display: block !important;
+  min-width: 0 !important;
+
+  padding: 34px !important;
+
+  background: #c8c2b8 !important;
+  background-color: #c8c2b8 !important;
+  background-image: none !important;
+
+  color: #111 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* L'ancienne section devient simplement le contenu du panneau */
+.site-shell.site-shell-public
+.ab-custom-panel-inspirations > .ab-custom-inspirations {
+  grid-column: auto !important;
+  grid-row: auto !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+
+  border: 0 !important;
+  border-left: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  color: #111 !important;
+}
+
+/* =========================================================
+   CUSTOM — PANNEAU 5 : MESURES
+   ========================================================= */
+
+.site-shell.site-shell-public
+.ab-custom-form > .ab-custom-panel-measurements {
+  grid-column: 1 / 13 !important;
+
+  display: block !important;
+  min-width: 0 !important;
+
+  padding: 34px !important;
+
+  background: #c8c2b8 !important;
+  background-color: #c8c2b8 !important;
+  background-image: none !important;
+
+  color: #111 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.site-shell.site-shell-public
+.ab-custom-panel-measurements > .ab-custom-measurements {
+  grid-column: auto !important;
+  grid-row: auto !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  color: #111 !important;
+}
+
+/* =========================================================
+   CUSTOM — BOUTON ENVOYER
+   ========================================================= */
+
+.site-shell.site-shell-public
+.ab-custom-form > .ab-custom-submit {
+  grid-column: 1 / 13 !important;
+
+  justify-self: end !important;
+
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+
+  gap: 10px !important;
+
+  margin: 10px 0 0 !important;
+  padding: 16px 24px !important;
+
+  background: #c51f1f !important;
+  background-image: none !important;
+
+  color: #050505 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.16em !important;
+
+  white-space: nowrap !important;
+}
+
+.site-shell.site-shell-public
+.ab-custom-form > .ab-custom-submit svg {
+  display: block !important;
+  width: 17px !important;
+  height: 17px !important;
+
+  flex: 0 0 auto !important;
+}
+
+/* =========================================================
+   HOME — DESSIN À DROITE DU HERO
+   ========================================================= */
+
+.site-shell.site-shell-public .ab-home-drawing {
+  position: absolute;
+
+  right: -130px ;
+  top: -200px;
+
+  width: clamp(850px, 70vw, 1400px);
+
+  z-index: 1;
+
+  height: auto !important;
+
+  object-fit: initial !important;
+  object-position: initial !important;
+
+  opacity: 0.9;
+   -webkit-mask-image:
+  linear-gradient(
+    to right,
+    transparent 0%,
+    black 7%,
+    black 97%,
+    transparent 100%
+  );
+
+mask-image:
+  linear-gradient(
+    to right,
+    transparent 0%,
+    black 7%,
+    black 97%,
+    transparent 100%
+  );
+
+}
+
+.site-shell.site-shell-public .ab-home-cutout {
+  z-index: 3;
+}
+
+.site-shell.site-shell-public .ab-home-hero {
+  overflow: hidden !important;
+}
+
+/* =========================================================
+   HOME — ORDRE DES COUCHES
+   ========================================================= */
+
+/* Le dessin reste en arrière-plan */
+.site-shell.site-shell-public .ab-home-drawing {
+  z-index: 1 !important;
+}
+
+/* ANNETTE BAKEUR + Bienvenue dans la Bakeury
+   passent devant le dessin */
+.site-shell.site-shell-public .ab-home-title-wrap {
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+/* Ton cutout reste lui aussi devant le dessin */
+.site-shell.site-shell-public .ab-home-cutout {
+  z-index: 6 !important;
+}
+
+/* Les trois catégories passent devant le dessin */
+.site-shell.site-shell-public .ab2-card {
+  position: relative !important;
+  z-index: 7 !important;
+}
+
+/* =========================================================
+   HOME — zone hero + catégories
+   Le dessin est coupé pile avant NOUVEAUTÉS
+   ========================================================= */
+
+.site-shell.site-shell-public .ab-home-art-zone {
+  position: relative;
+  overflow: hidden !important;
+}
+
+/* =========================================================
+   HOME — CROP FINAL DU DESSIN
+   exactement après les catégories
+   ========================================================= */
+
+.site-shell.site-shell-public .ab-home-art-zone {
+  position: relative !important;
+
+  overflow: hidden !important;
+  clip-path: inset(0) !important;
+}
+
+
+/* Le hero et son contenu ne coupent plus eux-mêmes le dessin */
+.site-shell.site-shell-public .ab-home-hero,
+.site-shell.site-shell-public .ab-home-hero-inner {
+  overflow: visible !important;
+}
+
+
+/* Le dessin n'a PLUS son propre crop */
+.site-shell.site-shell-public .ab-home-drawing {
+  clip-path: none !important;
+}
+
+/* HOME — fond papier sur tout le hero + catégories */
+
+.site-shell.site-shell-public .ab-home-art-zone {
+  position: relative !important;
+  overflow: hidden !important;
+
+  background-color: #f4f0e8;
+
+  background-image:
+  radial-gradient(
+    circle at 25% 20%,
+    rgba(255, 255, 255, 0.38),
+    transparent 38%
+  ),
+  url("data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.38' numOctaves='3' seed='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='.24'/%3E%3C/svg%3E") !important;
+
+background-size:
+  100% 100%,
+  90px 90px !important;
+}
+.site-shell.site-shell-public
+.ab-home-art-zone .ab-home-hero,
+.site-shell.site-shell-public
+.ab-home-art-zone .ab2-menu {
+  background: transparent !important;
+}
+
+.site-shell.site-shell-public .ab-home-kicker {
+  color: #3f3b36 !important;
+}
+
+.site-shell.site-shell-public .ab-home-welcome {
+  color: #575149 !important;
+}
+
+/* HOME — titre carte personnalisée */
+.site-shell.site-shell-public .ab2-card-custom h2 {
+  font-size: clamp(42px, 3.60vw, 66px) !important;
+  line-height: 0.92 !important;
+  letter-spacing: -0.035em !important;
+
+  max-width: 100% !important;
+  margin: 0 !important;
+
+  white-space: normal !important;
 }

@@ -17,54 +17,43 @@ export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
       ?.scrollIntoView({ behavior: 'smooth' });
   };
 
+
   return (
     <main className="ab2-home">
 
       {/* =========================
           01 — COUVERTURE
       ========================== */}
-      <section className="ab2-cover">
+ <div className="ab-home-art-zone">
+      <section className="ab-home-hero">
+  <div className="ab-home-hero-inner">
+    <div className="ab-home-title-wrap">
+      <p className="ab-home-kicker">Press-on nails artist</p>
 
-        <div className="ab2-cover-meta">
-          <span>01</span>
-          <span>ANNETTE BAKEUR</span>
-        </div>
+      <h1 className="ab-home-title">
+        ANNETTE
+        <br />
+        BAKEUR
+      </h1>
 
-        <div className="ab2-title">
-          <span>ANNETTE</span>
-          <span>BAKEUR</span>
-        </div>
+      <p className="ab-home-welcome">
+  Bienvenue dans la Bakeury
+</p>
+    </div>
 
-        <div className="ab2-blue-line" aria-hidden="true" />
+    <img
+      src="/hero-cutout.png"
+      alt="Annette Bakeur"
+      className="ab-home-cutout"
+    />
+    <img
+  src="/images/dessin-bakeury.jpg"
+  alt=""
+  className="ab-home-drawing"
+/>
+  </div>
 
-        <div className="ab2-hero-wrap">
-          <span className="ab2-fig">FIG. 01</span>
-
-          <div className="ab2-hero-image">
-            {hero ? (
-              <img src={hero} alt="Annette Bakeur" />
-            ) : (
-              <Placeholder label="PHOTO" />
-            )}
-          </div>
-        </div>
-
-        <div className="ab2-bakeury">
-          <span>LA</span>
-          <strong>BAKEURY</strong>
-        </div>
-
-        <Flower2 className="ab2-flower" strokeWidth={1.2} />
-
-        <div className="ab2-yellow-mark" aria-hidden="true">
-          ✳
-        </div>
-
-        <button className="ab2-enter" onClick={scrollToMenu}>
-          ENTRER <ArrowRight size={17} />
-        </button>
-
-      </section>
+</section>
 
       {/* =========================
           02 — LES TROIS ENTRÉES
@@ -86,7 +75,11 @@ export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
 
             <div className="ab2-card-content">
               <span className="ab2-card-small">ANNETTE BAKEUR</span>
-              <h2>SUR-MESURE</h2>
+              <h2>
+  COMMANDE
+  <br />
+  PERSONNALISÉE
+</h2>
             </div>
 
             <ArrowRight className="ab2-card-arrow" />
@@ -126,6 +119,7 @@ export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
 
         </div>
       </section>
+ </div>
 
       {/* =========================
           03 — NOUVEAUTÉS
@@ -187,14 +181,6 @@ export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
               </div>
             ))
           )}
-
-          <span className="ab2-new-note" aria-hidden="true">
-            new
-          </span>
-
-          <span className="ab2-blue-star" aria-hidden="true">
-            ✦
-          </span>
 
         </div>
       </section>
