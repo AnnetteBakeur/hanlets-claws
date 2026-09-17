@@ -10,10 +10,78 @@ const EMAIL_CONTACT = 'axellehanlet@free.fr';
 // ===== PASSWORD RESET STATE (à rajouter dans le composant App) =====
 // (tu verras c'est utilisé dans le return)
 
-const SHAPES = Array.from({ length: 10 }, (_, index) => ({
-  id: index + 1,
-  label: `Modèle ${index + 1}`
-}));
+const SHAPES = [
+  {
+    id: 1,
+    label: 'Modèle 1',
+    image: '/shape-guide-1-6.png',
+    backgroundSize: '245%',
+    backgroundPosition: '10% -5%',
+  },
+  {
+    id: 2,
+    label: 'Modèle 2',
+    image: '/shape-guide-1-6.png',
+    backgroundSize: '245%',
+    backgroundPosition: '90% -5%',
+  },
+  {
+    id: 3,
+    label: 'Modèle 3',
+    image: '/shape-guide-1-6.png',
+    backgroundSize: '245%',
+    backgroundPosition: '10% 52%',
+  },
+  {
+    id: 4,
+    label: 'Modèle 4',
+    image: '/shape-guide-1-6.png',
+    backgroundSize: '245%',
+    backgroundPosition: '90% 52%',
+  },
+  {
+    id: 5,
+    label: 'Modèle 5',
+    image: '/shape-guide-1-6.png',
+    backgroundSize: '245%',
+    backgroundPosition: '18% 104%',
+  },
+  {
+    id: 6,
+    label: 'Modèle 6',
+    image: '/shape-guide-1-6.png',
+    backgroundSize: '245%',
+    backgroundPosition: '98% 104%',
+  },
+  {
+    id: 7,
+    label: 'Modèle 7',
+    image: '/shape-guide-7-10.png',
+    backgroundSize: '215%',
+    backgroundPosition: '10% 5%',
+  },
+  {
+    id: 8,
+    label: 'Modèle 8',
+    image: '/shape-guide-7-10.png',
+    backgroundSize: '215%',
+    backgroundPosition: '96% 5%',
+  },
+  {
+    id: 9,
+    label: 'Modèle 9',
+    image: '/shape-guide-7-10.png',
+    backgroundSize: '215%',
+    backgroundPosition: '10% 92%',
+  },
+  {
+    id: 10,
+    label: 'Modèle 10',
+    image: '/shape-guide-7-10.png',
+    backgroundSize: '215%',
+    backgroundPosition: '90% 92%',
+  },
+];
 
 const MEASUREMENT_PHOTOS = [
   { id: 'leftThumb', name: 'Pouce main gauche' },
@@ -367,7 +435,7 @@ function Header({ page, goTo, menuOpen, setMenuOpen }) {
   const links = [
     { id: 'home', label: 'LA BAKEURY' },
     { id: 'designs', label: 'DESIGNS' },
-    { id: 'custom', label: 'SUR-MESURE' }
+    { id: 'custom', label: 'PERSONNALISÉS' }
   ];
 
   const navigate = (id) => {
@@ -553,6 +621,7 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
 
 function OrderForm({ design, saveOrder, goTo }) {
   const [contact, setContact] = useState('');
+  const [modifications, setModifications] = useState('');
   const [shape, setShape] = useState(null);
   const [measurements, setMeasurements] = useState({});
   const [showMeasurements, setShowMeasurements] = useState(false);
@@ -564,12 +633,21 @@ function OrderForm({ design, saveOrder, goTo }) {
     if (!contact.trim()) return alert('Renseignez un contact');
     if (!shape) return alert('Choisissez une forme/longueur');
     setSubmitting(true);
-    await saveOrder({ type: 'design', designId: design.id, designName: design.name, designPrice: design.price, contact: contact.trim(), shape, measurements });
+    await saveOrder({
+  type: 'design',
+  designId: design.id,
+  designName: design.name,
+  designPrice: design.price,
+  contact: contact.trim(),
+  modifications: modifications.trim(),
+  shape,
+  measurements
+});
     setSubmitting(false);
   }
 
   return (
-    <div className="ab-custom-page max-w-3xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
+    <div className="ab-order-page max-w-3xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
       <BackButton onClick={() => goTo('designs')} label="Retour aux designs" icon="arrow" />
       <div className="ab-order-product bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden mb-8">
         <div className="ab-order-product-inner flex flex-col sm:flex-row gap-5 p-5 lg:p-7">
@@ -590,17 +668,64 @@ function OrderForm({ design, saveOrder, goTo }) {
         </div>
       </div>
       <div className="ab-order-form space-y-5">
-        <Section num="0" title="Votre contact">
-          <p className="text-neutral-500 text-sm mb-3">Mail ou Instagram pour que je puisse vous recontacter.</p>
-          <input value={contact} onChange={e => setContact(e.target.value)} placeholder="email@exemple.com ou @votrepseudo" className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600" />
-        </Section>
-        <Section num="1" title="Longueur & forme"><ShapeSelector value={shape} onChange={setShape} /></Section>
-        <Section num="2" title="Vos mesures" optional>
-          <p className="text-neutral-500 text-sm mb-4">À renseigner uniquement si vous commandez pour la première fois.</p>
-          {!showMeasurements ? (
-            <button onClick={() => setShowMeasurements(true)} className="px-5 py-2.5 border border-neutral-700 hover:border-neutral-300 text-neutral-100 text-sm rounded-full transition-colors">Renseigner mes mesures</button>
-          ) : <MeasurementsBlock measurements={measurements} setMeasurements={setMeasurements} />}
-        </Section>
+        <Section title="Votre contact" className="ab-order-contact">
+  <p className="text-neutral-500 text-sm mb-3">
+    Mail ou Instagram pour que je puisse vous recontacter.
+  </p>
+
+  <input
+    value={contact}
+    onChange={e => setContact(e.target.value)}
+    placeholder="email@exemple.com ou @votrepseudo"
+    className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600"
+  />
+</Section>
+
+<Section
+  title="Modifications souhaitées"
+  optional
+  className="ab-order-modifications"
+>
+  <p className="text-neutral-500 text-sm mb-3">
+    Indiquez ici les couleurs, motifs ou détails que vous souhaitez modifier.
+  </p>
+
+  <textarea
+    value={modifications}
+    onChange={e => setModifications(e.target.value)}
+    rows={4}
+    placeholder="Ex. : remplacer le orange par du rouge, retirer certains motifs..."
+    className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 resize-none"
+  />
+</Section>
+
+<Section title="Longueur & forme" className="ab-order-shape">
+  <ShapeSelector value={shape} onChange={setShape} />
+</Section>
+
+<Section
+  title="Vos mesures"
+  optional
+  className="ab-order-measurements"
+>
+  <p className="text-neutral-500 text-sm mb-4">
+    À renseigner uniquement si vous commandez pour la première fois.
+  </p>
+
+  {!showMeasurements ? (
+    <button
+      onClick={() => setShowMeasurements(true)}
+      className="px-5 py-2.5 border border-neutral-700 hover:border-neutral-300 text-neutral-100 text-sm rounded-full transition-colors"
+    >
+      Renseigner mes mesures
+    </button>
+  ) : (
+    <MeasurementsBlock
+      measurements={measurements}
+      setMeasurements={setMeasurements}
+    />
+  )}
+</Section>
         <button onClick={submit} disabled={submitting} className="ab-order-submit w-full px-6 py-4 bg-neutral-50 text-neutral-950 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-full flex items-center justify-center gap-2 text-sm tracking-wide font-medium">
           {submitting ? 'Envoi en cours...' : <>Envoyer ma commande <Send className="w-4 h-4" /></>}
         </button>
@@ -639,10 +764,10 @@ function CustomOrderForm({ saveOrder, goTo }) {
   }
 
   return (
-    <div className="ab-order-page max-w-3xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
+    <div className="ab-custom-page">
       <BackButton onClick={() => goTo('home')} />
       <div className="ab-custom-header mb-10">
-        <p className="text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">Sur mesure</p>
+        <p className="text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">Personnalisé</p>
         <h1 className="font-serif text-4xl lg:text-5xl text-neutral-50 mb-3" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>Commande personnalisée</h1>
         <p className="text-neutral-400">Décrivez-moi votre vision, je crée votre set unique.</p>
       </div>
@@ -721,7 +846,6 @@ function Section({ num, title, optional, children, className = '' }) {
   return (
     <div className={`bg-neutral-900 rounded-2xl border border-neutral-800 p-5 lg:p-7 ${className}`}>
       <div className="flex items-center gap-3 mb-4">
-        <span className="w-7 h-7 rounded-full bg-neutral-50 text-neutral-950 text-xs flex items-center justify-center font-bold">{num}</span>
         <h3 className="font-serif text-lg lg:text-xl text-neutral-50" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>{title}{optional && <span className="text-neutral-500 text-sm ml-2 italic font-sans">(Optionnel)</span>}</h3>
       </div>
       {children}
@@ -741,83 +865,47 @@ function ShapeSelector({ value, onChange }) {
   return (
     <div>
       <p className="text-neutral-400 text-sm mb-5 leading-relaxed">
-        Consultez les deux guides ci-dessous, puis sélectionnez le numéro
-        correspondant à la longueur et à la forme souhaitées.
+        Sélectionnez directement la forme et la longueur souhaitées.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-7">
-        <figure className="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950">
-          <img
-            src="/shape-guide-1-6.png"
-            alt="Guide des longueurs et formes 1 à 6"
-            className="w-full h-auto object-contain"
-          />
-
-          <figcaption className="px-4 py-3 text-center text-sm text-neutral-400 border-t border-neutral-800">
-            Modèles 1 à 6
-          </figcaption>
-        </figure>
-
-        <figure className="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950">
-          <img
-            src="/shape-guide-7-10.png"
-            alt="Guide des longueurs et formes 7 à 10"
-            className="w-full h-auto object-contain"
-          />
-
-          <figcaption className="px-4 py-3 text-center text-sm text-neutral-400 border-t border-neutral-800">
-            Modèles 7 à 10
-          </figcaption>
-        </figure>
-      </div>
-
-      <p className="text-xs tracking-widest uppercase text-neutral-500 mb-3">
-        Sélectionnez un modèle
-      </p>
-
-      <div className="grid grid-cols-5 gap-2 sm:gap-3">
-        {SHAPES.map((shape) => {
+      <div className="ab-shape-grid">
+        {SHAPES.map(shape => {
           const selected = value === shape.id;
 
           return (
-            <label
+            <button
               key={shape.id}
-              className={`relative aspect-square rounded-xl border-2 cursor-pointer
-                flex items-center justify-center transition-all
-                ${
-                  selected
-                    ? 'border-neutral-50 bg-neutral-800/70 shadow-lg'
-                    : 'border-neutral-800 bg-neutral-950 hover:border-neutral-500'
-                }`}
+              type="button"
+              onClick={() => onChange(shape.id)}
+              className={`ab-shape-card ${selected ? 'is-selected' : ''}`}
             >
-              <input
-                type="radio"
-                name="shape-choice"
-                value={shape.id}
-                checked={selected}
-                onChange={() => onChange(shape.id)}
-                className="sr-only"
+              <div
+                className="ab-shape-thumb"
+                style={{
+                  backgroundImage: `url(${shape.image})`,
+                  backgroundSize: shape.backgroundSize,
+                  backgroundPosition: shape.backgroundPosition,
+                  backgroundRepeat: 'no-repeat'
+                }}
               />
 
-              <span className="text-xl sm:text-2xl font-semibold text-neutral-100">
-                {shape.id}
-              </span>
+              <div className="ab-shape-label">
+                <span>{String(shape.id).padStart(2, '0')}</span>
+                <strong>{shape.label}</strong>
+              </div>
 
               {selected && (
-                <span className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-neutral-50 flex items-center justify-center">
-                  <Check
-                    className="w-3 h-3 text-neutral-950"
-                    strokeWidth={3}
-                  />
+                <span className="ab-shape-check">
+                  <Check size={15} strokeWidth={3} />
                 </span>
               )}
-            </label>
+            </button>
           );
         })}
       </div>
 
       {value && (
-        <p className="mt-4 text-sm text-neutral-300">
+        <p className="ab-shape-selected">
           Modèle sélectionné : <strong>n° {value}</strong>
         </p>
       )}
