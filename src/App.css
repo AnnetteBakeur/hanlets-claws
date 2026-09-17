@@ -3246,3 +3246,96 @@ aspect-ratio: 4 / 5 !important;
 
   align-items: flex-end !important;
 }
+/* =========================================================
+   DESIGNS — FILTRE DE CATÉGORIES
+   ========================================================= */
+
+.ab-designs-category-filter {
+  display: flex;
+  align-items: stretch;
+
+  width: fit-content;
+
+  margin: 0 0 48px;
+  border: 1px solid #333;
+
+  background: #050505;
+}
+
+.ab-designs-filter-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-height: 52px;
+
+  padding: 0 22px;
+
+  border: 0;
+  border-right: 1px solid #333;
+
+  background: transparent;
+  color: #777;
+
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: .14em;
+
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    color .2s ease;
+}
+
+.ab-designs-filter-button:last-child {
+  border-right: 0;
+}
+
+.ab-designs-filter-button span {
+  font-size: 7px;
+  font-weight: 500;
+
+  color: #666;
+}
+
+.ab-designs-filter-button:hover {
+  color: #f0ede5;
+}
+
+.ab-designs-filter-button.is-active {
+  background: #f21b1b;
+  color: #050505;
+}
+
+.ab-designs-filter-button.is-active span {
+  color: #050505;
+}
+
+
+/* téléphone */
+
+@media (max-width: 650px) {
+
+  .ab-designs-category-filter {
+    width: 100%;
+
+    margin-bottom: 32px;
+  }
+
+  .ab-designs-filter-button {
+    flex: 1;
+
+    justify-content: center;
+
+    min-height: 48px;
+
+    padding: 8px 10px;
+
+    font-size: 8px !important;
+  }
+
+  .ab-designs-filter-button span {
+    display: none;
+  }
+}

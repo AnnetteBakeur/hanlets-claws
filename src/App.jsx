@@ -469,12 +469,7 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
       : designs.filter(
           d => (d.category || 'original') === category
         );
-  const pageTitle =
-    category === 'soft'
-      ? 'Prix doux'
-      : category === 'original'
-      ? 'Designs originaux'
-      : 'Designs disponibles';
+  const pageTitle = 'Designs disponibles';
   const sorted = [...filteredDesigns].sort((a, b) => sort === 'price-asc' ? a.price - b.price : sort === 'price-desc' ? b.price - a.price : 0);
   return (
     <div className="ab-designs-page max-w-7xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
@@ -499,6 +494,36 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
           </select>
         </div>
       </div>
+      <div className="ab-designs-category-filter">
+
+  <button
+    type="button"
+    onClick={() => goTo('designs')}
+    className={`ab-designs-filter-button ${category === 'all' ? 'is-active' : ''}`}
+  >
+    <span>00</span>
+    TOUS
+  </button>
+
+  <button
+    type="button"
+    onClick={() => goTo('designs-original')}
+    className={`ab-designs-filter-button ${category === 'original' ? 'is-active' : ''}`}
+  >
+    <span>01</span>
+    DESIGNS ORIGINAUX
+  </button>
+
+  <button
+    type="button"
+    onClick={() => goTo('designs-soft')}
+    className={`ab-designs-filter-button ${category === 'soft' ? 'is-active' : ''}`}
+  >
+    <span>02</span>
+    PRIX DOUX
+  </button>
+
+</div>
       {filteredDesigns.length === 0 ? (
         <p className="text-neutral-500 text-center py-20">Aucun design disponible pour l'instant.</p>
       ) : (
