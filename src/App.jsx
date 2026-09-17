@@ -11,76 +11,16 @@ const EMAIL_CONTACT = 'axellehanlet@free.fr';
 // (tu verras c'est utilisé dans le return)
 
 const SHAPES = [
-  {
-    id: 1,
-    label: 'Modèle 1',
-    image: '/shape-guide-1-6.png',
-    backgroundSize: '245%',
-    backgroundPosition: '10% -5%',
-  },
-  {
-    id: 2,
-    label: 'Modèle 2',
-    image: '/shape-guide-1-6.png',
-    backgroundSize: '245%',
-    backgroundPosition: '90% -5%',
-  },
-  {
-    id: 3,
-    label: 'Modèle 3',
-    image: '/shape-guide-1-6.png',
-    backgroundSize: '245%',
-    backgroundPosition: '10% 52%',
-  },
-  {
-    id: 4,
-    label: 'Modèle 4',
-    image: '/shape-guide-1-6.png',
-    backgroundSize: '245%',
-    backgroundPosition: '90% 52%',
-  },
-  {
-    id: 5,
-    label: 'Modèle 5',
-    image: '/shape-guide-1-6.png',
-    backgroundSize: '245%',
-    backgroundPosition: '18% 104%',
-  },
-  {
-    id: 6,
-    label: 'Modèle 6',
-    image: '/shape-guide-1-6.png',
-    backgroundSize: '245%',
-    backgroundPosition: '98% 104%',
-  },
-  {
-    id: 7,
-    label: 'Modèle 7',
-    image: '/shape-guide-7-10.png',
-    backgroundSize: '215%',
-    backgroundPosition: '10% 5%',
-  },
-  {
-    id: 8,
-    label: 'Modèle 8',
-    image: '/shape-guide-7-10.png',
-    backgroundSize: '215%',
-    backgroundPosition: '96% 5%',
-  },
-  {
-    id: 9,
-    label: 'Modèle 9',
-    image: '/shape-guide-7-10.png',
-    backgroundSize: '215%',
-    backgroundPosition: '10% 92%',
-  },
-  {
-    id: 10,
-    label: 'Modèle 10',
-    image: '/shape-guide-7-10.png',
-    backgroundSize: '215%',
-    backgroundPosition: '90% 92%',
-  },
+  { id: 1, label: 'Modèle 1', image: '/shapes/shape 1.jpeg' },
+  { id: 2, label: 'Modèle 2', image: '/shapes/shape 2.jpeg' },
+  { id: 3, label: 'Modèle 3', image: '/shapes/shape 3.jpeg' },
+  { id: 4, label: 'Modèle 4', image: '/shapes/shape 4.jpeg' },
+  { id: 5, label: 'Modèle 5', image: '/shapes/shape 5.jpeg' },
+  { id: 6, label: 'Modèle 6', image: '/shapes/shape 6.jpeg' },
+  { id: 7, label: 'Modèle 7', image: '/shapes/shape 7.jpeg' },
+  { id: 8, label: 'Modèle 8', image: '/shapes/shape 8.jpeg' },
+  { id: 9, label: 'Modèle 9', image: '/shapes/shape 9.jpeg' },
+  { id: 10, label: 'Modèle 10', image: '/shapes/shape 10.jpeg' },
 ];
 
 const MEASUREMENT_PHOTOS = [
@@ -681,6 +621,7 @@ function OrderForm({ design, saveOrder, goTo }) {
         </div>
       </div>
       <div className="ab-order-form space-y-5">
+        <div className="ab-order-side-top">
         <Section
   title="Votre contact"
   className="ab-order-contact"
@@ -765,6 +706,7 @@ function OrderForm({ design, saveOrder, goTo }) {
 
   </div>
 </Section>
+</div>
 
 <Section
   title="Modifications souhaitées"
@@ -976,12 +918,15 @@ function CustomOrderForm({ saveOrder, goTo }) {
 
   </div>
 </Section>
+
+<div className="ab-custom-options">
         <Section num="1" title="Couleurs" className="ab-custom-colors">
           <textarea value={colors} onChange={e => setColors(e.target.value)} rows={2} placeholder="Décrivez les couleurs souhaitées..." className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 resize-none" />
         </Section>
         <Section num="2" title="Chrome" className="ab-custom-chrome"><ChoiceRow options={['Doré', 'Argenté', 'Les deux', 'Aucun']} value={chrome} onChange={setChrome} /></Section>
         <Section num="3" title="Bijoux (strass, perles)" className="ab-custom-jewelry"><ChoiceRow options={['Oui', 'Non']} value={jewelry} onChange={setJewelry} /></Section>
         <Section num="4" title="Relief" className="ab-custom-relief"><ChoiceRow options={['Oui', 'Non']} value={relief} onChange={setRelief} /></Section>
+        </div>
         <Section num="5" title="Descriptif personnel" className="ab-custom-description">
           <textarea value={desc} onChange={e => setDesc(e.target.value)} rows={4} placeholder="Décrivez-moi le niveau de détails que vous souhaitez pour vos ongles + requêtes complémentaires" className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 resize-none mb-2" />
           <p className="text-neutral-500 text-sm italic">Exemple : j'aimerais des ongles tous différents, avec des spirales, mais pas d'étoiles. </p>
@@ -1028,23 +973,62 @@ function CustomOrderForm({ saveOrder, goTo }) {
 }
 
 function ConfirmationScreen({ order, goTo }) {
+  const isCustom = order.type === 'custom';
+
   return (
-    <div className="max-w-2xl mx-auto px-5 lg:px-10 py-16 lg:py-24">
-      <div className="bg-neutral-900 rounded-2xl border border-neutral-800 p-8 lg:p-12 text-center">
-        <div className="w-16 h-16 rounded-full bg-neutral-50 mx-auto mb-6 flex items-center justify-center"><Check className="w-8 h-8 text-neutral-950" strokeWidth={3} /></div>
-        <p className="text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">Confirmation</p>
-        <h1 className="font-serif text-3xl lg:text-4xl text-neutral-50 mb-4" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>Commande reçue ✨</h1>
-        <p className="text-neutral-400 mb-2">Merci pour votre confiance.</p>
-        <p className="text-neutral-400 mb-6">Je reviens vers vous très vite via <span className="text-neutral-100 font-medium">{order.contact}</span></p>
-        <div className="bg-neutral-950 rounded-xl border border-neutral-800 p-4 mb-6 inline-block">
-          <p className="text-xs text-neutral-500 mb-1 tracking-widest uppercase">Numéro de commande</p>
-          <p className="font-mono text-neutral-100 text-sm">#{order.id}</p>
+    <div className="ab-confirmation-page">
+      <div className="ab-confirmation-card">
+
+        <div className="ab-confirmation-top">
+          <span>CONFIRMATION</span>
+          <span>ANNETTE BAKEUR</span>
         </div>
-        <p className="text-neutral-500 text-sm mb-8 italic">Conservez ce numéro pour toute correspondance ultérieure.</p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <button onClick={() => goTo('home')} className="px-6 py-3 bg-neutral-50 text-neutral-950 hover:bg-white rounded-full text-sm flex items-center justify-center gap-2"><Home className="w-4 h-4" /> Retour à l'accueil</button>
-          <button onClick={() => goTo('designs')} className="px-6 py-3 border border-neutral-700 hover:border-neutral-400 rounded-full text-sm">Voir d'autres designs</button>
+
+        <h1>
+          COMMANDE
+          <br />
+          REÇUE !
+        </h1>
+
+        <div className="ab-confirmation-content">
+          <div className="ab-confirmation-message">
+            <p>Merci pour votre confiance.</p>
+
+            <p>
+              Je reviens vers vous via{' '}
+              <strong>{order.contact}</strong>{' '}
+              {isCustom
+                ? 'pour le croquis et le paiement.'
+                : 'pour le paiement.'}
+            </p>
+          </div>
+
+          <div className="ab-confirmation-number">
+            <span>NUMÉRO DE COMMANDE</span>
+            <strong>#{order.id}</strong>
+          </div>
         </div>
+
+        <p className="ab-confirmation-note">
+          Conservez ce numéro pour toute correspondance ultérieure.
+        </p>
+
+        <div className="ab-confirmation-actions">
+          <button
+            className="ab-confirmation-home"
+            onClick={() => goTo('home')}
+          >
+            RETOUR À L’ACCUEIL
+          </button>
+
+          <button
+            className="ab-confirmation-designs"
+            onClick={() => goTo('designs')}
+          >
+            VOIR LES DESIGNS
+          </button>
+        </div>
+
       </div>
     </div>
   );
@@ -1076,44 +1060,52 @@ function ShapeSelector({ value, onChange }) {
         Sélectionnez directement la forme et la longueur souhaitées.
       </p>
 
-      <div className="ab-shape-grid">
-        {SHAPES.map(shape => {
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+        {SHAPES.map((shape, index) => {
           const selected = value === shape.id;
 
           return (
-            <button
+            <label
               key={shape.id}
-              type="button"
-              onClick={() => onChange(shape.id)}
-              className={`ab-shape-card ${selected ? 'is-selected' : ''}`}
+              className={`ab-shape-choice cursor-pointer border transition-all ${
+                selected
+                  ? 'border-neutral-50'
+                  : 'border-neutral-800 hover:border-neutral-500'
+              }`}
             >
-              <div
-                className="ab-shape-thumb"
-                style={{
-                  backgroundImage: `url(${shape.image})`,
-                  backgroundSize: shape.backgroundSize,
-                  backgroundPosition: shape.backgroundPosition,
-                  backgroundRepeat: 'no-repeat'
-                }}
+              <input
+                type="radio"
+                name="shape-choice"
+                value={shape.id}
+                checked={selected}
+                onChange={() => onChange(shape.id)}
+                className="sr-only"
               />
 
-              <div className="ab-shape-label">
-                <span>{String(shape.id).padStart(2, '0')}</span>
-                <strong>{shape.label}</strong>
+              <div className="ab-shape-choice-image">
+                <img
+                  src={shape.image}
+                  alt={shape.label}
+                />
+
+                {selected && (
+                  <span className="ab-shape-check">
+                    <Check size={14} strokeWidth={3} />
+                  </span>
+                )}
               </div>
 
-              {selected && (
-                <span className="ab-shape-check">
-                  <Check size={15} strokeWidth={3} />
-                </span>
-              )}
-            </button>
+              <div className="ab-shape-choice-caption">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{shape.label}</strong>
+              </div>
+            </label>
           );
         })}
       </div>
 
       {value && (
-        <p className="ab-shape-selected">
+        <p className="mt-4 text-sm text-neutral-300">
           Modèle sélectionné : <strong>n° {value}</strong>
         </p>
       )}
