@@ -502,7 +502,7 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
       {filteredDesigns.length === 0 ? (
         <p className="text-neutral-500 text-center py-20">Aucun design disponible pour l'instant.</p>
       ) : (
-        <div className="ab-designs-grid grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:gap-7">
+        <div className="ab-designs-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 lg:gap-5">
           {sorted.map(d => (
             <div
   key={d.id}
