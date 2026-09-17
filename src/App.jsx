@@ -544,7 +544,7 @@ function OrderForm({ design, saveOrder, goTo }) {
   }
 
   return (
-    <div className="ab-order-page max-w-3xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
+    <div className="ab-custom-page max-w-3xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
       <BackButton onClick={() => goTo('designs')} label="Retour aux designs" icon="arrow" />
       <div className="ab-order-product bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden mb-8">
         <div className="ab-order-product-inner flex flex-col sm:flex-row gap-5 p-5 lg:p-7">
@@ -616,28 +616,28 @@ function CustomOrderForm({ saveOrder, goTo }) {
   return (
     <div className="ab-order-page max-w-3xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
       <BackButton onClick={() => goTo('home')} />
-      <div className="mb-10">
+      <div className="ab-custom-header mb-10">
         <p className="text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">Sur mesure</p>
         <h1 className="font-serif text-4xl lg:text-5xl text-neutral-50 mb-3" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>Commande personnalisée</h1>
         <p className="text-neutral-400">Décrivez-moi votre vision, je crée votre set unique.</p>
       </div>
-      <div className="space-y-5">
-        <Section num="0" title="Votre contact">
+      <div className="ab-custom-form space-y-5">
+        <Section num="0" title="Votre contact" className="ab-custom-contact">
           <p className="text-neutral-500 text-sm mb-3">Mail ou Instagram pour que je puisse vous recontacter.</p>
           <input value={contact} onChange={e => setContact(e.target.value)} placeholder="email@exemple.com ou @votrepseudo" className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600" />
         </Section>
-        <Section num="1" title="Couleurs">
+        <Section num="1" title="Couleurs" className="ab-custom-colors">
           <textarea value={colors} onChange={e => setColors(e.target.value)} rows={2} placeholder="Décrivez les couleurs souhaitées..." className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 resize-none" />
         </Section>
-        <Section num="2" title="Chrome"><ChoiceRow options={['Doré', 'Argenté', 'Les deux', 'Aucun']} value={chrome} onChange={setChrome} /></Section>
-        <Section num="3" title="Bijoux (strass, perles)"><ChoiceRow options={['Oui', 'Non']} value={jewelry} onChange={setJewelry} /></Section>
-        <Section num="4" title="Relief"><ChoiceRow options={['Oui', 'Non']} value={relief} onChange={setRelief} /></Section>
-        <Section num="5" title="Descriptif personnel">
+        <Section num="2" title="Chrome" className="ab-custom-chrome"><ChoiceRow options={['Doré', 'Argenté', 'Les deux', 'Aucun']} value={chrome} onChange={setChrome} /></Section>
+        <Section num="3" title="Bijoux (strass, perles)" className="ab-custom-jewelry"><ChoiceRow options={['Oui', 'Non']} value={jewelry} onChange={setJewelry} /></Section>
+        <Section num="4" title="Relief" className="ab-custom-relief"><ChoiceRow options={['Oui', 'Non']} value={relief} onChange={setRelief} /></Section>
+        <Section num="5" title="Descriptif personnel" className="ab-custom-description">
           <textarea value={desc} onChange={e => setDesc(e.target.value)} rows={4} placeholder="Décrivez-moi le niveau de détails que vous souhaitez pour vos ongles + requêtes complémentaires" className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 resize-none mb-2" />
           <p className="text-neutral-500 text-sm italic">Exemple : j'aimerais des ongles tous différents, avec des spirales, mais pas d'étoiles. </p>
         </Section>
-        <Section num="6" title="Longueur & forme"><ShapeSelector value={shape} onChange={setShape} /></Section>
-        <Section num="7" title="Inspirations">
+        <Section num="6" title="Longueur & forme" className="ab-custom-shape"><ShapeSelector value={shape} onChange={setShape} /></Section>
+        <Section num="7" title="Inspirations" className="ab-custom-inspirations">
           <p className="text-neutral-500 text-sm mb-4">Importez vos photos / inspirations (10 maximum)</p>
           <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 mb-3">
             {inspirations.map((img, i) => (
@@ -655,8 +655,13 @@ function CustomOrderForm({ saveOrder, goTo }) {
           <input ref={inspRef} type="file" accept="image/*" multiple onChange={handleInspirations} className="hidden" />
           <p className="text-neutral-600 text-xs">{inspirations.length}/10 photos</p>
         </Section>
-        <Section num="8" title="Vos mesures"><MeasurementsBlock measurements={measurements} setMeasurements={setMeasurements} /></Section>
-        <button onClick={submit} disabled={submitting} className="w-full px-6 py-4 bg-neutral-50 text-neutral-950 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-full flex items-center justify-center gap-2 text-sm tracking-wide font-medium">
+        <Section num="8" title="Vos mesures" className="ab-custom-measurements">
+  <MeasurementsBlock
+    measurements={measurements}
+    setMeasurements={setMeasurements}
+  />
+</Section>
+        <button onClick={submit} disabled={submitting} className="ab-custom-submit w-full px-6 py-4 bg-neutral-50 text-neutral-950 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-full flex items-center justify-center gap-2 text-sm tracking-wide font-medium">
           {submitting ? 'Envoi en cours...' : <>Envoyer ma commande <Send className="w-4 h-4" /></>}
         </button>
       </div>
@@ -687,9 +692,9 @@ function ConfirmationScreen({ order, goTo }) {
   );
 }
 
-function Section({ num, title, optional, children }) {
+function Section({ num, title, optional, children, className = '' }) {
   return (
-    <div className="bg-neutral-900 rounded-2xl border border-neutral-800 p-5 lg:p-7">
+    <div className={`bg-neutral-900 rounded-2xl border border-neutral-800 p-5 lg:p-7 ${className}`}>
       <div className="flex items-center gap-3 mb-4">
         <span className="w-7 h-7 rounded-full bg-neutral-50 text-neutral-950 text-xs flex items-center justify-center font-bold">{num}</span>
         <h3 className="font-serif text-lg lg:text-xl text-neutral-50" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>{title}{optional && <span className="text-neutral-500 text-sm ml-2 italic font-sans">(Optionnel)</span>}</h3>
