@@ -2249,14 +2249,6 @@ aspect-ratio: 4 / 5 !important;
    CONFIRMATION DE COMMANDE — ANNETTE BAKEUR
    ========================================================= */
 
-.ab-confirmation-page {
-  color: #f0ede5;
-}
-
-.ab-confirmation-card {
-  position: relative;
-}
-
 /* petite ligne éditoriale du haut */
 .ab-confirmation-top {
   display: flex;
@@ -2278,13 +2270,6 @@ aspect-ratio: 4 / 5 !important;
 }
 
 /* message + numéro */
-.ab-confirmation-content {
-  display: grid;
-  border-top: 1px solid rgba(240, 237, 229, 0.22);
-  border-bottom: 1px solid rgba(240, 237, 229, 0.22);
-}
-
-
 .ab-confirmation-message p {
   max-width: 650px;
   margin: 0 0 18px !important;
@@ -2294,6 +2279,7 @@ aspect-ratio: 4 / 5 !important;
 
 .ab-confirmation-message p:first-child {
   color: #f0ede5 !important;
+  font-size: 20px !important;
   font-weight: 800;
 }
 
@@ -2305,6 +2291,7 @@ aspect-ratio: 4 / 5 !important;
 /* numéro de commande */
 .ab-confirmation-number {
   display: flex;
+  padding: 24px !important;
   flex-direction: column;
   justify-content: center;
   background: #efece3;
@@ -2321,14 +2308,17 @@ aspect-ratio: 4 / 5 !important;
 
 .ab-confirmation-number strong {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 17px !important;
   font-weight: 500;
   word-break: break-all;
 }
 
 /* note sous le numéro */
 .ab-confirmation-note {
+  margin: 16px 0 28px !important;
   color: #777 !important;
   font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 12px !important;
   font-style: italic;
 }
 
@@ -2340,8 +2330,11 @@ aspect-ratio: 4 / 5 !important;
 }
 
 .ab-confirmation-actions button {
+  min-height: 48px !important;
+  padding: 0 22px !important;
   border-radius: 0 !important;
   font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 10px !important;
   font-weight: 900;
   letter-spacing: 0.12em;
   cursor: pointer;
@@ -2400,9 +2393,11 @@ aspect-ratio: 4 / 5 !important;
   justify-content: center !important;
   padding: 55px 24px 75px !important;
   background: #050505 !important;
+  color: #f0ede5;
 }
 
 .ab-confirmation-card {
+  position: relative;
   width: 100% !important;
   max-width: 860px !important;
   margin: 0 auto !important;
@@ -2427,7 +2422,10 @@ aspect-ratio: 4 / 5 !important;
 
 /* Zone message + numéro */
 .ab-confirmation-content {
+  display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(230px, 0.75fr) !important;
+  border-top: 1px solid rgba(240, 237, 229, 0.22);
+  border-bottom: 1px solid rgba(240, 237, 229, 0.22);
 }
 
 /* Message */
@@ -2436,35 +2434,10 @@ aspect-ratio: 4 / 5 !important;
 }
 
 .ab-confirmation-message p {
-  font-size: 16px !important;
-  line-height: 1.45 !important;
-  margin-bottom: 12px !important;
-}
-
-.ab-confirmation-message p:first-child {
-  font-size: 20px !important;
-}
-
-/* Numéro de commande */
-.ab-confirmation-number {
-  padding: 24px !important;
-}
-
-.ab-confirmation-number strong {
-  font-size: 17px !important;
-}
-
-/* Petite note */
-.ab-confirmation-note {
-  margin: 16px 0 28px !important;
-  font-size: 12px !important;
-}
-
-/* Boutons */
-.ab-confirmation-actions button {
-  min-height: 48px !important;
-  padding: 0 22px !important;
-  font-size: 10px !important;
+  max-width: 650px;
+  margin: 0 0 12px !important;
+  color: #c7c3c0 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 
