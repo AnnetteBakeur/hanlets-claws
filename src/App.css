@@ -49,7 +49,7 @@
   height: 100%;
   display: block;
   object-fit: cover;
-}s
+}
 
 
 /* ================= MENU ================= */
@@ -475,131 +475,7 @@
 }
 
 
-/* ================= MOBILE ================= */
 
-@media (max-width: 800px) {
-
-  .ab2-menu {
-    padding: 75px 20px 90px;
-  }
-
-  .ab2-menu-grid {
-    display: flex;
-    flex-direction: column;
-
-    gap: 9px;
-  }
-
-  .ab2-card {
-    min-height: 260px;
-
-    padding: 25px;
-  }
-
-  .ab2-card-custom {
-    min-height: 330px;
-  }
-
-  .ab2-card-content {
-    left: 25px;
-    bottom: 25px;
-  }
-
-  .ab2-card h2,
-  .ab2-card-original h2,
-  .ab2-card-soft h2 {
-    font-size: clamp(3rem, 15vw, 5rem);
-  }
-
-
-  .ab2-new {
-    padding: 85px 20px 110px;
-  }
-
-  .ab2-new-head {
-    display: block;
-
-    margin-bottom: 70px;
-  }
-
-  .ab2-new-head h2 {
-    font-size: 18vw;
-  }
-
-  .ab2-new-head button {
-    margin-top: 30px;
-  }
-
-  .ab2-new-layout {
-    height: 880px;
-  }
-
-  .ab2-design-1 {
-    width: 62%;
-
-    left: 0;
-    top: 0;
-  }
-
-  .ab2-design-2 {
-    width: 62%;
-
-    left: auto;
-    right: 0;
-
-    top: 29%;
-  }
-
-  .ab2-design-3 {
-    width: 57%;
-
-    left: 4%;
-    right: auto;
-
-    top: 59%;
-  }
-
-  .ab2-new-note {
-    bottom: -10px;
-  }
-
-
-  .ab2-archives {
-    padding: 90px 20px 55px;
-  }
-
-  .ab2-archives-head h2 {
-    font-size: 21vw;
-  }
-
-  .ab2-archive-note {
-    position: static;
-
-    margin-top: 35px;
-
-    justify-content: flex-end;
-  }
-
-  .ab2-archive-grid {
-    columns: 2 130px;
-
-    column-gap: 7px;
-  }
-
-  .ab2-archive-item {
-    margin-bottom: 7px;
-  }
-
-  .ab2-archive-footer {
-    grid-template-columns: 1fr auto;
-
-    gap: 10px;
-  }
-
-  .ab2-archive-footer span:nth-child(2) {
-    display: none;
-  }
-}
 /* =========================================================
    ANNETTE BAKEUR — HEADER
    ========================================================= */
@@ -615,10 +491,10 @@
 }
 
 .ab-header-inner {
-  min-height: 76px;
+  min-height: 64px;
   padding: 0 2.2vw;
   display: grid;
-  grid-template-columns: minmax(190px, 1fr) auto minmax(190px, 1fr);
+  grid-template-columns: minmax(230px, 1fr) auto minmax(230px, 1fr);
   align-items: center;
   gap: 30px;
 }
@@ -635,7 +511,7 @@
   background: transparent;
   color: #f21b1b;
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: clamp(18px, 1.7vw, 28px);
+  font-size: clamp(20px, 1.8vw, 30px);
   font-weight: 900;
   line-height: 0.85;
   letter-spacing: -0.07em;
@@ -657,8 +533,8 @@
 
 .ab-header-link {
   position: relative;
-  min-width: 135px;
-  padding: 0 22px;
+  min-width: 125px;
+padding: 0 19px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -670,7 +546,7 @@
 
   color: #f0ede5;
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.08em;
 
@@ -686,10 +562,10 @@
 
 .ab-header-number {
   color: #777;
-  font-size: 8px;
+  font-size: 7px;
   font-weight: 500;
   align-self: flex-start;
-  margin-top: 22px;
+  margin-top: 17px;
 }
 
 .ab-header-link:hover {
@@ -758,14 +634,10 @@
 
 @media (max-width: 850px) {
   .ab-header-inner {
-    min-height: 66px;
+    min-height: 64px;
     padding: 0 18px;
     display: flex;
     justify-content: space-between;
-  }
-
-  .ab-header-brand {
-    font-size: 21px;
   }
 
   .ab-header-nav {
@@ -775,103 +647,6 @@
   .ab-header-menu-button {
     display: grid;
   }
-
-  .ab-mobile-menu {
-    display: block;
-    background: #050505;
-    border-top: 1px solid rgba(255, 255, 255, 0.16);
-  }
-
-  .ab-mobile-menu button {
-    width: 100%;
-    min-height: 64px;
-    padding: 0 18px;
-
-    display: grid;
-    grid-template-columns: 45px 1fr;
-    align-items: center;
-
-    border: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
-    background: #050505;
-    color: #f0ede5;
-
-    text-align: left;
-    cursor: pointer;
-  }
-
-  .ab-mobile-menu button span {
-    color: #777;
-    font-size: 9px;
-  }
-
-  .ab-mobile-menu button strong {
-    font-family: Arial, Helvetica, sans-serif !important;
-    font-size: 18px;
-    font-weight: 900;
-    letter-spacing: -0.03em;
-  }
-
-  .ab-mobile-menu button.is-active {
-    background: #f21b1b;
-    color: #050505;
-  }
-
-  .ab-mobile-menu button.is-active span {
-    color: #050505;
-  }
-
-  .ab-mobile-menu .ab-mobile-admin {
-    grid-template-columns: 45px 1fr;
-    color: #777;
-  }
-
-  .ab-mobile-admin svg {
-    width: 15px;
-    height: 15px;
-  }
-}
-/* AJUSTEMENTS HEADER V2 */
-
-.ab-header-inner {
-  min-height: 64px;
-  grid-template-columns: minmax(230px, 1fr) auto minmax(230px, 1fr);
-}
-
-.ab-header-brand {
-  font-size: clamp(20px, 1.8vw, 30px);
-}
-
-.ab-header-link {
-  min-width: 125px;
-  padding: 0 19px;
-  font-size: 10px;
-}
-
-.ab-header-number {
-  font-size: 7px;
-  margin-top: 17px;
-}/* LES TROIS ENTRÉES — TEST ÉDITORIAL */
-
-.ab2-menu-grid {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr 0.8fr;
-  gap: 12px;
-  align-items: end;
-}
-
-.ab2-card-custom {
-  min-height: 350px;
-  transform: translateY(-55px);
-}
-
-
-.ab2-card-original {
-  min-height: 390px;
-}
-
-.ab2-card-soft {
-  min-height: 260px;
 }
 /* =========================================================
    PAGE DESIGNS — OUVERTURE DE CHAPITRE
@@ -924,16 +699,6 @@
   text-transform: uppercase;
 }
 
-.ab-designs-copy {
-  margin-top: 32px;
-  max-width: 520px;
-
-  color: #8a8a8a !important;
-
-  font-size: 13px;
-  line-height: 1.6;
-}
-
 .ab-designs-sort {
   flex-shrink: 0;
   margin-bottom: 8px;
@@ -976,10 +741,6 @@
 
   .ab-designs-title {
     font-size: clamp(54px, 18vw, 95px) !important;
-  }
-
-  .ab-designs-copy {
-    margin-top: 24px;
   }
 }
 /* Correction couleur titre page Designs */
@@ -1323,33 +1084,6 @@
   letter-spacing: -0.04em !important;
 }
 
-/* BOUTON FINAL */
-
-.ab-order-submit {
-  margin-top: 25px;
-
-  border-radius: 0 !important;
-
-  background: #f21b1b !important;
-  color: #050505 !important;
-
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 11px !important;
-  font-weight: 900 !important;
-
-  letter-spacing: 0.12em !important;
-  text-transform: uppercase;
-
-  transition:
-    transform 160ms ease,
-    background 160ms ease;
-}
-
-.ab-order-submit:hover {
-  background: #ffd514 !important;
-  transform: translateY(-3px);
-}
-
 /* MOBILE */
 
 @media (max-width: 850px) {
@@ -1578,18 +1312,6 @@ aspect-ratio: auto !important;
   }
 }
 
-/* Le vieux thème violet ne doit plus recolorer le bouton final */
-
-.site-shell.site-shell-order .ab-order-submit {
-  background: #f21b1b !important;
-  color: #050505 !important;
-
-  box-shadow: none !important;
-}
-
-.site-shell.site-shell-order .ab-order-submit:hover {
-  background: #ffd514 !important;
-}
 /* =========================================================
    PAGE COMMANDE — SUPPRESSION TOTALE DE L'ANCIEN VIOLET
    ========================================================= */
@@ -1673,15 +1395,6 @@ aspect-ratio: auto !important;
   border-color: #f0ede5 !important;
 }
 
-/* Le bouton final reste rouge */
-
-.site-shell.site-shell-order .ab-order-submit {
-  background: #f21b1b !important;
-  background-image: none !important;
-  border-color: #f21b1b !important;
-  color: #050505 !important;
-  box-shadow: none !important;
-}
 /* =========================================================
    IDENTITÉ PUBLIQUE — SUPPRESSION DE L'ANCIEN VIOLET
    ========================================================= */
@@ -1889,106 +1602,7 @@ aspect-ratio: 4 / 5 !important;
     margin-bottom: 35px;
   }
 }
-/* =========================================================
-   SUR-MESURE — PAGE CARNET / PAPIER
-   ========================================================= */
 
-.site-shell.site-shell-public .ab-custom-page {
-  width: 100% !important;
-  max-width: 1650px !important;
-
-  margin: 0 auto !important;
-  padding: 65px 4vw 110px !important;
-
-  display: grid;
-  grid-template-columns: minmax(270px, 0.55fr) minmax(0, 1.45fr);
-  grid-template-areas:
-    "back back"
-    "intro form";
-
-  column-gap: clamp(45px, 6vw, 110px);
-  align-items: start;
-
-  background: #050505;
-}
-
-/* RETOUR */
-
-.site-shell.site-shell-public .ab-custom-page > button:first-child {
-  grid-area: back;
-
-  margin-bottom: 55px;
-
-  color: #777 !important;
-
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 9px !important;
-  font-weight: 700 !important;
-
-  letter-spacing: 0.18em !important;
-  text-transform: uppercase;
-}
-
-/* =========================================================
-   COLONNE GAUCHE — INTRODUCTION
-   ========================================================= */
-
-.site-shell.site-shell-public .ab-custom-header {
-  grid-area: intro;
-
-  position: sticky;
-  top: 115px;
-
-  margin: 0 !important;
-  padding-top: 10px;
-}
-
-/* "SUR MESURE" */
-
-.site-shell.site-shell-public .ab-custom-header > p:first-child {
-  margin-bottom: 24px !important;
-
-  color: #f0ede5 !important;
-
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 9px !important;
-  font-weight: 700 !important;
-
-  letter-spacing: 0.3em !important;
-  text-transform: uppercase;
-}
-
-/* COMMANDE PERSONNALISÉE */
-
-.site-shell.site-shell-public .ab-custom-header h1 {
-  max-width: 650px;
-
-  margin: 0 0 35px !important;
-
-  color: #f21b1b !important;
-
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: clamp(58px, 6vw, 105px) !important;
-  font-weight: 900 !important;
-
-  line-height: 0.82 !important;
-  letter-spacing: -0.075em !important;
-
-  text-transform: uppercase;
-}
-
-/* Phrase sous le titre */
-
-.site-shell.site-shell-public .ab-custom-header > p:last-child {
-  max-width: 400px;
-
-  margin: 0 !important;
-
-  color: #aaa !important;
-
-  font-size: 14px !important;
-  line-height: 1.6;
-}
 
 /* =========================================================
    COLONNE DROITE — FEUILLE / FORMULAIRE
@@ -2298,88 +1912,14 @@ aspect-ratio: 4 / 5 !important;
    ========================================================= */
 
 @media (max-width: 800px) {
-  .site-shell.site-shell-public .ab-custom-page {
-    display: block;
-
-    padding: 40px 18px 70px !important;
-  }
-
-  .site-shell.site-shell-public .ab-custom-header {
-    position: static;
-
-    margin-bottom: 55px !important;
-  }
-
-  .site-shell.site-shell-public .ab-custom-header h1 {
-    font-size: clamp(50px, 16vw, 82px) !important;
-  }
 
   .site-shell.site-shell-public .ab-custom-form {
     padding: 28px 20px !important;
   }
 
-  .site-shell.site-shell-public .ab-custom-form::before {
-    top: 18px;
-    right: 18px;
-
-    font-size: 42px;
-  }
-
   .site-shell.site-shell-public .ab-custom-form > div {
     padding: 28px 0 !important;
   }
-}
-/* =========================================================
-   SUR-MESURE — VERSION DESKTOP PLUS DENSE
-   ========================================================= */
-
-/* La page redevient une composition verticale :
-   intro compacte en haut + grande feuille dessous */
-
-.site-shell.site-shell-public .ab-custom-page {
-  display: block !important;
-
-  width: 100% !important;
-  max-width: 1650px !important;
-
-  margin: 0 auto !important;
-  padding: 42px 3vw 80px !important;
-}
-
-/* Retour */
-
-.site-shell.site-shell-public .ab-custom-page > button:first-child {
-  margin-bottom: 42px !important;
-}
-
-/* =========================================================
-   INTRO PLUS COMPACTE
-   ========================================================= */
-
-.site-shell.site-shell-public .ab-custom-header {
-  position: static !important;
-
-  max-width: 1050px;
-
-  margin: 0 0 42px !important;
-  padding: 0 !important;
-}
-
-.site-shell.site-shell-public .ab-custom-header > p:first-child {
-  margin-bottom: 16px !important;
-}
-
-.site-shell.site-shell-public .ab-custom-header h1 {
-  max-width: 950px;
-
-  margin-bottom: 24px !important;
-
-  font-size: clamp(44px, 5vw, 78px) !important;
-  line-height: 0.86 !important;
-}
-
-.site-shell.site-shell-public .ab-custom-header > p:last-child {
-  font-size: 13px !important;
 }
 
 /* =========================================================
@@ -2552,27 +2092,11 @@ aspect-ratio: 4 / 5 !important;
   font-size: 12px !important;
 }
 
-/* Fleur plus discrète */
-
-.site-shell.site-shell-public .ab-custom-form::before {
-  top: 18px !important;
-  right: 24px !important;
-
-  font-size: 42px !important;
-}
-
 /* =========================================================
    VRAI MOBILE
    ========================================================= */
 
 @media (max-width: 620px) {
-  .site-shell.site-shell-public .ab-custom-page {
-    padding: 30px 16px 60px !important;
-  }
-
-  .site-shell.site-shell-public .ab-custom-header h1 {
-    font-size: clamp(43px, 14vw, 66px) !important;
-  }
 
   .site-shell.site-shell-public .ab-custom-form {
     display: block !important;
@@ -3026,29 +2550,45 @@ aspect-ratio: 4 / 5 !important;
   }
 
   .site-shell.site-shell-order .ab-order-image {
-    width: 100% !important;
-
-    height: clamp(330px, 42vh, 420px) !important;
-
-    aspect-ratio: auto !important;
-
-    background: #111 !important;
-  }
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
 
   .site-shell.site-shell-order .ab-order-image img {
-    width: 100% !important;
-    height: 100% !important;
-
-    object-fit: contain !important;
-  }
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: initial !important;
+}
 
   .site-shell.site-shell-order .ab-order-summary {
-    padding-top: 18px !important;
+    padding-top: 12px !important;
   }
 
   .site-shell.site-shell-order .ab-order-title {
-    font-size: clamp(38px, 3vw, 58px) !important;
-  }
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+  font-size: clamp(36px, 2.8vw, 52px) !important;
+  line-height: 0.9 !important;
+}
+
+.site-shell.site-shell-order .ab-order-kicker {
+  margin-bottom: 6px !important;
+}
+
+.site-shell.site-shell-order .ab-order-desc {
+  margin-bottom: 10px !important;
+  line-height: 1.4 !important;
+}
+
+.site-shell.site-shell-order .ab-order-price {
+  margin-top: 0 !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+}
 
 
   /* =====================================================
@@ -3092,13 +2632,15 @@ aspect-ratio: 4 / 5 !important;
   grid-column: 1 !important;
   grid-row: 1 !important;
   padding-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 /* Colonne centrale — longueur & forme */
 .site-shell.site-shell-order .ab-order-shape {
   grid-column: 1 !important;
-  grid-row: 2 / span 3 !important;
+  grid-row: 2 !important;
   padding-top: 0 !important;
+  margin-top: 28px !important;
 }
 
   /* Guides moins gigantesques */
@@ -3129,6 +2671,7 @@ aspect-ratio: 4 / 5 !important;
   grid-column: 2 !important;
   grid-row: 1 !important;
   padding-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 /* Adresse de livraison */
@@ -3145,13 +2688,6 @@ aspect-ratio: 4 / 5 !important;
   margin-top: 0 !important;
 }
 
-/* Bouton d'envoi */
-.site-shell.site-shell-order .ab-order-submit {
-  grid-column: 2 !important;
-  grid-row: 4 !important;
-  margin-top: 24px !important;
-}
-
   /* =====================================================
      COLONNE 3 — ENVOYER
      ===================================================== */
@@ -3164,250 +2700,11 @@ aspect-ratio: 4 / 5 !important;
     font-size: clamp(27px, 2.2vw, 38px) !important;
   }
 }
-/* =========================================================
-   FICHE DESIGN — PHOTO + RÉSUMÉ PRODUIT
-   ========================================================= */
-
-@media (min-width: 1100px) {
-
-  .site-shell.site-shell-order .ab-order-image {
-    height: auto !important;
-    aspect-ratio: auto !important;
-    overflow: hidden !important;
-    background: transparent !important;
-  }
-
-  .site-shell.site-shell-order .ab-order-image img {
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
-    object-fit: initial !important;
-  }
-
-  /* Rapproche les informations de la photo */
-
-  .site-shell.site-shell-order .ab-order-summary {
-    padding-top: 12px !important;
-  }
-
-  .site-shell.site-shell-order .ab-order-kicker {
-    margin-bottom: 6px !important;
-  }
-
-  .site-shell.site-shell-order .ab-order-title {
-    margin-top: 0 !important;
-    margin-bottom: 8px !important;
-
-    font-size: clamp(36px, 2.8vw, 52px) !important;
-    line-height: 0.9 !important;
-  }
-
-  .site-shell.site-shell-order .ab-order-desc {
-    margin-bottom: 10px !important;
-    line-height: 1.4 !important;
-  }
-
-  .site-shell.site-shell-order .ab-order-price {
-    margin-top: 0 !important;
-    font-size: 20px !important;
-    font-weight: 700 !important;
-  }
-}
-/* =========================================================
-   FICHE DESIGN — POSITION DES CHAMPS
-   ========================================================= */
-
-@media (min-width: 1100px) {
-
-  /* COLONNE CENTRALE — MODIFICATIONS */
-
-  .site-shell.site-shell-order
-    .ab-order-form > .ab-order-modifications {
-
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-  }
 
 
-  /* COLONNE CENTRALE — FORME */
-
-  .site-shell.site-shell-order
-    .ab-order-form > .ab-order-shape {
-
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-
-    margin-top: 28px !important;
-  }
-
-
-  /* COLONNE DROITE — CONTACT */
-
-  .site-shell.site-shell-order
-    .ab-order-form > .ab-order-contact {
-
-    grid-column: 2 !important;
-    grid-row: 1 !important;
-
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-  }
-
-
-}
-/* =========================================================
-   SÉLECTEUR DE FORMES — CARTES PHOTOGRAPHIQUES
-   ========================================================= */
-
-.ab-shape-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.ab-shape-card {
-  position: relative;
-
-  overflow: hidden;
-
-  padding: 0;
-
-  border: 1px solid #444;
-  border-radius: 0;
-
-  background: #080808;
-  color: #f0ede5;
-
-  cursor: pointer;
-
-  transition:
-    border-color .2s ease,
-    transform .2s ease,
-    background .2s ease;
-}
-
-.ab-shape-card:hover {
-  border-color: #888;
-  transform: translateY(-2px);
-}
-
-.ab-shape-card.is-selected {
-  border: 2px solid #f21b1b;
-}
-
-.ab-shape-thumb {
-  width: 100%;
-  aspect-ratio: 1 / 1.25;
-
-  background-color: #111;
-  background-repeat: no-repeat;
-}
-
-.ab-shape-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 9px 10px;
-
-  border-top: 1px solid #333;
-}
-
-.ab-shape-label span {
-  font-size: 8px;
-  letter-spacing: .12em;
-  color: #777;
-}
-
-.ab-shape-label strong {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-
-.ab-shape-card.is-selected .ab-shape-label {
-  background: #f21b1b;
-  color: #050505;
-}
-
-.ab-shape-card.is-selected .ab-shape-label span {
-  color: #050505;
-}
-
-.ab-shape-check {
-  position: absolute;
-  top: 7px;
-  right: 7px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 24px;
-  height: 24px;
-
-  border-radius: 50%;
-
-  background: #f21b1b;
-  color: #050505;
-}
-
-.ab-shape-selected {
-  margin-top: 12px;
-
-  font-size: 11px;
-  letter-spacing: .06em;
-
-  color: #888;
-}
-
-
-/* tablette */
-
-@media (max-width: 1200px) {
-  .ab-shape-grid {
-    grid-template-columns: repeat(5, minmax(70px, 1fr));
-  }
-}
-
-
-/* téléphone */
-
-@media (max-width: 700px) {
-  .ab-shape-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  .ab-shape-thumb {
-    aspect-ratio: 1 / 1.1;
-  }
-}
 /* =========================================================
    COMMANDE PERSONNALISÉE — MISE EN PAGE PROPRE
    ========================================================= */
-
-.site-shell.site-shell-public .ab-custom-page {
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
-
-  padding: clamp(40px, 5vw, 80px) 4vw !important;
-
-  display: block !important;
-}
-
-/* En-tête */
-
-.site-shell.site-shell-public .ab-custom-header {
-  width: 100% !important;
-  max-width: none !important;
-  margin-bottom: 50px !important;
-}
 
 /* Grand formulaire beige */
 
@@ -3669,6 +2966,7 @@ aspect-ratio: 4 / 5 !important;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
   background: #f21b1b;
   color: #050505;
 }
@@ -4090,14 +3388,6 @@ left: 18px;
   top: 8px;
 }
 
-.site-shell.site-shell-public .ab-home-subtitle {
-  margin: 28px 0 0 0;
-  max-width: 480px;
-  color: rgba(255,255,255,0.72);
-  font-size: clamp(16px, 1.5vw, 20px);
-  line-height: 1.5;
-}
-
 .site-shell.site-shell-public .ab-home-cutout {
   position: absolute;
 
@@ -4135,10 +3425,6 @@ left: 18px;
   .site-shell.site-shell-public .ab-home-title {
     font-size: clamp(54px, 16vw, 96px);
     line-height: 0.9;
-    max-width: 100%;
-  }
-
-  .site-shell.site-shell-public .ab-home-subtitle {
     max-width: 100%;
   }
 
@@ -4259,18 +3545,6 @@ left: 18px;
   color: #050505 !important;
 }
 
-.site-shell.site-shell-public .ab-custom-title {
-  margin: 0 0 12px;
-
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif !important;
-  font-size: clamp(4rem, 6.3vw, 7rem) !important;
-  font-weight: 900 !important;
-  line-height: 0.9 !important;
-  letter-spacing: -0.045em !important;
-  text-transform: uppercase;
-
-  color: #c51f1f !important;
-}
 .site-shell.site-shell-public .ab-custom-submit {
   width: fit-content !important;
   min-width: 300px;
@@ -4300,112 +3574,10 @@ left: 18px;
   border-radius: 0 !important;
 }
 
-
-.site-shell.site-shell-public .ab-custom-title {
-  margin: 0 !important;
-
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: clamp(4.2rem, 6vw, 7rem) !important;
-  font-weight: 900 !important;
-
-  line-height: 0.9 !important;
-  letter-spacing: -0.055em !important;
-
-  color: #c51f1f !important;
-  text-transform: uppercase !important;
-}
-
-/* CUSTOM — entête harmonisé avec la page Designs */
-
-.site-shell.site-shell-public .ab-custom-kicker {
-  margin-bottom: 18px !important;
-
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 0.72rem !important;
-  font-weight: 700 !important;
-  line-height: 1 !important;
-  letter-spacing: 0.3em !important;
-
-  color: #9e9991 !important;
-
-  text-transform: uppercase !important;
-}
-
-.site-shell.site-shell-public .ab-custom-title {
-  margin: 0 !important;
-
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: clamp(4.5rem, 6vw, 7.5rem) !important;
-  font-weight: 900 !important;
-
-  line-height: 0.88 !important;
-  letter-spacing: -0.055em !important;
-
-  color: #c51f1f !important;
-
-  text-transform: uppercase !important;
-}
-
-.site-shell.site-shell-public .ab-custom-subtitle {
-  margin: 24px 0 0 !important;
-
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 1rem !important;
-  font-weight: 400 !important;
-  line-height: 1.5 !important;
-  letter-spacing: 0 !important;
-
-  color: #9e9991 !important;
-
-  text-transform: none !important;
-  transform: none !important;
-}
-
-/* =========================================================
-   CUSTOM — même structure d'en-tête que DESIGNS
-   ========================================================= */
-
-.site-shell.site-shell-public .ab-custom-head {
-  width: 100% !important;
-
-  margin-bottom: 58px !important;
-
-  padding-bottom: 18px !important;
-
-  border-bottom: 1px solid #343434 !important;
-}
-
-.site-shell.site-shell-public .ab-custom-kicker {
-  margin: 0 0 28px !important;
-}
-
-.site-shell.site-shell-public .ab-custom-title {
-  margin: 0 !important;
-
-  font-size: clamp(4rem, 6.2vw, 7rem) !important;
-  line-height: 0.88 !important;
-}
-
-.site-shell.site-shell-public .ab-custom-subtitle {
-  margin: 22px 0 0 !important;
-}
-
 /* CUSTOM — même titre que DESIGNS, mais rouge */
 
 .site-shell.site-shell-public .ab-custom-title-red {
   color: #c51f1f !important;
-}
-
-.site-shell.site-shell-public .ab-custom-subtitle-clean {
-  margin-top: 0 !important;
-  color: #9e9991 !important;
-
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 1rem !important;
-  font-weight: 400 !important;
-  line-height: 1.5 !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
 }
 
 /* CUSTOM — titre sur une ligne comme DESIGNS */
@@ -4993,16 +4165,6 @@ mask-image:
 }
 
 /* =========================================================
-   HOME — zone hero + catégories
-   Le dessin est coupé pile avant NOUVEAUTÉS
-   ========================================================= */
-
-.site-shell.site-shell-public .ab-home-art-zone {
-  position: relative;
-  overflow: hidden !important;
-}
-
-/* =========================================================
    HOME — CROP FINAL DU DESSIN
    exactement après les catégories
    ========================================================= */
@@ -5030,9 +4192,6 @@ mask-image:
 /* HOME — fond papier sur tout le hero + catégories */
 
 .site-shell.site-shell-public .ab-home-art-zone {
-  position: relative !important;
-  overflow: hidden !important;
-
   background-color: #f4f0e8;
 
   background-image:
@@ -5558,25 +4717,30 @@ mask-image: linear-gradient(
   }
 
   .site-shell.site-shell-public .ab2-archive-note {
-    margin-top: 20px !important;
-  }
-
-  .site-shell.site-shell-public .ab2-archive-grid {
-    padding-top: 12px !important;
-  }
-
-  .site-shell.site-shell-public .ab2-archive-footer {
-    margin-top: 35px !important;
-  }
+  position: static !important;
+  margin-top: 20px !important;
+  justify-content: flex-end !important;
 }
 
-/* =========================================================
-   FONDU FINAL — ZONE PEINTE → NOUVEAUTÉS
-   ========================================================= */
+  .site-shell.site-shell-public .ab2-archive-grid {
+  columns: 2 130px !important;
+  column-gap: 7px !important;
+  padding-top: 12px !important;
+}
 
-.site-shell.site-shell-public .ab-home-art-zone {
-  position: relative !important;
-  overflow: hidden !important;
+.site-shell.site-shell-public .ab2-archive-item {
+  margin-bottom: 7px !important;
+}
+
+  .site-shell.site-shell-public .ab2-archive-footer {
+  grid-template-columns: 1fr auto !important;
+  gap: 10px !important;
+  margin-top: 35px !important;
+}
+
+.site-shell.site-shell-public .ab2-archive-footer span:nth-child(2) {
+  display: none !important;
+}
 }
 
 .site-shell.site-shell-public .ab2-card {
@@ -5631,6 +4795,7 @@ mask-image: linear-gradient(
     color: #f0ede5 !important;
 
     text-align: left !important;
+    cursor: pointer !important;
   }
 
   .site-shell.site-shell-public .ab-mobile-menu button span {
@@ -5688,13 +4853,13 @@ mask-image: linear-gradient(
     width: 100% !important;
     max-width: none !important;
 
-    padding: 28px 16px 60px !important;
+    padding: 22px 14px 50px !important;
   }
 
   /* EN-TÊTE */
   .site-shell.site-shell-public
   .ab-custom-page-v2 .ab-designs-head {
-    margin-bottom: 28px !important;
+    margin-bottom: 20px !important;
   }
 
   .site-shell.site-shell-public
@@ -5719,8 +4884,8 @@ mask-image: linear-gradient(
 
     margin: 0 !important;
 
-    font-size: clamp(38px, 11.5vw, 48px) !important;
-    line-height: 0.84 !important;
+    font-size: clamp(32px, 9.5vw, 40px) !important;
+line-height: 0.86 !important;
     letter-spacing: -0.055em !important;
 
     white-space: normal !important;
@@ -5738,7 +4903,7 @@ mask-image: linear-gradient(
 
     width: 100% !important;
 
-    gap: 16px !important;
+    gap: 12px !important;
 
     padding: 0 !important;
     margin: 0 !important;
@@ -5770,7 +4935,7 @@ mask-image: linear-gradient(
   .site-shell.site-shell-public .ab-custom-panel-measurements {
     width: 100% !important;
 
-    padding: 22px !important;
+    padding: 16px !important;
 
     background: #c8c2b8 !important;
     background-image: none !important;
@@ -5790,8 +4955,8 @@ mask-image: linear-gradient(
 
   .site-shell.site-shell-public
   .ab-custom-panel-contact .ab-custom-shipping {
-    margin-top: 24px !important;
-    padding-top: 24px !important;
+    margin-top: 16px !important;
+padding-top: 16px !important;
   }
 
   /* Tous les champs de livraison en une seule colonne */
@@ -5800,7 +4965,7 @@ mask-image: linear-gradient(
     display: grid !important;
     grid-template-columns: 1fr !important;
 
-    gap: 12px !important;
+    gap: 8px !important;
   }
 
   .site-shell.site-shell-public
@@ -5830,7 +4995,7 @@ mask-image: linear-gradient(
   .ab-custom-options > div {
     width: 100% !important;
 
-    padding: 22px 0 !important;
+    padding: 16px 0 !important;
   }
 
   .site-shell.site-shell-public
@@ -5840,9 +5005,9 @@ mask-image: linear-gradient(
 
   .site-shell.site-shell-public
   .ab-custom-options button {
-    padding: 10px 14px !important;
-
-    font-size: 12px !important;
+    padding: 8px 11px !important;
+font-size: 11px !important;
+line-height: 1 !important;
   }
 
 
@@ -5906,16 +5071,16 @@ mask-image: linear-gradient(
      ===================================================== */
 
   .site-shell.site-shell-public .ab-custom-form h3 {
-    font-size: 26px !important;
-    line-height: 0.95 !important;
-
-    margin-bottom: 16px !important;
+    font-size: 20px !important;
+line-height: 1 !important;
+margin-bottom: 10px !important;
   }
 
   .site-shell.site-shell-public .ab-custom-form p {
     max-width: 100% !important;
+    font-size: 13px !important;
+line-height: 1.35 !important;
   }
-
 
   /* =====================================================
      CHAMPS
@@ -5933,8 +5098,10 @@ mask-image: linear-gradient(
     box-sizing: border-box !important;
 
     font-size: 16px !important;
+    min-height: 44px !important;
+padding: 10px 12px !important;
+line-height: 1.2 !important;
   }
-
 
   /* =====================================================
      BOUTON FINAL
@@ -5950,101 +5117,5 @@ mask-image: linear-gradient(
     padding: 17px 18px !important;
 
     font-size: 11px !important;
-  }
-}
-
-/* =========================================================
-   MOBILE — COMMANDE PERSONNALISÉE PLUS COMPACTE
-   ========================================================= */
-
-@media (max-width: 800px) {
-
-  /* page un peu plus étroite */
-  .site-shell.site-shell-public .ab-custom-page-v2 {
-    padding: 22px 14px 50px !important;
-  }
-
-  /* titre principal */
-  .site-shell.site-shell-public
-  .ab-custom-page-v2 .ab-custom-title-red {
-    font-size: clamp(32px, 9.5vw, 40px) !important;
-    line-height: 0.86 !important;
-  }
-
-  /* espace avant le formulaire */
-  .site-shell.site-shell-public
-  .ab-custom-page-v2 .ab-designs-head {
-    margin-bottom: 20px !important;
-  }
-
-  /* panneaux crème */
-  .site-shell.site-shell-public .ab-custom-panel-contact,
-  .site-shell.site-shell-public .ab-custom-options,
-  .site-shell.site-shell-public .ab-custom-panel-details,
-  .site-shell.site-shell-public .ab-custom-panel-inspirations,
-  .site-shell.site-shell-public .ab-custom-panel-measurements {
-    padding: 16px !important;
-  }
-
-  /* titres : Votre contact / Livraison / Couleurs / etc. */
-  .site-shell.site-shell-public .ab-custom-form h3 {
-    font-size: 20px !important;
-    line-height: 1 !important;
-
-    margin-bottom: 10px !important;
-  }
-
-  /* textes explicatifs */
-  .site-shell.site-shell-public .ab-custom-form p {
-    font-size: 13px !important;
-    line-height: 1.35 !important;
-  }
-
-  /* champs */
-  .site-shell.site-shell-public
-  .ab-custom-form input:not(.sr-only),
-  .site-shell.site-shell-public
-  .ab-custom-form textarea,
-  .site-shell.site-shell-public
-  .ab-custom-form select {
-    min-height: 44px !important;
-
-    padding: 10px 12px !important;
-
-    /* on garde 16px pour éviter le zoom automatique iPhone */
-    font-size: 16px !important;
-    line-height: 1.2 !important;
-  }
-
-  /* espace entre les champs de livraison */
-  .site-shell.site-shell-public
-  .ab-custom-shipping > div {
-    gap: 8px !important;
-  }
-
-  /* séparation Contact → Livraison */
-  .site-shell.site-shell-public
-  .ab-custom-panel-contact .ab-custom-shipping {
-    margin-top: 16px !important;
-    padding-top: 16px !important;
-  }
-
-  /* options : Chrome / Bijoux / Relief */
-  .site-shell.site-shell-public
-  .ab-custom-options > div {
-    padding: 16px 0 !important;
-  }
-
-  .site-shell.site-shell-public
-  .ab-custom-options button {
-    padding: 8px 11px !important;
-
-    font-size: 11px !important;
-    line-height: 1 !important;
-  }
-
-  /* espacement général entre les gros blocs */
-  .site-shell.site-shell-public .ab-custom-form {
-    gap: 12px !important;
   }
 }
