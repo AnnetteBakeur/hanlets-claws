@@ -2242,9 +2242,7 @@ aspect-ratio: 4 / 5 !important;
 
     column-gap: 30px !important;
     row-gap: 0 !important;
-
     align-items: start !important;
-
     width: 100% !important;
   }
 
@@ -2324,10 +2322,7 @@ aspect-ratio: 4 / 5 !important;
      COLONNE 3 — ENVOYER
      ===================================================== */
 
-  
-
   /* Titres un peu moins imposants */
-
   .site-shell.site-shell-order .ab-order-form h3 {
     font-size: clamp(27px, 2.2vw, 38px) !important;
   }
@@ -2355,14 +2350,11 @@ aspect-ratio: 4 / 5 !important;
 /* Les sections de la colonne droite gardent le style crème */
 .site-shell.site-shell-public .ab-custom-options > div {
   padding: 24px 0 !important;
-
   border: 0 !important;
   border-bottom: 1px solid rgba(17, 17, 17, 0.18) !important;
   border-radius: 0 !important;
-
   background: transparent !important;
   box-shadow: none !important;
-
   color: #111 !important;
 }
 
@@ -2713,25 +2705,19 @@ aspect-ratio: 4 / 5 !important;
 
 .ab-confirmation-page {
   min-height: calc(100vh - 72px) !important;
-
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-
   padding: 55px 24px 75px !important;
-
   background: #050505 !important;
 }
 
 .ab-confirmation-card {
   width: 100% !important;
   max-width: 860px !important;
-
   margin: 0 auto !important;
   padding: 38px 40px 34px !important;
-
   background: #080808 !important;
-
   border: 1px solid rgba(240, 237, 229, 0.28) !important;
 }
 
@@ -2744,7 +2730,6 @@ aspect-ratio: 4 / 5 !important;
 /* Titre */
 .site-shell .ab-confirmation-card h1 {
   margin: 0 0 32px !important;
-
   font-size: clamp(42px, 5vw, 68px) !important;
   line-height: 0.84 !important;
   letter-spacing: -0.055em !important;
@@ -2818,8 +2803,7 @@ aspect-ratio: 4 / 5 !important;
 .site-shell.site-shell-public .ab-home-hero {
   position: relative;
   background: #050505;
-  overflow: hidden;
-  padding: 35px 0 0;;
+  padding: 35px 0 0;
 }
 
 .site-shell.site-shell-public .ab-home-hero-inner {
@@ -2830,8 +2814,6 @@ aspect-ratio: 4 / 5 !important;
 }
 
 .site-shell.site-shell-public .ab-home-title-wrap {
-  position: relative;
-  z-index: 1;
   width: min(900px, 100%);
   padding-top: 0;
 }
@@ -2871,23 +2853,14 @@ left: 18px;
 
 .site-shell.site-shell-public .ab-home-cutout {
   position: absolute;
-
   right: clamp(620px, 43vw, 850px);
-
   bottom: 30px;
-
   height: clamp(360px, 39vw, 560px);
   width: auto;
-
-  z-index: 3;
-
   object-fit: contain;
   pointer-events: none;
-
   transform: none ;
-
   filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.18));
-
   clip-path: inset(0 0 5% 0);
 }
 
@@ -2927,25 +2900,17 @@ left: 18px;
   }
 }
 
-@media (min-width: 801px) {
-  .site-shell.site-shell-public .ab2-new {
-    margin-top: -70px !important;
-  }
-}
-
 .site-shell.site-shell-public .ab2-card-arrow {
   display: none !important;
 }
 
 .site-shell.site-shell-public .ab-home-welcome {
   margin: 75px 0 0 40px;
-
   font-family: "Nothing You Could Do", cursive;
   font-size: clamp(1.8rem, 2.6vw, 3rem);
   font-weight: 400;
   line-height: 1.1;
   letter-spacing: 0;
-
   color: #b7b3ac !important;
 }
 
@@ -2963,7 +2928,6 @@ left: 18px;
   display: flex;
   align-items: center;
   gap: 8px;
-
   font-family: Impact, "Arial Narrow Bold", sans-serif !important;
   font-size: clamp(1.7rem, 2.2vw, 2.35rem) !important;
   font-weight: 900 !important;
@@ -3068,12 +3032,9 @@ left: 18px;
 .site-shell.site-shell-public .ab-custom-form {
   background: transparent !important;
   background-image: none !important;
-
   padding: 0 !important;
-
   display: grid !important;
   grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
-
   column-gap: 24px !important;
   row-gap: 24px !important;
 }
@@ -3086,16 +3047,9 @@ left: 18px;
 
 .site-shell.site-shell-public .ab-custom-panel-contact {
   display: block !important;
-
   grid-column: 1 / 7 !important;
   grid-row: 1 !important;
-
   min-width: 0 !important;
-
-  padding: 34px !important;
-
-  background: #c8c2b8 !important;
-  color: #111 !important;
 }
 
 
@@ -3106,21 +3060,12 @@ left: 18px;
 .site-shell.site-shell-public
 .ab-custom-panel-contact .ab-custom-shipping {
   display: block !important;
-
   width: 100% !important;
-
   grid-column: auto !important;
   grid-row: auto !important;
-
   margin: 0 !important;
   padding: 0 !important;
-
-  background: transparent !important;
-  background-image: none !important;
-
   border: 0 !important;
-  border-radius: 0 !important;
-
   color: #111 !important;
 }
 
@@ -3130,7 +3075,6 @@ left: 18px;
 .ab-custom-panel-contact .ab-custom-shipping {
   margin-top: 32px !important;
   padding-top: 32px !important;
-
   border-top: 1px solid rgba(5, 5, 5, 0.22) !important;
 }
 
@@ -3142,17 +3086,10 @@ left: 18px;
 .site-shell.site-shell-public .ab-custom-options {
   grid-column: 7 / 13 !important;
   grid-row: 1 !important;
-
   display: flex !important;
   flex-direction: column !important;
   gap: 0 !important;
-
   min-width: 0 !important;
-
-  padding: 34px !important;
-
-  background: #c8c2b8 !important;
-  color: #111 !important;
 }
 
 
@@ -3161,19 +3098,11 @@ left: 18px;
 .site-shell.site-shell-public
 .ab-custom-options > div {
   width: 100% !important;
-
   grid-column: auto !important;
   grid-row: auto !important;
-
   margin: 0 !important;
   padding: 28px 0 !important;
-
-  background: transparent !important;
-  background-image: none !important;
-
   border: 0 !important;
-  border-radius: 0 !important;
-
   color: #111 !important;
 }
 
@@ -3211,15 +3140,8 @@ left: 18px;
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
-
   box-shadow: none !important;
   border-radius: 0 !important;
-}
-
-.site-shell.site-shell-public .ab-custom-panel-contact,
-.site-shell.site-shell-public .ab-custom-options {
-  background: #c8c2b8 !important;
-  background-image: none !important;
 }
 
 /* CUSTOM — forcer le fond des 2 premiers panneaux */
@@ -3231,9 +3153,7 @@ left: 18px;
   background: #c8c2b8 !important;
   background-color: #c8c2b8 !important;
   background-image: none !important;
-
   color: #111 !important;
-
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -3256,18 +3176,11 @@ left: 18px;
 .site-shell.site-shell-public
 .ab-custom-form > .ab-custom-panel-details {
   grid-column: 1 / 13 !important;
-
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 0 !important;
-
+  row-gap: 0 !important;
   padding: 34px !important;
-
   background: #c8c2b8 !important;
   background-image: none !important;
-
   color: #111 !important;
-
   border: 0 !important;
   border-radius: 0 !important;
 }
@@ -3280,32 +3193,14 @@ left: 18px;
 .ab-custom-panel-details > .ab-custom-shape {
   grid-column: auto !important;
   grid-row: auto !important;
-
-  width: 100% !important;
-  min-width: 0 !important;
-
-  margin: 0 !important;
   padding: 0 !important;
-
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
-
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-
   color: #111 !important;
-}
-
-
-/* Partie forme à droite */
-.site-shell.site-shell-public
-.ab-custom-panel-details > .ab-custom-shape {
-  margin-left: 34px !important;
-  padding-left: 34px !important;
-
-  border-left: 1px solid rgba(5, 5, 5, 0.22) !important;
 }
 
 /* =========================================================
@@ -3344,9 +3239,7 @@ left: 18px;
 .ab-custom-options select {
   background: #d6d0c6 !important;
   background-color: #d6d0c6 !important;
-
   color: #111 !important;
-
   border: 1px solid rgba(17, 17, 17, 0.35) !important;
   box-shadow: none !important;
 }
@@ -3389,7 +3282,6 @@ left: 18px;
 .ab-custom-form > .ab-custom-panel-details {
   display: grid !important;
   grid-template-columns: 44% 56% !important;
-
   column-gap: 28px !important;
   align-items: start !important;
 }
@@ -3400,7 +3292,6 @@ left: 18px;
 .ab-custom-panel-details > .ab-custom-shape {
   width: 100% !important;
   min-width: 0 !important;
-
   margin: 0 !important;
 }
 
@@ -3408,7 +3299,6 @@ left: 18px;
 .site-shell.site-shell-public
 .ab-custom-panel-details > .ab-custom-shape {
   padding-left: 28px !important;
-
   border-left: 1px solid rgba(5, 5, 5, 0.22) !important;
 }
 
@@ -3419,18 +3309,13 @@ left: 18px;
 .site-shell.site-shell-public
 .ab-custom-form > .ab-custom-panel-inspirations {
   grid-column: 1 / 13 !important;
-
   display: block !important;
   min-width: 0 !important;
-
   padding: 34px !important;
-
   background: #c8c2b8 !important;
   background-color: #c8c2b8 !important;
   background-image: none !important;
-
   color: #111 !important;
-
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -3442,22 +3327,17 @@ left: 18px;
 .ab-custom-panel-inspirations > .ab-custom-inspirations {
   grid-column: auto !important;
   grid-row: auto !important;
-
   width: 100% !important;
   min-width: 0 !important;
-
   margin: 0 !important;
   padding: 0 !important;
-
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
-
   border: 0 !important;
   border-left: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-
   color: #111 !important;
 }
 
@@ -3468,18 +3348,13 @@ left: 18px;
 .site-shell.site-shell-public
 .ab-custom-form > .ab-custom-panel-measurements {
   grid-column: 1 / 13 !important;
-
   display: block !important;
   min-width: 0 !important;
-
   padding: 34px !important;
-
   background: #c8c2b8 !important;
   background-color: #c8c2b8 !important;
   background-image: none !important;
-
   color: #111 !important;
-
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -3489,21 +3364,16 @@ left: 18px;
 .ab-custom-panel-measurements > .ab-custom-measurements {
   grid-column: auto !important;
   grid-row: auto !important;
-
   width: 100% !important;
   min-width: 0 !important;
-
   margin: 0 !important;
   padding: 0 !important;
-
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
-
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-
   color: #111 !important;
 }
 
@@ -3514,36 +3384,26 @@ left: 18px;
 .site-shell.site-shell-public
 .ab-custom-form > .ab-custom-submit {
   grid-column: 1 / 13 !important;
-
   justify-self: end !important;
-
   display: inline-flex !important;
   flex-direction: row !important;
   align-items: center !important;
   justify-content: center !important;
-
   width: auto !important;
   min-width: 0 !important;
   height: auto !important;
-
   gap: 10px !important;
-
   margin: 10px 0 0 !important;
   padding: 16px 24px !important;
-
   background: #c51f1f !important;
   background-image: none !important;
-
   color: #050505 !important;
-
   border: 0 !important;
   border-radius: 0 !important;
-
   font-size: 0.8rem !important;
   font-weight: 800 !important;
   line-height: 1 !important;
   letter-spacing: 0.16em !important;
-
   white-space: nowrap !important;
 }
 
@@ -3552,7 +3412,6 @@ left: 18px;
   display: block !important;
   width: 17px !important;
   height: 17px !important;
-
   flex: 0 0 auto !important;
 }
 
@@ -3562,19 +3421,13 @@ left: 18px;
 
 .site-shell.site-shell-public .ab-home-drawing {
   position: absolute;
-
   right: -130px ;
   top: -200px;
-
   width: clamp(850px, 70vw, 1400px);
-
   z-index: 1;
-
   height: auto !important;
-
   object-fit: initial !important;
   object-position: initial !important;
-
   opacity: 0.9;
    -webkit-mask-image:
   linear-gradient(
@@ -3594,14 +3447,6 @@ mask-image:
     transparent 100%
   );
 
-}
-
-.site-shell.site-shell-public .ab-home-cutout {
-  z-index: 3;
-}
-
-.site-shell.site-shell-public .ab-home-hero {
-  overflow: hidden !important;
 }
 
 /* =========================================================
@@ -3638,7 +3483,6 @@ mask-image:
 
 .site-shell.site-shell-public .ab-home-art-zone {
   position: relative !important;
-
   overflow: hidden !important;
   clip-path: inset(0) !important;
 }
@@ -3693,10 +3537,8 @@ background-size:
   font-size: clamp(42px, 3.60vw, 66px) !important;
   line-height: 0.92 !important;
   letter-spacing: -0.035em !important;
-
   max-width: 100% !important;
   margin: 0 !important;
-
   white-space: normal !important;
 }
 
@@ -3713,13 +3555,10 @@ background-size:
 
   .site-shell.site-shell-public .ab-home-hero-inner {
     position: relative !important;
-
     width: 100% !important;
     min-height: 610px !important;
-
     margin: 0 !important;
     padding: 0 22px !important;
-
     overflow: visible !important;
   }
 
@@ -3727,34 +3566,25 @@ background-size:
   .site-shell.site-shell-public .ab-home-kicker {
     position: relative !important;
     z-index: 8 !important;
-
     margin: 0 0 10px !important;
-
     font-size: 10px !important;
     line-height: 1.2 !important;
     letter-spacing: 0.28em !important;
-
     white-space: nowrap !important;
   }
 
   /* ANNETTE BAKEUR */
   .site-shell.site-shell-public .ab-home-title {
     position: relative !important;
-
     left: -6px !important;
     top: 0 !important;
-
     width: 100% !important;
     max-width: none !important;
-
     margin: 0 !important;
-
     font-size: clamp(48px, 15vw, 64px) !important;
 line-height: 0.84 !important;
 letter-spacing: -0.035em !important;
-
     transform: none !important;
-
     -webkit-text-stroke: 1px #c51f1f !important;
     text-shadow: none !important;
   }
@@ -3762,7 +3592,6 @@ letter-spacing: -0.035em !important;
   .site-shell.site-shell-public .ab-home-title-wrap {
     position: relative !important;
     z-index: 8 !important;
-
     width: 100% !important;
     padding: 0 !important;
   }
@@ -3772,13 +3601,9 @@ letter-spacing: -0.035em !important;
   position: relative !important;
   left: -6px !important;
   z-index: 8 !important;
-
   width: 58% !important;
-
   margin: 4px 0 0 6px !important;
-
   color: #111 !important;
-
   font-size: clamp(9px, 2.3vw, 12px) !important;
 line-height: 1.05 !important;
 }
@@ -3786,18 +3611,13 @@ line-height: 1.05 !important;
   /* dessin du carnet */
   .site-shell.site-shell-public .ab-home-drawing {
   position: absolute !important;
-
   width: 500px !important;
   max-width: none !important;
   height: auto !important;
-
   top: -65px !important;
   right: -55px !important;
-
   opacity: 0.9 !important;
-
   clip-path: none !important;
-
   pointer-events: none !important;
   -webkit-mask-image: linear-gradient(
   to bottom,
@@ -4154,10 +3974,6 @@ mask-image: linear-gradient(
 .site-shell.site-shell-public .ab2-archive-footer span:nth-child(2) {
   display: none !important;
 }
-}
-
-.site-shell.site-shell-public .ab2-card {
-  z-index: 7 !important;
 }
 
 /* =========================================================
