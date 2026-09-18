@@ -827,11 +827,8 @@ padding: 0 19px;
 
 .site-shell .ab-order-title {
   margin: 0 0 25px !important;
-  color: #f21b1b !important;
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: clamp(58px, 7vw, 118px) !important;
   font-weight: 900 !important;
-  line-height: 0.8 !important;
   letter-spacing: -0.075em !important;
   text-transform: uppercase;
 }
@@ -1023,15 +1020,12 @@ html {
 @media (min-width: 780px) {
 
   .site-shell.site-shell-order .ab-order-summary {
-    width: 100%;
-    padding-bottom: 0;
-  }
+  padding-bottom: 0;
+}
 
   .site-shell.site-shell-order .ab-order-title {
-    font-size: clamp(48px, 4.2vw, 82px) !important;
-    white-space: normal !important;
-    overflow: visible !important;
-  }
+  font-size: clamp(48px, 4.2vw, 82px) !important;
+}
 
   /* COLONNE DROITE — FORMULAIRE */
 
@@ -1617,32 +1611,11 @@ aspect-ratio: 4 / 5 !important;
    ========================================================= */
 
 @media (max-width: 620px) {
-
-  .site-shell.site-shell-public .ab-custom-form {
-    display: block !important;
-    padding: 24px 18px !important;
-  }
-
-  .site-shell.site-shell-public .ab-custom-form > div {
-    padding: 25px 0 !important;
-    border-left: 0 !important;
-  }
-
-  .site-shell.site-shell-public .ab-custom-colors,
-  .site-shell.site-shell-public .ab-custom-jewelry,
-  .site-shell.site-shell-public .ab-custom-relief,
-  .site-shell.site-shell-public .ab-custom-inspirations {
-    padding-left: 0 !important;
-  }
-
-  .site-shell.site-shell-public .ab-custom-inspirations .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-
   .site-shell.site-shell-public .ab-custom-measurements .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
+
 /* =========================================================
    DESIGNS — DENSITÉ DESKTOP
    ========================================================= */
@@ -2050,17 +2023,6 @@ aspect-ratio: 4 / 5 !important;
   grid-column: 2 !important;
   grid-row: 4 !important;
   margin-top: 20px !important;
-}
-
-.site-shell.site-shell-order
-.ab-order-form > button:last-child:hover {
-  background: #b91d1d !important;
-}
-
-.site-shell.site-shell-order
-.ab-order-form > button:last-child svg {
-  width: 17px !important;
-  height: 17px !important;
 }
 
   /* Titres un peu moins imposants */
