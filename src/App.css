@@ -43,211 +43,13 @@
 
 /* ================= COVER ================= */
 
-.ab2-cover {
-  position: relative;
-  min-height: 860px;
-  height: calc(100vh - 64px);
-  max-height: 1000px;
-  overflow: hidden;
-  isolation: isolate;
-  border-bottom: 1px solid #252525;
-
-  background-image:
-    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-
-  background-size: 80px 80px;
-}
-
-.ab2-cover-meta {
-  position: absolute;
-  z-index: 10;
-  left: 3vw;
-  top: 4vh;
-
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-
-  font-size: 9px;
-  letter-spacing: .25em;
-  color: #777;
-}
-
-.ab2-title {
-  position: absolute;
-  z-index: 6;
-
-  left: 6vw;
-  top: 7vh;
-
-  display: flex;
-  flex-direction: column;
-
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 900;
-  font-size: clamp(6.3rem, 12vw, 12.8rem);
-  letter-spacing: -.075em;
-  line-height: .72;
-
-  color: var(--red);
-}
-
-.ab2-title span:last-child {
-  margin-left: 10vw;
-
-  color: var(--black);
-  -webkit-text-stroke: 3px var(--red);
-}
-
-.ab2-hero-wrap {
-  position: absolute;
-  z-index: 4;
-
-  width: min(30vw, 420px);
-
-  left: 39%;
-  top: 38%;
-
-  transform: rotate(2.5deg);
-}
-
-.ab2-fig {
-  display: block;
-  margin: 0 0 7px 3px;
-
-  font-size: 8px;
-  letter-spacing: .22em;
-  color: #888;
-}
-
-.ab2-hero-image {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-
-  overflow: hidden;
-
-  border: 7px solid var(--paper);
-  background: #111;
-
-  box-shadow:
-    15px 15px 0 var(--blue),
-    28px 27px 0 rgba(255,255,255,.06);
-}
-
-.ab2-hero-image img,
 .ab2-design-image img,
 .ab2-archive-item img {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
-}
-
-.ab2-bakeury {
-  position: absolute;
-  z-index: 9;
-
-  left: 25%;
-  bottom: 8%;
-
-  transform: rotate(-5deg);
-
-  padding: 7px 13px;
-
-  background: var(--paper);
-  color: var(--black);
-
-  box-shadow: 7px 7px 0 var(--blue);
-}
-
-.ab2-bakeury span {
-  margin-right: 8px;
-  font-size: 9px;
-  letter-spacing: .2em;
-}
-
-.ab2-bakeury strong {
-  font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
-  font-size: 1.5rem;
-}
-
-.ab2-flower {
-  position: absolute;
-  z-index: 5;
-
-  width: 65px;
-  height: 65px;
-
-  left: 75%;
-  top: 52%;
-
-  color: var(--paper);
-
-  transform: rotate(12deg);
-}
-
-.ab2-yellow-mark {
-  position: absolute;
-  z-index: 8;
-
-  left: 69%;
-  top: 23%;
-
-  color: var(--yellow);
-  font-size: 4rem;
-
-  transform: rotate(13deg);
-}
-
-.ab2-blue-line {
-  position: absolute;
-  z-index: 2;
-
-  width: 500px;
-  height: 500px;
-
-  right: -180px;
-  top: -250px;
-
-  border: 2px solid var(--blue);
-  border-radius: 50%;
-}
-
-.ab2-enter {
-  position: absolute;
-  z-index: 10;
-
-  right: 5vw;
-  bottom: 6%;
-
-  display: flex;
-  align-items: center;
-  gap: 11px;
-
-  padding: 13px 18px;
-
-  border: 0;
-
-  background: var(--red);
-  color: white;
-
-  font-size: 10px !important;
-  font-weight: 800 !important;
-  letter-spacing: .15em;
-
-  cursor: pointer;
-
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease;
-}
-
-.ab2-enter:hover {
-  transform: translate(-4px, -4px);
-  box-shadow: 5px 5px 0 var(--blue);
-}
+}s
 
 
 /* ================= MENU ================= */
@@ -392,17 +194,6 @@
 .ab2-card-soft h2 {
   font-size: clamp(2.5rem, 4vw, 4.2rem);
 }
-
-.ab2-card-arrow {
-  position: absolute;
-
-  width: 27px;
-  height: 27px;
-
-  right: 28px;
-  bottom: 28px;
-}
-
 
 /* ================= NEW ================= */
 
@@ -562,36 +353,6 @@
   letter-spacing: .08em;
 }
 
-.ab2-new-note {
-  position: absolute;
-  z-index: 5;
-
-  left: 0;
-  bottom: -15px;
-
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 4vw, 4rem);
-  font-style: italic;
-
-  color: var(--red);
-
-  transform: rotate(-8deg);
-}
-
-.ab2-blue-star {
-  position: absolute;
-
-  right: 0;
-  top: -55px;
-
-  color: var(--blue);
-
-  font-size: 5rem;
-
-  transform: rotate(12deg);
-}
-
-
 /* ================= ARCHIVES ================= */
 
 .ab2-archives {
@@ -633,13 +394,6 @@
 
   font-size: 8px;
   letter-spacing: .25em;
-}
-
-.ab2-archive-note svg {
-  width: 40px;
-  height: 40px;
-
-  color: var(--green);
 }
 
 .ab2-archive-grid {
@@ -724,73 +478,6 @@
 /* ================= MOBILE ================= */
 
 @media (max-width: 800px) {
-
-  .ab2-cover {
-    height: 760px;
-    min-height: 760px;
-  }
-
-  .ab2-cover-meta {
-    left: 20px;
-    top: 25px;
-  }
-
-  .ab2-title {
-    left: 20px;
-    top: 80px;
-
-    font-size: 20vw;
-  }
-
-  .ab2-title span:last-child {
-    margin-left: 8vw;
-
-    -webkit-text-stroke-width: 2px;
-  }
-
-  .ab2-hero-wrap {
-    width: 58vw;
-
-    max-width: 280px;
-
-    left: auto;
-    right: 13%;
-
-    top: 40%;
-  }
-
-  .ab2-hero-image {
-    border-width: 5px;
-
-    box-shadow: 10px 10px 0 var(--blue);
-  }
-
-  .ab2-bakeury {
-    left: 20px;
-    bottom: 65px;
-  }
-
-  .ab2-yellow-mark {
-    left: auto;
-    right: 7%;
-    top: 32%;
-
-    font-size: 3rem;
-  }
-
-  .ab2-flower {
-    left: 12%;
-    top: 47%;
-
-    width: 45px;
-    height: 45px;
-  }
-
-  .ab2-enter {
-    right: 20px;
-    bottom: 20px;
-  }
-
 
   .ab2-menu {
     padding: 75px 20px 90px;
@@ -4002,83 +3689,7 @@ aspect-ratio: 4 / 5 !important;
   letter-spacing: 0.035em !important;
   white-space: nowrap !important;
 }
-/* =========================================
-   CHOIX DES FORMES — PHOTOS INDIVIDUELLES
-   ========================================= */
 
-.ab-shape-choice {
-  display: block;
-  min-width: 0;
-  background: #050505;
-  overflow: hidden;
-}
-
-.ab-shape-choice-image {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  background: #111;
-}
-
-.ab-shape-choice-image img {
-  width: 100% !important;
-  height: 100% !important;
-  max-height: none !important;
-  object-fit: cover !important;
-  display: block;
-}
-
-.ab-shape-choice-caption {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-top: 1px solid rgba(240, 237, 229, 0.18);
-}
-
-.ab-shape-choice-caption span {
-  color: #777;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-}
-
-.ab-shape-choice-caption strong {
-  color: #f0ede5;
-  font-size: 12px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.ab-shape-check {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 25px;
-  height: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f21b1b;
-  color: #050505;
-}
-/* Formes — légendes plus compactes uniquement sur les fiches design */
-.site-shell.site-shell-order .ab-shape-choice-caption {
-  gap: 6px !important;
-  padding: 10px 8px !important;
-  flex-wrap: nowrap !important;
-}
-
-.site-shell.site-shell-order .ab-shape-choice-caption span {
-  font-size: 9px !important;
-  flex-shrink: 0;
-}
-
-.site-shell.site-shell-order .ab-shape-choice-caption strong {
-  font-size: 10px !important;
-  letter-spacing: 0.035em !important;
-  white-space: nowrap !important;
-}
 /* COMMANDE PERSONNALISÉE — légendes des formes compactes */
 .site-shell.site-shell-public
   .ab-custom-shape
