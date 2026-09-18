@@ -1866,7 +1866,6 @@ aspect-ratio: 4 / 5 !important;
 
   .site-shell.site-shell-order .ab-order-image {
   aspect-ratio: auto !important;
-  overflow: hidden !important;
   background: transparent !important;
 }
 
@@ -1884,7 +1883,6 @@ aspect-ratio: 4 / 5 !important;
   margin-top: 0 !important;
   margin-bottom: 8px !important;
   font-size: clamp(36px, 2.8vw, 52px) !important;
-  line-height: 0.9 !important;
 }
 
 .site-shell.site-shell-order .ab-order-kicker {
@@ -2719,7 +2717,6 @@ left: 18px;
 /* Le formulaire n'est plus lui-même la grande feuille crème */
 .site-shell.site-shell-public .ab-custom-form {
   background: transparent !important;
-  background-image: none !important;
   padding: 0 !important;
   display: grid !important;
   grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
@@ -2825,11 +2822,9 @@ left: 18px;
 .ab-custom-options > .ab-custom-jewelry,
 .site-shell.site-shell-public
 .ab-custom-options > .ab-custom-relief {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
+ background: transparent !important;
+box-shadow: none !important;
+border-radius: 0 !important;
 }
 
 /* CUSTOM — forcer le fond des 2 premiers panneaux */
@@ -2839,8 +2834,6 @@ left: 18px;
 .site-shell.site-shell-public
 .ab-custom-form > .ab-custom-options {
   background: #c8c2b8 !important;
-  background-color: #c8c2b8 !important;
-  background-image: none !important;
   color: #111 !important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -2867,7 +2860,6 @@ left: 18px;
   row-gap: 0 !important;
   padding: 34px !important;
   background: #c8c2b8 !important;
-  background-image: none !important;
   color: #111 !important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -2883,8 +2875,6 @@ left: 18px;
   grid-row: auto !important;
   padding: 0 !important;
   background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -3001,8 +2991,6 @@ left: 18px;
   min-width: 0 !important;
   padding: 34px !important;
   background: #c8c2b8 !important;
-  background-color: #c8c2b8 !important;
-  background-image: none !important;
   color: #111 !important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -3020,8 +3008,6 @@ left: 18px;
   margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
   border: 0 !important;
   border-left: 0 !important;
   border-radius: 0 !important;
@@ -3040,8 +3026,6 @@ left: 18px;
   min-width: 0 !important;
   padding: 34px !important;
   background: #c8c2b8 !important;
-  background-color: #c8c2b8 !important;
-  background-image: none !important;
   color: #111 !important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -3057,8 +3041,6 @@ left: 18px;
   margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
