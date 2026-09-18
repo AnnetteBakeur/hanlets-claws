@@ -2129,41 +2129,11 @@ aspect-ratio: 4 / 5 !important;
   min-width: 0 !important;
 }
 
-/* Les sections de la colonne droite gardent le style crème */
-.site-shell.site-shell-public .ab-custom-options > div {
-  padding: 24px 0 !important;
-  border: 0 !important;
-  border-bottom: 1px solid rgba(17, 17, 17, 0.18) !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  color: #111 !important;
-}
-
 /* Titres : Couleurs / Chrome / Bijoux / Relief */
 .site-shell.site-shell-public .ab-custom-options h3 {
   color: #111 !important;
   font-family: Arial, Helvetica, sans-serif !important;
   font-weight: 900 !important;
-}
-
-/* Champ Couleurs */
-.site-shell.site-shell-public .ab-custom-options textarea {
-  background: transparent !important;
-  color: #111 !important;
-  border-color: rgba(17, 17, 17, 0.35) !important;
-}
-
-/* Placeholder du champ Couleurs */
-.site-shell.site-shell-public .ab-custom-options textarea::placeholder {
-  color: #888 !important;
-}
-
-/* Boutons Doré / Argenté / Oui / Non... */
-.site-shell.site-shell-public .ab-custom-options button {
-  background: transparent !important;
-  color: #111 !important;
-  border-color: #111 !important;
 }
 
 /* Toutes les sections restent lisibles */
@@ -2187,10 +2157,9 @@ aspect-ratio: 4 / 5 !important;
 }
 /* Informations de livraison — commande personnalisée */
 .site-shell.site-shell-public .ab-custom-shipping {
-  grid-column: 1 / 7 !important;
-  width: 100% !important;
   min-width: 0 !important;
 }
+
 .site-shell.site-shell-public .ab-custom-shipping input {
   width: 100% !important;
   min-width: 0 !important;
