@@ -1508,34 +1508,11 @@ aspect-ratio: 4 / 5 !important;
 
 .site-shell.site-shell-public .ab-custom-form {
   grid-area: form;
-
   position: relative;
-
-  width: 100%;
-  margin: 0 !important;
-
-  padding: clamp(24px, 3vw, 42px) !important;
-
-  color: #111;
-
-  background-color: #efebe2 !important;
-
-  background-image:
-    radial-gradient(
-      circle at 20% 30%,
-      rgba(0, 0, 0, 0.025) 0,
-      transparent 22%
-    ),
-    radial-gradient(
-      circle at 80% 65%,
-      rgba(0, 0, 0, 0.02) 0,
-      transparent 26%
-    ) !important;
 
   box-shadow:
     14px 16px 0 rgba(255, 255, 255, 0.045);
 }
-
 
 /* =========================================================
    SECTIONS 0 → 8
@@ -1569,20 +1546,14 @@ aspect-ratio: 4 / 5 !important;
   > span:first-child {
   width: auto !important;
   height: auto !important;
-
   min-width: 0 !important;
-
   border-radius: 0 !important;
-
   background: transparent !important;
   background-image: none !important;
-
   color: #f21b1b !important;
-
   font-family: Arial, Helvetica, sans-serif !important;
   font-size: 10px !important;
   font-weight: 900 !important;
-
   letter-spacing: 0.16em;
 }
 
@@ -1590,11 +1561,8 @@ aspect-ratio: 4 / 5 !important;
 
 .site-shell.site-shell-public .ab-custom-form h3 {
   color: #111 !important;
-
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: clamp(25px, 2.6vw, 43px) !important;
   font-weight: 900 !important;
-
   line-height: 1 !important;
   letter-spacing: -0.04em !important;
 }
@@ -1603,7 +1571,6 @@ aspect-ratio: 4 / 5 !important;
 
 .site-shell.site-shell-public .ab-custom-form h3 span {
   color: #777 !important;
-
   font-family: Georgia, "Times New Roman", serif !important;
   font-size: 13px !important;
   font-style: italic;
@@ -1625,12 +1592,9 @@ aspect-ratio: 4 / 5 !important;
 .site-shell.site-shell-public .ab-custom-form select {
   border: 1px solid rgba(5, 5, 5, 0.35) !important;
   border-radius: 0 !important;
-
   background: rgba(255, 255, 255, 0.22) !important;
   background-image: none !important;
-
   color: #111 !important;
-
   box-shadow: none !important;
 }
 
@@ -1775,23 +1739,9 @@ aspect-ratio: 4 / 5 !important;
    ========================================================= */
 
 .site-shell.site-shell-public .ab-custom-submit {
-  margin-top: 35px !important;
-
-  border: 0 !important;
-  border-radius: 0 !important;
-
-  background: #f21b1b !important;
-  background-image: none !important;
-
-  color: #050505 !important;
-
   box-shadow: none !important;
 
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 11px !important;
-  font-weight: 900 !important;
-
-  letter-spacing: 0.14em !important;
   text-transform: uppercase;
 
   transition:
@@ -1800,40 +1750,13 @@ aspect-ratio: 4 / 5 !important;
 }
 
 .site-shell.site-shell-public .ab-custom-submit:hover {
-  background: #ffd514 !important;
-
   transform: translateY(-3px);
 }
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 800px) {
-
-  .site-shell.site-shell-public .ab-custom-form {
-    padding: 28px 20px !important;
-  }
-
-  .site-shell.site-shell-public .ab-custom-form > div {
-    padding: 28px 0 !important;
-  }
-}
 
 /* =========================================================
    LA FEUILLE DEVIENT UNE GRILLE 12 COLONNES
    ========================================================= */
-
-.site-shell.site-shell-public .ab-custom-form {
-  display: grid !important;
-
-  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
-
-  column-gap: 24px !important;
-  row-gap: 0 !important;
-
-  padding: 32px 38px 38px !important;
-}
 
 /* Tailwind mettait des espaces verticaux entre chaque enfant :
    on les neutralise */
@@ -1854,69 +1777,6 @@ aspect-ratio: 4 / 5 !important;
   font-size: clamp(21px, 2vw, 31px) !important;
 }
 
-/* =========================================================
-   RÉPARTITION DES RUBRIQUES
-   ========================================================= */
-
-/* Ligne 1 */
-
-.site-shell.site-shell-public .ab-custom-contact {
-  grid-column: span 6;
-}
-
-.site-shell.site-shell-public .ab-custom-colors {
-  grid-column: span 6;
-
-  padding-left: 24px !important;
-  border-left: 1px solid rgba(5, 5, 5, 0.18) !important;
-}
-
-/* Ligne 2 : trois petites rubriques */
-
-.site-shell.site-shell-public .ab-custom-chrome,
-.site-shell.site-shell-public .ab-custom-jewelry,
-.site-shell.site-shell-public .ab-custom-relief {
-  grid-column: span 4;
-}
-
-.site-shell.site-shell-public .ab-custom-jewelry,
-.site-shell.site-shell-public .ab-custom-relief {
-  padding-left: 24px !important;
-  border-left: 1px solid rgba(5, 5, 5, 0.18) !important;
-}
-
-/* Ligne 3 */
-
-.site-shell.site-shell-public .ab-custom-description {
-  grid-column: span 6;
-}
-
-.site-shell.site-shell-public .ab-custom-inspirations {
-  grid-column: span 6;
-
-  padding-left: 24px !important;
-  border-left: 1px solid rgba(5, 5, 5, 0.18) !important;
-}
-
-/* Longueur / forme */
-
-.site-shell.site-shell-public .ab-custom-shape {
-  grid-column: 1 / -1;
-}
-
-/* Mesures */
-
-.site-shell.site-shell-public .ab-custom-measurements {
-  grid-column: 1 / -1;
-}
-
-/* Bouton envoyer */
-
-.site-shell.site-shell-public .ab-custom-submit {
-  grid-column: 1 / -1;
-
-  margin-top: 28px !important;
-}
 
 /* =========================================================
    LONGUEUR & FORME — PLUS COMPACT
@@ -2227,160 +2087,60 @@ aspect-ratio: 4 / 5 !important;
 @media (min-width: 900px) {
 
   .site-shell .ab-order-page {
-    display: grid !important;
-
-    grid-template-columns:
-      minmax(320px, 0.8fr)
-      minmax(0, 1.2fr) !important;
-
-    grid-template-areas:
-      "back back"
-      "product form" !important;
-
-    column-gap: clamp(36px, 4vw, 72px) !important;
-
-    align-items: start !important;
-
-    width: 100% !important;
-    max-width: 1500px !important;
-
-    margin: 0 auto !important;
-    padding: 40px 3vw 80px !important;
+    padding-top: 40px !important;
+    padding-bottom: 80px !important;
   }
 
-
-  /* Retour aux designs */
-
   .site-shell .ab-order-page > button:first-child {
-    grid-area: back !important;
-
     margin-bottom: 28px !important;
   }
 
-
-  /* =====================================================
-     GAUCHE — PRODUIT
-     ===================================================== */
-
   .site-shell .ab-order-product {
-    grid-area: product !important;
-
-    position: sticky !important;
-    top: 105px !important;
-
-    width: 100% !important;
     max-width: 540px !important;
-
-    margin: 0 !important;
   }
-
 
   .site-shell .ab-order-product-inner {
-    display: block !important;
-
     width: 100% !important;
   }
 
-
-  /* Photo entièrement visible */
-
   .site-shell .ab-order-image {
-    width: 100% !important;
-    height: min(55vh, 500px) !important;
-
-    max-width: none !important;
-
-    aspect-ratio: auto !important;
-
     overflow: hidden !important;
-
     background: #111 !important;
   }
 
-
   .site-shell .ab-order-image img {
-    width: 100% !important;
-    height: 100% !important;
-
-    object-fit: contain !important;
-
     transform: none !important;
   }
 
-
-  /* Nom + description + prix */
-
   .site-shell .ab-order-summary {
-    width: 100% !important;
-
     padding: 20px 0 0 !important;
   }
 
-
   .site-shell .ab-order-title {
     margin: 8px 0 14px !important;
-
-    font-size: clamp(42px, 4vw, 68px) !important;
     line-height: 0.9 !important;
   }
-
-
-  /* =====================================================
-     DROITE — FORMULAIRE
-     ===================================================== */
-
-  .site-shell .ab-order-form {
-    grid-area: form !important;
-
-    width: 100% !important;
-    max-width: none !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-
-  /* Sections moins gigantesques */
 
   .site-shell .ab-order-form > div {
     padding-top: 24px !important;
     padding-bottom: 24px !important;
   }
 
-
   .site-shell .ab-order-form h3 {
     font-size: clamp(26px, 2.5vw, 40px) !important;
   }
 }
-
 
 /* =========================================================
    FICHE DESIGN — MOBILE
    ========================================================= */
 
 @media (max-width: 899px) {
-
-  .site-shell .ab-order-page {
-    display: block !important;
-  }
-
   .site-shell .ab-order-product {
-    position: static !important;
-
     max-width: none !important;
   }
-
-  .site-shell .ab-order-image {
-    width: 100% !important;
-    height: auto !important;
-
-    aspect-ratio: 4 / 5 !important;
-  }
-
-  .site-shell .ab-order-image img {
-    object-fit: contain !important;
-  }
 }
+
 /* =========================================================
    FICHE DESIGN — VRAIE COMPOSITION 3 COLONNES
    ========================================================= */
@@ -3266,20 +3026,6 @@ left: 18px;
   color: #050505 !important;
 }
 
-.site-shell.site-shell-public .ab-custom-submit {
-  width: fit-content !important;
-  min-width: 300px;
-
-  margin-left: auto !important;
-  padding: 17px 34px !important;
-
-  background: #c51f1f !important;
-  color: #050505 !important;
-
-  border: 0 !important;
-  border-radius: 0 !important;
-}
-
 .site-shell.site-shell-public .ab-custom-submit:hover {
   background: #b91d1d !important;
 }
@@ -4075,18 +3821,13 @@ mask-image: linear-gradient(
   /* photo détourée */
   .site-shell.site-shell-public .ab-home-cutout {
   position: absolute !important;
-
   width: auto !important;
   height: 270px !important;
-
   left: 40% !important;
   right: auto !important;
   bottom: 290px !important;
-
   transform: translateX(-10%) !important;
-
   z-index: 12 !important;
-
   clip-path: inset(0 0 25.5% 0) !important;
   object-fit: contain !important;
 }
@@ -4098,10 +3839,8 @@ mask-image: linear-gradient(
 .site-shell.site-shell-public .ab2-menu {
   position: relative !important;
   z-index: 10 !important;
-
   width: 100% !important;
   max-width: none !important;
-
   margin: -410px 0 0 !important;
   padding: 28px 16px 70px !important;
 }
@@ -4109,10 +3848,8 @@ mask-image: linear-gradient(
 /* CHAPITRE 02 / LA BAKEURY */
 .site-shell.site-shell-public .ab2-section-meta {
   width: 100% !important;
-
   margin: 0 0 10px !important;
   padding: 0 4px !important;
-
   font-size: 8px !important;
   letter-spacing: 0.24em !important;
 }
@@ -4122,28 +3859,20 @@ mask-image: linear-gradient(
   display: flex !important;
   flex-direction: column !important;
   align-items: stretch !important;
-
   width: 100% !important;
-
   grid-template-columns: none !important;
   grid-template-rows: none !important;
-
   gap: 12px !important;
 }
 
 /* Réglages communs */
 .site-shell.site-shell-public .ab2-card {
   position: relative !important;
-
   min-height: 0 !important;
-
   padding: 22px !important;
-
   top: auto !important;
   bottom: auto !important;
-
   transform: none !important;
-
   overflow: hidden !important;
 }
 
@@ -4151,11 +3880,8 @@ mask-image: linear-gradient(
 .site-shell.site-shell-public .ab2-card-custom {
   width: 94% !important;
   height: 175px !important;
-
   align-self: flex-start !important;
-
   grid-row: auto !important;
-
   margin: 0 0 0 5% !important;
 }
 
@@ -4163,7 +3889,6 @@ mask-image: linear-gradient(
   font-size: clamp(32px, 9.2vw, 39px) !important;
   line-height: 0.9 !important;
   letter-spacing: -0.035em !important;
-
   white-space: normal !important;
 }
 
@@ -4171,9 +3896,7 @@ mask-image: linear-gradient(
 .site-shell.site-shell-public .ab2-card-original {
   width: 80% !important;
   height: 180px !important;
-
   align-self: flex-start !important;
-
   margin: 0 !important;
 }
 
@@ -4186,9 +3909,7 @@ mask-image: linear-gradient(
 .site-shell.site-shell-public .ab2-card-soft {
   width: 78% !important;
   height: 140px !important;
-
   align-self: flex-start !important;
-
   margin: 0 0 0 24% !important;
 }
 
@@ -4202,14 +3923,12 @@ mask-image: linear-gradient(
   left: 22px !important;
   right: 18px !important;
   bottom: 20px !important;
-
   width: auto !important;
 }
 
 /* Petit ANNETTE BAKEUR / SÉLECTION */
 .site-shell.site-shell-public .ab2-card-small {
   margin-bottom: 8px !important;
-
   font-size: 7px !important;
   letter-spacing: 0.22em !important;
 }
@@ -4218,7 +3937,6 @@ mask-image: linear-gradient(
 .site-shell.site-shell-public .ab2-card-number {
   top: 17px !important;
   right: 18px !important;
-
   font-size: 11px !important;
 }
 }
@@ -4243,12 +3961,9 @@ mask-image: linear-gradient(
 
   .site-shell.site-shell-public .ab2-menu-grid {
     grid-template-columns: 1fr 0.92fr 1.08fr !important;
-
     /* IMPORTANT : une seule ligne maintenant */
     grid-template-rows: 1fr !important;
-
     align-items: start !important;
-
     gap: 18px !important;
     margin-top: 95px !important;
   }
@@ -4257,7 +3972,6 @@ mask-image: linear-gradient(
 .site-shell.site-shell-public .ab2-card-original {
     grid-column: 1 !important;
     grid-row: 1 !important;
-
     height: 440px !important;
     margin-top: 100px !important;
   }
@@ -4266,7 +3980,6 @@ mask-image: linear-gradient(
   .site-shell.site-shell-public .ab2-card-soft {
     grid-column: 2 !important;
     grid-row: 1 !important;
-
     height: 320px !important;
     margin-top: 20px !important;
   }
@@ -4275,10 +3988,8 @@ mask-image: linear-gradient(
   .site-shell.site-shell-public .ab2-card-custom {
     grid-column: 3 !important;
     grid-row: 1 !important;
-
     height: 410px !important;
     margin-top: 80px !important;
-
     top: auto !important;
     transform: none !important;
   }
@@ -4293,10 +4004,8 @@ mask-image: linear-gradient(
   font-size: clamp(42px, 3vw, 54px) !important;
   line-height: 0.92 !important;
   letter-spacing: -0.035em !important;
-
   width: 100% !important;
   max-width: 100% !important;
-
   white-space: normal !important;
 }
 /* NOUVEAUTÉS commence exactement après la zone peinte */
@@ -4328,13 +4037,11 @@ mask-image: linear-gradient(
 
   .site-shell.site-shell-public .ab2-new-head {
     display: block !important;
-
     margin: 0 0 42px !important;
   }
 
   .site-shell.site-shell-public .ab2-section-label {
     margin-bottom: 8px !important;
-
     font-size: 8px !important;
     line-height: 1 !important;
     letter-spacing: 0.24em !important;
@@ -4342,11 +4049,9 @@ mask-image: linear-gradient(
 
   .site-shell.site-shell-public .ab2-new-head h2 {
     margin: 0 !important;
-
     font-size: clamp(44px, 12.5vw, 52px) !important;
     line-height: 0.82 !important;
     letter-spacing: -0.065em !important;
-
     white-space: nowrap !important;
   }
 
@@ -4359,32 +4064,23 @@ mask-image: linear-gradient(
 
 .site-shell.site-shell-public .ab2-new-layout {
   display: grid !important;
-
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-
   width: 100% !important;
   height: auto !important;
-
   gap: 26px 14px !important;
-
   margin: 0 !important;
   padding: 0 !important;
 }
 
 .site-shell.site-shell-public .ab2-design {
   position: relative !important;
-
   top: auto !important;
   right: auto !important;
   bottom: auto !important;
   left: auto !important;
-
   width: 100% !important;
-
   margin: 0 !important;
-
   align-self: start !important;
-
   transform: none !important;
 }
 
@@ -4415,8 +4111,6 @@ mask-image: linear-gradient(
     padding-top: 6px !important;
   }
 
-
-
   /* ---------- ARCHIVES ---------- */
 
   .site-shell.site-shell-public .ab2-archives {
@@ -4429,11 +4123,9 @@ mask-image: linear-gradient(
 
   .site-shell.site-shell-public .ab2-archives-head h2 {
     margin: 0 !important;
-
     font-size: clamp(58px, 17vw, 72px) !important;
     line-height: 0.76 !important;
     letter-spacing: -0.065em !important;
-
     max-width: 100% !important;
   }
 
@@ -4482,58 +4174,43 @@ mask-image: linear-gradient(
 
   .site-shell.site-shell-public .ab-mobile-menu {
     position: absolute !important;
-
     top: 100% !important;
     right: 16px !important;
     left: auto !important;
-
     width: min(310px, calc(100vw - 32px)) !important;
-
     display: block !important;
-
     background: #050505 !important;
-
     border: 1px solid rgba(240, 237, 229, 0.22) !important;
     border-top: 0 !important;
-
     box-shadow: 0 18px 35px rgba(0, 0, 0, 0.35) !important;
   }
 
   .site-shell.site-shell-public .ab-mobile-menu button {
     width: 100% !important;
     min-height: 52px !important;
-
     padding: 0 16px !important;
-
     display: grid !important;
     grid-template-columns: 38px 1fr !important;
     align-items: center !important;
-
     border: 0 !important;
     border-bottom: 1px solid rgba(240, 237, 229, 0.14) !important;
-
     background: #050505 !important;
     color: #f0ede5 !important;
-
     text-align: left !important;
     cursor: pointer !important;
   }
 
   .site-shell.site-shell-public .ab-mobile-menu button span {
     color: #777 !important;
-
     font-size: 8px !important;
     font-weight: 500 !important;
-
     letter-spacing: 0.08em !important;
   }
 
   .site-shell.site-shell-public .ab-mobile-menu button strong {
     font-family: Arial, Helvetica, sans-serif !important;
-
     font-size: 13px !important;
     font-weight: 800 !important;
-
     letter-spacing: 0.05em !important;
   }
 
@@ -4552,7 +4229,6 @@ mask-image: linear-gradient(
   .site-shell.site-shell-public
   .ab-mobile-menu .ab-mobile-admin {
     min-height: 48px !important;
-
     color: #777 !important;
   }
 
@@ -4573,7 +4249,6 @@ mask-image: linear-gradient(
   .site-shell.site-shell-public .ab-custom-page-v2 {
     width: 100% !important;
     max-width: none !important;
-
     padding: 22px 14px 50px !important;
   }
 
@@ -4592,7 +4267,6 @@ mask-image: linear-gradient(
   .site-shell.site-shell-public
   .ab-custom-page-v2 .ab-designs-kicker {
     margin-bottom: 10px !important;
-
     font-size: 8px !important;
     letter-spacing: 0.26em !important;
   }
@@ -4602,13 +4276,10 @@ mask-image: linear-gradient(
   .ab-custom-page-v2 .ab-custom-title-red {
     width: 100% !important;
     max-width: 100% !important;
-
     margin: 0 !important;
-
     font-size: clamp(32px, 9.5vw, 40px) !important;
 line-height: 0.86 !important;
     letter-spacing: -0.055em !important;
-
     white-space: normal !important;
     overflow-wrap: normal !important;
   }
@@ -4621,11 +4292,8 @@ line-height: 0.86 !important;
   .site-shell.site-shell-public .ab-custom-form {
     display: flex !important;
     flex-direction: column !important;
-
     width: 100% !important;
-
     gap: 12px !important;
-
     padding: 0 !important;
     margin: 0 !important;
   }
@@ -4634,12 +4302,9 @@ line-height: 0.86 !important;
   .site-shell.site-shell-public .ab-custom-form > * {
     width: 100% !important;
     max-width: 100% !important;
-
     grid-column: 1 / -1 !important;
     grid-row: auto !important;
-
     min-width: 0 !important;
-
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
@@ -4655,12 +4320,9 @@ line-height: 0.86 !important;
   .site-shell.site-shell-public .ab-custom-panel-inspirations,
   .site-shell.site-shell-public .ab-custom-panel-measurements {
     width: 100% !important;
-
     padding: 16px !important;
-
     background: #c8c2b8 !important;
     background-image: none !important;
-
     box-sizing: border-box !important;
   }
 
@@ -4685,7 +4347,6 @@ padding-top: 16px !important;
   .ab-custom-shipping > div {
     display: grid !important;
     grid-template-columns: 1fr !important;
-
     gap: 8px !important;
   }
 
@@ -4693,9 +4354,7 @@ padding-top: 16px !important;
   .ab-custom-shipping input {
     width: 100% !important;
     min-width: 0 !important;
-
     grid-column: 1 !important;
-
     box-sizing: border-box !important;
   }
 
@@ -4708,14 +4367,12 @@ padding-top: 16px !important;
   .site-shell.site-shell-public .ab-custom-options {
     display: flex !important;
     flex-direction: column !important;
-
     gap: 0 !important;
   }
 
   .site-shell.site-shell-public
   .ab-custom-options > div {
     width: 100% !important;
-
     padding: 16px 0 !important;
   }
 
@@ -4741,7 +4398,6 @@ line-height: 1 !important;
   .ab-custom-form > .ab-custom-panel-details {
     display: flex !important;
     flex-direction: column !important;
-
     gap: 0 !important;
   }
 
@@ -4750,10 +4406,8 @@ line-height: 1 !important;
   .site-shell.site-shell-public
   .ab-custom-panel-details > .ab-custom-shape {
     width: 100% !important;
-
     margin: 0 !important;
     padding: 0 !important;
-
     border-left: 0 !important;
   }
 
@@ -4761,7 +4415,6 @@ line-height: 1 !important;
   .ab-custom-panel-details > .ab-custom-shape {
     margin-top: 26px !important;
     padding-top: 26px !important;
-
     border-top: 1px solid rgba(5, 5, 5, 0.22) !important;
   }
 
@@ -4770,7 +4423,6 @@ line-height: 1 !important;
   .site-shell.site-shell-public
   .ab-custom-shape .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-
     gap: 10px !important;
   }
 
@@ -4782,7 +4434,6 @@ line-height: 1 !important;
   .site-shell.site-shell-public
   .ab-custom-inspirations .grid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-
     gap: 8px !important;
   }
 
@@ -4815,9 +4466,7 @@ line-height: 1.35 !important;
   .ab-custom-form select {
     width: 100% !important;
     max-width: 100% !important;
-
     box-sizing: border-box !important;
-
     font-size: 16px !important;
     min-height: 44px !important;
 padding: 10px 12px !important;
@@ -4831,12 +4480,9 @@ line-height: 1.2 !important;
   .site-shell.site-shell-public
   .ab-custom-form > .ab-custom-submit {
     width: 100% !important;
-
     justify-self: stretch !important;
-
     margin: 4px 0 0 !important;
     padding: 17px 18px !important;
-
     font-size: 11px !important;
   }
 }
