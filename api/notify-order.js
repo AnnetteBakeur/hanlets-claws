@@ -1,3 +1,5 @@
+import { Buffer } from 'node:buffer'
+import process from 'node:process'
 import { createClient } from '@supabase/supabase-js'
 
 const ORDER_PHOTOS_BUCKET = 'order-photos'

@@ -129,12 +129,36 @@ export default function App() {
     Boolean(recoveryCode);
   const isPasswordReset = passwordRecovery || hasRecoveryUrl;
 
+  async function loadAll() {
+  const [g, d] = await Promise.all([
+    db.getSetting('gallery'),
+    db.getSetting('designs')
+  ]);
+
+  return { g, d };
+}
+
   useEffect(() => {
-    loadAll();
-    db.getCurrentUser().then(setUser);
+  loadAll()
+    .then(({ g, d }) => {
+      if (g) setGallery(g);
+      if (d && d.length > 0) setDesigns(d);
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+
+  db.getCurrentUser().then(setUser);
 
     const unsub = db.onAuthChange((event, currentUser) => {
       setUser(currentUser);
+
+      if (!currentUser) {
+  setOrders([]);
+}
 
       if (event === 'PASSWORD_RECOVERY') {
         setPasswordRecovery(true);
@@ -171,12 +195,39 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (user) {
-      db.listOrders().then(setOrders);
-    } else {
-      setOrders([]);
-    }
-  }, [user]);
+  if (!user) return;
+
+  db.listOrders().then(setOrders);
+}, [user]);
+
+useEffect(() => {
+  // On enregistre l'écran initial dans l'historique
+  window.history.replaceState(
+    { page: 'home', design: null },
+    '',
+    window.location.href
+  );
+
+  const handlePopState = (event) => {
+    const state = event.state;
+
+    setPage(state?.page || 'home');
+    setSelectedDesign(state?.design || null);
+    setMenuOpen(false);
+    setConfirmation(null);
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto',
+    });
+  };
+
+  window.addEventListener('popstate', handlePopState);
+
+  return () => {
+    window.removeEventListener('popstate', handlePopState);
+  };
+}, []);
 
   async function handlePasswordUpdate() {
     setPasswordResetMessage('');
@@ -257,18 +308,6 @@ export default function App() {
     );
   }
 
-  async function loadAll() {
-    try {
-      const [g, d] = await Promise.all([
-  db.getSetting('gallery'),
-  db.getSetting('designs')
-]);
-
-if (g) setGallery(g);
-if (d && d.length > 0) setDesigns(d);
-    } catch (e) { console.error(e); }
-    setLoading(false);
-  }
 
   async function saveOrder(order) {
     const o = { ...order, id: uid(), createdAt: Date.now(), status: 'new' };
@@ -300,34 +339,6 @@ if (d && d.length > 0) setDesigns(d);
     return true;
   }
 
-  useEffect(() => {
-  // On enregistre l'écran initial dans l'historique
-  window.history.replaceState(
-    { page: 'home', design: null },
-    '',
-    window.location.href
-  );
-
-  const handlePopState = (event) => {
-    const state = event.state;
-
-    setPage(state?.page || 'home');
-    setSelectedDesign(state?.design || null);
-    setMenuOpen(false);
-    setConfirmation(null);
-
-    window.scrollTo({
-      top: 0,
-      behavior: 'auto',
-    });
-  };
-
-  window.addEventListener('popstate', handlePopState);
-
-  return () => {
-    window.removeEventListener('popstate', handlePopState);
-  };
-}, []);
 
   function goTo(p, d = null) {
   setSelectedDesign(d);
@@ -1079,7 +1090,7 @@ function ConfirmationScreen({ order, goTo }) {
   );
 }
 
-function Section({ num, title, optional, children, className = '' }) {
+function Section({ title, optional, children, className = '' }) {
   return (
     <div className={`bg-neutral-900 rounded-2xl border border-neutral-800 p-5 lg:p-7 ${className}`}>
       <div className="flex items-center gap-3 mb-4">
@@ -1380,7 +1391,6 @@ function AdminPage({
           setSelectedOrder(null);
         }} />
       ) : <OrdersList orders={orders} onSelect={setSelectedOrder} />)}
-      {tab === 'hero' && <HeroManager hero={hero} setHero={setHero} />}
       {tab === 'gallery' && <GalleryManager gallery={gallery} setGallery={setGallery} />}
       {tab === 'designs' && <DesignsManager designs={designs} setDesigns={setDesigns} />}
       {tab === 'settings' && <SettingsPanel user={user} />}
