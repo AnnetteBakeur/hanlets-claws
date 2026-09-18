@@ -1,4 +1,4 @@
-import { ArrowRight, Flower2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 function Placeholder({ label }) {
   return (
@@ -9,14 +9,7 @@ function Placeholder({ label }) {
 }
 
 export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
-  const latestDesigns = [...designs].slice(-3).reverse();
-
-  const scrollToMenu = () => {
-    document
-      .getElementById('ab2-menu')
-      ?.scrollIntoView({ behavior: 'smooth' });
-  };
-
+  const latestDesigns = [...designs].slice(-4).reverse();
 
   return (
     <main className="ab2-home">
@@ -60,66 +53,64 @@ export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
       ========================== */}
       <section className="ab2-menu" id="ab2-menu">
 
-        <div className="ab2-section-meta">
-          <span>CHAPITRE 02</span>
-          <span>LA BAKEURY</span>
-        </div>
+  <div className="ab2-section-meta">
+    <span>CHAPITRE 01</span>
+    <span>LA BAKEURY</span>
+  </div>
 
-        <div className="ab2-menu-grid">
+  <div className="ab2-menu-grid">
 
-          <button
-            className="ab2-card ab2-card-custom"
-            onClick={() => goTo('custom')}
-          >
-            <span className="ab2-card-number">01</span>
+    {/* 01 — DESIGNS ORIGINAUX */}
+    <button
+      className="ab2-card ab2-card-original"
+      onClick={() => goTo('designs-original')}
+    >
+      <span className="ab2-card-number">01</span>
 
-            <div className="ab2-card-content">
-              <span className="ab2-card-small">ANNETTE BAKEUR</span>
-              <h2>
-  COMMANDE
-  <br />
-  PERSONNALISÉE
-</h2>
-            </div>
+      <div className="ab2-card-content">
+        <span className="ab2-card-small">ANNETTE BAKEUR</span>
+        <h2>
+          DESIGNS
+          <br />
+          ORIGINAUX
+        </h2>
+      </div>
+    </button>
 
-            <ArrowRight className="ab2-card-arrow" />
-          </button>
+    {/* 02 — PRIX DOUX */}
+    <button
+      className="ab2-card ab2-card-soft"
+      onClick={() => goTo('designs-soft')}
+    >
+      <span className="ab2-card-number">02</span>
 
-          <button
-            className="ab2-card ab2-card-original"
-            onClick={() => goTo('designs-original')}
-          >
-            <span className="ab2-card-number">02</span>
+      <div className="ab2-card-content">
+        <span className="ab2-card-small">SÉLECTION</span>
+        <h2>PRIX DOUX</h2>
+      </div>
+    </button>
 
-            <div className="ab2-card-content">
-              <span className="ab2-card-small">ANNETTE BAKEUR</span>
-              <h2>
-                DESIGNS
-                <br />
-                ORIGINAUX
-              </h2>
-            </div>
+    {/* 03 — COMMANDE PERSONNALISÉE */}
+    <button
+      className="ab2-card ab2-card-custom"
+      onClick={() => goTo('custom')}
+    >
+      <span className="ab2-card-number">03</span>
 
-            <ArrowRight className="ab2-card-arrow" />
-          </button>
+      <div className="ab2-card-content">
+        <span className="ab2-card-small">ANNETTE BAKEUR</span>
+        <h2>
+          COMMANDE
+          <br />
+          PERSONNALISÉE
+        </h2>
+      </div>
+    </button>
 
-          <button
-            className="ab2-card ab2-card-soft"
-            onClick={() => goTo('designs-soft')}
-          >
-            <span className="ab2-card-number">03</span>
+  </div>
+</section>
 
-            <div className="ab2-card-content">
-              <span className="ab2-card-small">SÉLECTION</span>
-              <h2>PRIX DOUX</h2>
-            </div>
-
-            <ArrowRight className="ab2-card-arrow" />
-          </button>
-
-        </div>
-      </section>
- </div>
+</div>
 
       {/* =========================
           03 — NOUVEAUTÉS
@@ -128,7 +119,7 @@ export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
 
         <div className="ab2-new-head">
           <div>
-            <span className="ab2-section-label">03 / SÉLECTION</span>
+            <span className="ab2-section-label">CHAPITRE 02</span>
             <h2>NOUVEAUTÉS</h2>
           </div>
 
@@ -191,7 +182,7 @@ export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
       <section className="ab2-archives">
 
         <div className="ab2-archives-head">
-          <span className="ab2-section-label">CHAPITRE 04</span>
+          <span className="ab2-section-label">CHAPITRE 03</span>
 
           <h2>
             LES
@@ -200,9 +191,8 @@ export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
           </h2>
 
           <div className="ab2-archive-note">
-            <span>ANNETTE BAKEUR</span>
-            <Flower2 strokeWidth={1.2} />
-          </div>
+  <span>ANNETTE BAKEUR</span>
+</div>
         </div>
 
         {gallery.length > 0 ? (
@@ -234,7 +224,7 @@ export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
         <footer className="ab2-archive-footer">
           <span>ANNETTE BAKEUR</span>
           <span>LA BAKEURY</span>
-          <span>04</span>
+          <span>03</span>
         </footer>
 
       </section>

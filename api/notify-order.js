@@ -79,8 +79,8 @@ export default async function handler(req, res) {
   const supabaseUrl = process.env.SUPABASE_URL
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   const brevoApiKey = process.env.BREVO_API_KEY
-  const recipient = process.env.ORDER_NOTIFICATION_EMAIL || 'axellehanlet@free.fr'
-  const sender = process.env.ORDER_FROM_EMAIL || 'axellehanlet@free.fr'
+  const recipient = process.env.ORDER_NOTIFICATION_EMAIL 
+  const sender = process.env.ORDER_FROM_EMAIL 
   const siteUrl = process.env.SITE_URL || 'https://annettebakeur.vercel.app'
 
   if (!supabaseUrl || !serviceRoleKey || !brevoApiKey) {

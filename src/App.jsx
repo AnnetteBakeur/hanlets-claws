@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
-import { Sparkles, Upload, X, Plus, Lock, Mail, Camera, Trash2, ArrowLeft, Heart, Check, ImagePlus, Send, Package, LogOut, Edit3, Menu, ChevronRight, Search, Download, Home, Settings, Eye, EyeOff } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Sparkles, Upload, X, Plus, Lock, Camera, Trash2, ArrowLeft, Check, ImagePlus, Send, Package, LogOut, Edit3, Menu, ChevronRight, Search, Download, Home, Settings, Eye, EyeOff } from 'lucide-react';
 import * as db from './db';
 import HomePage from './pages/HomePage';
 import './App.css';
 // ===== CONFIG (à personnaliser) =====
 const BRAND = "Annettebakeur";
 const INSTAGRAM = '@Annettebakeur';
-const EMAIL_CONTACT = 'axellehanlet@free.fr';
 // ===== PASSWORD RESET STATE (à rajouter dans le composant App) =====
 // (tu verras c'est utilisé dans le return)
 
@@ -93,26 +92,6 @@ function exportOrdersCSV(orders) {
 }
 
 // ===== ICONS =====
-function NailShapeSvg({ type, len, selected }) {
-  const w = 44;
-  const totalH = 28 + len;
-  const fill = selected ? '#E8E0D0' : '#3A3530';
-  const stroke = selected ? '#F5F0E8' : '#5A524A';
-  const tipY = 28;
-  let path;
-  if (type === 'round') path = `M 6 28 L 6 ${tipY + len - 14} Q 6 ${tipY + len} ${w/2} ${tipY + len} Q ${w-6} ${tipY + len} ${w-6} ${tipY + len - 14} L ${w-6} 28 Z`;
-  else if (type === 'square') path = `M 6 28 L 6 ${tipY + len} L ${w-6} ${tipY + len} L ${w-6} 28 Z`;
-  else if (type === 'almond') path = `M 6 28 L 8 ${tipY + len - 6} Q ${w/2} ${tipY + len + 4} ${w-8} ${tipY + len - 6} L ${w-6} 28 Z`;
-  else if (type === 'coffin') path = `M 6 28 L 11 ${tipY + len} L ${w-11} ${tipY + len} L ${w-6} 28 Z`;
-  else if (type === 'stiletto') path = `M 6 28 L ${w/2} ${tipY + len + 4} L ${w-6} 28 Z`;
-  return (
-    <svg viewBox={`0 0 ${w} ${totalH + 8}`} className="w-full h-full">
-      <ellipse cx={w/2} cy={22} rx={(w-12)/2} ry={6} fill="#4A423A" stroke="#6B5F55" strokeWidth="0.8" />
-      <path d={path} fill={fill} stroke={stroke} strokeWidth="1" strokeLinejoin="round" />
-      <ellipse cx={w/2} cy={32} rx={(w-14)/2} ry={3} fill="#FFFFFF" opacity="0.15" />
-    </svg>
-  );
-}
 
 function Placeholder({ label, className = '' }) {
   return (
@@ -1896,7 +1875,6 @@ function Footer({ goTo }) {
             <p className="text-neutral-500 text-sm leading-relaxed max-w-xs">Faits main, personnalisés et réutilisables.</p>
             <div className="flex gap-3 mt-5">
               <a href={`https://instagram.com/${INSTAGRAM.replace('@', '')}`} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full border border-neutral-800 flex items-center justify-center hover:border-neutral-400"><svg className="w-4 h-4 text-neutral-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-              <a href={`mailto:${EMAIL_CONTACT}`} className="w-9 h-9 rounded-full border border-neutral-800 flex items-center justify-center hover:border-neutral-400"><Mail className="w-4 h-4 text-neutral-300" /></a>
             </div>
           </div>
           <div className="flex flex-col sm:items-end gap-2 text-sm">
