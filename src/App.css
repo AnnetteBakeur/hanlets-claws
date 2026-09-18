@@ -653,10 +653,7 @@ padding: 0 19px;
    ========================================================= */
 
 .ab-designs-page {
-  max-width: none !important;
   width: 100%;
-  padding-left: 5vw !important;
-  padding-right: 5vw !important;
   background: #050505;
 }
 
@@ -688,13 +685,8 @@ padding: 0 19px;
 
 .ab-designs-title {
   margin: 0 !important;
-
-  color: #f21b1b !important;
-
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: clamp(70px, 9vw, 150px) !important;
   font-weight: 900 !important;
-  line-height: 0.78 !important;
   letter-spacing: -0.075em !important;
   text-transform: uppercase;
 }
@@ -725,28 +717,6 @@ padding: 0 19px;
   letter-spacing: 0.08em;
 }
 
-/* MOBILE */
-
-@media (max-width: 850px) {
-  .ab-designs-page {
-    padding-left: 18px !important;
-    padding-right: 18px !important;
-  }
-
-  .ab-designs-head {
-    min-height: auto;
-    padding: 45px 0 35px;
-    margin-bottom: 45px !important;
-  }
-
-  .ab-designs-title {
-    font-size: clamp(54px, 18vw, 95px) !important;
-  }
-}
-/* Correction couleur titre page Designs */
-.site-shell .ab-designs-title {
-  color: #f21b1b !important;
-}
 /* =========================================================
    PAGE DESIGNS — CARTES ÉDITORIALES
    ========================================================= */
@@ -1220,66 +1190,6 @@ html {
    ========================================================= */
 
 @media (min-width: 780px) {
-  .site-shell.site-shell-order .ab-order-page {
-    display: grid !important;
-
-    grid-template-columns:
-  minmax(300px, 0.6fr)
-  minmax(0, 1.4fr);
-
-    grid-template-areas:
-      "back back"
-      "product form";
-
-    column-gap: clamp(30px, 4vw, 75px);
-    align-items: start;
-
-    max-width: 1600px !important;
-    margin: 0 auto;
-
-    padding-left: 4vw !important;
-    padding-right: 4vw !important;
-  }
-
-  /* Retour aux designs */
-
-  .site-shell.site-shell-order .ab-order-page > button:first-child {
-    grid-area: back;
-  }
-
-  /* COLONNE GAUCHE — PRODUIT */
-
-  .site-shell.site-shell-order .ab-order-product {
-    grid-area: product;
-
-    position: sticky;
-    top: 110px;
-
-    width: 100%;
-    max-width: 440px !important;
-
-    margin: 0 !important;
-  }
-
-  .site-shell.site-shell-order .ab-order-product-inner {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-
-    gap: 30px !important;
-  }
-
-  .site-shell.site-shell-order .ab-order-image {
-    width: 100% !important;
-    max-width: none !important;
-height: min(46vh, 440px) !important;
-aspect-ratio: auto !important;
-
-  }
-  .site-shell.site-shell-order .ab-order-image img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-}
 
   .site-shell.site-shell-order .ab-order-summary {
     width: 100%;
@@ -1294,18 +1204,6 @@ aspect-ratio: auto !important;
   }
 
   /* COLONNE DROITE — FORMULAIRE */
-
-  .site-shell.site-shell-order .ab-order-form {
-    grid-area: form;
-
-    width: 100%;
-    max-width: none !important;
-
-    margin: 0 !important;
-    padding-top: 0 !important;
-
-    border-top: 0 !important;
-  }
 
   .site-shell.site-shell-order .ab-order-form > div:first-child {
     padding-top: 0 !important;
@@ -2159,46 +2057,20 @@ aspect-ratio: 4 / 5 !important;
   transform: scale(1.02);
 }
 
-/* Sur très grands écrans, on exploite vraiment la largeur */
-
-@media (min-width: 1500px) {
-  .site-shell.site-shell-public .ab-designs-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-  }
-}
-
 /* Téléphone : on garde 2 colonnes */
 
 @media (max-width: 620px) {
   .site-shell.site-shell-public .ab-designs-title {
     font-size: clamp(42px, 13vw, 64px) !important;
   }
-
-  .site-shell.site-shell-public .ab-designs-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 12px !important;
-  }
 }
 /* =========================================================
    DESIGNS — CORRECTION DENSITÉ + HAUT DE PAGE
    ========================================================= */
 
-/* Remonte tout le contenu de la page Designs */
-
-.site-shell.site-shell-public .ab-designs-page {
-  padding-top: 32px !important;
-}
-
 /* Réduit le grand vide après le bouton retour */
 
 .site-shell.site-shell-public .ab-designs-page > button:first-child {
-  margin-bottom: 42px !important;
-}
-
-/* Bloc titre plus compact */
-
-.site-shell.site-shell-public .ab-designs-head {
-  margin-top: 0 !important;
   margin-bottom: 42px !important;
 }
 
@@ -2711,47 +2583,12 @@ aspect-ratio: 4 / 5 !important;
 .site-shell.site-shell-public .ab-custom-form {
   width: 100% !important;
   max-width: none !important;
-
   margin: 0 !important;
-
-  display: grid !important;
-  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
-  gap: 0 32px !important;
-
-  padding: clamp(35px, 4vw, 65px) !important;
-
-  background: #efebe2 !important;
   color: #111 !important;
-}
-
-/* CONTACT */
-
-.site-shell.site-shell-public .ab-custom-contact {
-  grid-column: 1 / 7 !important;
-}
-
-/* LIVRAISON */
-.site-shell.site-shell-public .ab-custom-shipping {
-  grid-column: 1 / 7 !important;
-}
-
-/* COLONNE DROITE : COULEURS + OPTIONS */
-.site-shell.site-shell-public .ab-custom-options {
-  grid-column: 7 / 13 !important;
-  grid-row: 1 / span 2 !important;
-
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0 !important;
-
-  min-width: 0 !important;
 }
 
 /* Les sections à l'intérieur ne participent plus à la grande grille */
 .site-shell.site-shell-public .ab-custom-options > div {
-  grid-column: auto !important;
-  grid-row: auto !important;
-  width: 100% !important;
   min-width: 0 !important;
 }
 
@@ -2793,52 +2630,6 @@ aspect-ratio: 4 / 5 !important;
   background: transparent !important;
   color: #111 !important;
   border-color: #111 !important;
-}
-
-/* COULEURS */
-
-.site-shell.site-shell-public .ab-custom-colors {
-  grid-column: 7 / 13 !important;
-}
-
-/* CHROME */
-.site-shell.site-shell-public .ab-custom-chrome {
-  grid-column: 7 / 13 !important;
-}
-
-/* BIJOUX */
-.site-shell.site-shell-public .ab-custom-jewelry {
-  grid-column: 7 / 13 !important;
-}
-
-/* RELIEF */
-.site-shell.site-shell-public .ab-custom-relief {
-  grid-column: 7 / 13 !important;
-}
-
-
-/* DESCRIPTION */
-
-.site-shell.site-shell-public .ab-custom-description {
-  grid-column: 1 / 7 !important;
-}
-
-/* FORME */
-
-.site-shell.site-shell-public .ab-custom-shape {
-  grid-column: 7 / 13 !important;
-}
-
-/* INSPIRATIONS */
-
-.site-shell.site-shell-public .ab-custom-inspirations {
-  grid-column: 1 / 13 !important;
-}
-
-/* MESURES */
-
-.site-shell.site-shell-public .ab-custom-measurements {
-  grid-column: 1 / 13 !important;
 }
 
 /* Toutes les sections restent lisibles */
@@ -3017,19 +2808,11 @@ aspect-ratio: 4 / 5 !important;
    ========================================================= */
 
 .ab-confirmation-page {
-  min-height: 75vh;
-  background: #050505 !important;
-  padding: clamp(55px, 7vw, 110px) clamp(24px, 5vw, 80px) 110px;
   color: #f0ede5;
 }
 
 .ab-confirmation-card {
-  width: 100%;
-  max-width: 1250px;
-  margin: 0 auto;
   position: relative;
-
-  border-top: 1px solid rgba(240, 237, 229, 0.28);
 }
 
 /* petite ligne éditoriale du haut */
@@ -3037,10 +2820,6 @@ aspect-ratio: 4 / 5 !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  padding-top: 15px;
-  margin-bottom: clamp(35px, 5vw, 65px);
-
   color: #888;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 10px;
@@ -3050,48 +2829,29 @@ aspect-ratio: 4 / 5 !important;
 
 /* GRAND TITRE */
 .site-shell .ab-confirmation-card h1 {
-  margin: 0 0 clamp(45px, 6vw, 80px) !important;
-
   color: #f21b1b !important;
-
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: clamp(68px, 10vw, 155px) !important;
   font-weight: 900 !important;
-
-  line-height: 0.78 !important;
-  letter-spacing: -0.075em !important;
   text-transform: uppercase;
 }
 
 /* message + numéro */
 .ab-confirmation-content {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.6fr);
-
   border-top: 1px solid rgba(240, 237, 229, 0.22);
   border-bottom: 1px solid rgba(240, 237, 229, 0.22);
 }
 
-/* texte */
-.ab-confirmation-message {
-  padding: clamp(28px, 4vw, 50px) clamp(20px, 5vw, 65px) clamp(28px, 4vw, 50px) 0;
-}
 
 .ab-confirmation-message p {
   max-width: 650px;
-
   margin: 0 0 18px !important;
-
   color: #c7c3c0 !important;
-
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: clamp(18px, 1.7vw, 24px);
-  line-height: 1.45;
 }
 
 .ab-confirmation-message p:first-child {
   color: #f0ede5 !important;
-  font-size: clamp(22px, 2vw, 30px);
   font-weight: 800;
 }
 
@@ -3105,16 +2865,12 @@ aspect-ratio: 4 / 5 !important;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  padding: clamp(28px, 4vw, 50px);
-
   background: #efece3;
   color: #111;
 }
 
 .ab-confirmation-number span {
   margin-bottom: 15px;
-
   font-family: Arial, Helvetica, sans-serif;
   font-size: 10px;
   font-weight: 800;
@@ -3123,19 +2879,14 @@ aspect-ratio: 4 / 5 !important;
 
 .ab-confirmation-number strong {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: clamp(17px, 1.6vw, 23px);
   font-weight: 500;
   word-break: break-all;
 }
 
 /* note sous le numéro */
 .ab-confirmation-note {
-  margin: 20px 0 45px !important;
-
   color: #777 !important;
-
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 13px;
   font-style: italic;
 }
 
@@ -3147,16 +2898,10 @@ aspect-ratio: 4 / 5 !important;
 }
 
 .ab-confirmation-actions button {
-  min-height: 58px;
-  padding: 0 30px;
-
   border-radius: 0 !important;
-
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.12em;
-
   cursor: pointer;
   transition:
     background 180ms ease,
@@ -3193,31 +2938,6 @@ aspect-ratio: 4 / 5 !important;
    ======================== */
 
 @media (max-width: 760px) {
-  .ab-confirmation-page {
-    padding: 45px 20px 70px;
-  }
-
-  .ab-confirmation-top {
-    margin-bottom: 38px;
-  }
-
-  .site-shell .ab-confirmation-card h1 {
-    font-size: clamp(58px, 18vw, 90px) !important;
-    margin-bottom: 40px !important;
-  }
-
-  .ab-confirmation-content {
-    grid-template-columns: 1fr;
-  }
-
-  .ab-confirmation-message {
-    padding: 28px 0;
-  }
-
-  .ab-confirmation-number {
-    padding: 26px;
-  }
-
   .ab-confirmation-actions {
     flex-direction: column;
   }
@@ -3226,6 +2946,7 @@ aspect-ratio: 4 / 5 !important;
     width: 100%;
   }
 }
+
 /* =========================================================
    CONFIRMATION — CARTE CENTRÉE COMPACTE
    ========================================================= */
