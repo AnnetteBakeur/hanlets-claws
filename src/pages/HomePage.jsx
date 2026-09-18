@@ -8,7 +8,7 @@ function Placeholder({ label }) {
   );
 }
 
-export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
+export default function HomePage({ gallery = [], designs = [], goTo }) {
   const latestDesigns = [...designs].slice(-4).reverse();
 
   return (

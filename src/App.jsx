@@ -110,7 +110,6 @@ export default function App() {
   const [selectedDesign, setSelectedDesign] = useState(null);
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [hero, setHero] = useState(null);
   const [gallery, setGallery] = useState([]);
   const [designs, setDesigns] = useState(DEFAULT_DESIGNS);
   const [orders, setOrders] = useState([]);
@@ -260,14 +259,13 @@ export default function App() {
 
   async function loadAll() {
     try {
-      const [h, g, d] = await Promise.all([
-        db.getSetting('hero'),
-        db.getSetting('gallery'),
-        db.getSetting('designs')
-      ]);
-      if (h) setHero(h);
-      if (g) setGallery(g);
-      if (d && d.length > 0) setDesigns(d);
+      const [g, d] = await Promise.all([
+  db.getSetting('gallery'),
+  db.getSetting('designs')
+]);
+
+if (g) setGallery(g);
+if (d && d.length > 0) setDesigns(d);
     } catch (e) { console.error(e); }
     setLoading(false);
   }
@@ -362,7 +360,11 @@ export default function App() {
         </div>
       ) : (
         <>
-          {page === 'home' && <HomePage hero={hero} gallery={gallery} designs={designs} goTo={goTo} />}
+          {page === 'home' && <HomePage
+  gallery={gallery}
+  designs={designs}
+  goTo={goTo}
+/>}
           {(page === 'designs' || page === 'designs-original' || page === 'designs-soft') && (
   <DesignsPage
     designs={designs}
@@ -378,7 +380,7 @@ export default function App() {
 )}
           {page === 'order' && <OrderForm design={selectedDesign} saveOrder={saveOrder} goTo={goTo} />}
           {page === 'custom' && <CustomOrderForm saveOrder={saveOrder} goTo={goTo} />}
-          {page === 'admin' && <AdminPage user={user} setUser={setUser} orders={orders} setOrders={setOrders} hero={hero} setHero={setHero} gallery={gallery} setGallery={setGallery} designs={designs} setDesigns={setDesigns} goTo={goTo} />}
+          {page === 'admin' && <AdminPage user={user} setUser={setUser} orders={orders} setOrders={setOrders} gallery={gallery} setGallery={setGallery} designs={designs} setDesigns={setDesigns} goTo={goTo} />}
         </>
       )}
       <Footer goTo={goTo} />
@@ -1273,7 +1275,17 @@ function MeasurementUpload({ photo, image, onUpload, onRemove }) {
   );
 }
 
-function AdminPage({ user, setUser, orders, setOrders, hero, setHero, gallery, setGallery, designs, setDesigns, goTo }) {
+function AdminPage({
+  user,
+  setUser,
+  orders,
+  setOrders,
+  gallery,
+  setGallery,
+  designs,
+  setDesigns,
+  goTo
+}) {
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [tab, setTab] = useState('orders');
@@ -1351,7 +1363,7 @@ function AdminPage({ user, setUser, orders, setOrders, hero, setHero, gallery, s
         <button onClick={logout} className="text-neutral-500 hover:text-neutral-200 flex items-center gap-1.5 text-sm"><LogOut className="w-4 h-4" /> Déconnexion</button>
       </div>
       <div className="flex gap-2 mb-8 border-b border-neutral-800 overflow-x-auto">
-        {[{ id: 'orders', label: `Commandes (${orders.length})`, icon: Package },{ id: 'hero', label: 'Photo accueil', icon: Camera },{ id: 'gallery', label: 'Galerie', icon: ImagePlus },{ id: 'designs', label: 'Designs', icon: Sparkles },{ id: 'settings', label: 'Paramètres', icon: Settings }].map(t => (
+        {[{ id: 'orders', label: `Commandes (${orders.length})`, icon: Package },{ id: 'gallery', label: 'Galerie', icon: ImagePlus },{ id: 'designs', label: 'Designs', icon: Sparkles },{ id: 'settings', label: 'Paramètres', icon: Settings }].map(t => (
           <button key={t.id} onClick={() => setTab(t.id)} className={`px-4 py-3 text-sm flex items-center gap-2 border-b-2 transition-colors whitespace-nowrap ${tab === t.id ? 'border-neutral-50 text-neutral-50' : 'border-transparent text-neutral-500 hover:text-neutral-200'}`}><t.icon className="w-4 h-4" /> {t.label}</button>
         ))}
       </div>
@@ -1690,38 +1702,6 @@ function OrderDetail({ order, onBack, onUpdate, onDelete }) {
 
 function DetailRow({ label, children }) {
   return <div className="py-3 border-b border-neutral-800/60 last:border-0"><p className="text-xs tracking-widest uppercase text-neutral-500 mb-1.5">{label}</p><div className="text-neutral-200 text-sm">{children}</div></div>;
-}
-
-function HeroManager({ hero, setHero }) {
-  async function handleUpload(e) {
-    const file = e.target.files?.[0]; if (!file) return;
-    const compressed = await compressImage(file, 1400, 0.8);
-    await db.setSetting('hero', compressed); setHero(compressed);
-  }
-  async function handleDelete() {
-    if (!confirm("Supprimer la photo d'accueil ?")) return;
-    await db.setSetting('hero', null); setHero(null);
-  }
-  return (
-    <div className="bg-neutral-900 rounded-2xl border border-neutral-800 p-6 lg:p-8">
-      <h3 className="font-serif text-xl text-neutral-50 mb-2" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>Photo d'accueil</h3>
-      <p className="text-neutral-500 text-sm mb-5">La photo principale visible sur la page d'accueil. Format vertical (portrait) conseillé.</p>
-      {hero ? (
-        <div>
-          <div className="aspect-[4/5] max-w-md rounded-xl overflow-hidden bg-neutral-800 mb-4 border border-neutral-800"><img src={hero} alt="Hero" className="w-full h-full object-cover" /></div>
-          <div className="flex gap-2">
-            <label className="px-4 py-2 border border-neutral-700 hover:border-neutral-400 rounded-full text-sm cursor-pointer text-neutral-100">Remplacer<input type="file" accept="image/*" onChange={handleUpload} className="hidden" /></label>
-            <button onClick={handleDelete} className="px-4 py-2 text-red-400 hover:bg-red-950/40 rounded-full text-sm">Supprimer</button>
-          </div>
-        </div>
-      ) : (
-        <label className="aspect-[4/5] max-w-md rounded-xl border-2 border-dashed border-neutral-700 hover:border-neutral-400 flex flex-col items-center justify-center cursor-pointer transition-colors">
-          <Upload className="w-8 h-8 text-neutral-500 mb-2" /><span className="text-sm text-neutral-300">Importer une photo</span>
-          <input type="file" accept="image/*" onChange={handleUpload} className="hidden" />
-        </label>
-      )}
-    </div>
-  );
 }
 
 function GalleryManager({ gallery, setGallery }) {
