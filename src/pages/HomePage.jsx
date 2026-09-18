@@ -157,7 +157,7 @@ export default function HomePage({ hero, gallery = [], designs = [], goTo }) {
               </button>
             ))
           ) : (
-            [0, 1, 2].map((index) => (
+            [0, 1, 2, 3].map((index) => (
               <div
                 key={index}
                 className={`ab2-design ab2-design-${index + 1}`}

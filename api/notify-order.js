@@ -83,7 +83,13 @@ export default async function handler(req, res) {
   const sender = process.env.ORDER_FROM_EMAIL 
   const siteUrl = process.env.SITE_URL || 'https://annettebakeur.vercel.app'
 
-  if (!supabaseUrl || !serviceRoleKey || !brevoApiKey) {
+  if (
+  !supabaseUrl ||
+  !serviceRoleKey ||
+  !brevoApiKey ||
+  !recipient ||
+  !sender
+) {
     return res.status(500).json({ error: 'Missing server environment variables' })
   }
 
