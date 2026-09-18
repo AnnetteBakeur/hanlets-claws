@@ -904,17 +904,14 @@ padding: 0 19px;
 
 .site-shell:has(.ab-order-page) {
   background: #050505 !important;
-  background-image: none !important;
 }
 
 .site-shell .ab-order-page {
   background: #050505 !important;
-  background-image: none !important;
 }
 
 .site-shell .ab-order-form > div {
   background: transparent !important;
-  background-image: none !important;
   box-shadow: none !important;
   border-radius: 0 !important;
   border-left: 0 !important;
@@ -927,7 +924,6 @@ padding: 0 19px;
   min-width: 0 !important;
   width: 100% !important;
   background: transparent !important;
-  background-image: none !important;
 }
 
 .site-shell .ab-order-title {
@@ -946,7 +942,6 @@ padding: 0 19px;
 
 .site-shell.site-shell-order {
   background: #050505 !important;
-  background-image: none !important;
 }
 
 .site-shell.site-shell-order::before,
@@ -960,7 +955,6 @@ padding: 0 19px;
 .site-shell.site-shell-order .ab-order-product,
 .site-shell.site-shell-order .ab-order-summary {
   background: transparent !important;
-  background-image: none !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -970,7 +964,6 @@ padding: 0 19px;
 
 .site-shell.site-shell-order .ab-order-form > .bg-neutral-900 {
   background: transparent !important;
-  background-image: none !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -1058,7 +1051,6 @@ html {
 
 .site-shell.site-shell-order label .bg-neutral-50 {
   background: #f21b1b !important;
-  background-image: none !important;
   color: #050505 !important;
 }
 
@@ -1068,7 +1060,6 @@ html {
 .site-shell.site-shell-order textarea,
 .site-shell.site-shell-order select {
   background: #070707 !important;
-  background-image: none !important;
   border-color: rgba(240, 237, 229, 0.22) !important;
   box-shadow: none !important;
 }
@@ -1107,7 +1098,6 @@ html {
 
 .site-shell.site-shell-public header {
   background: #08070d !important;
-  background-image: none !important;
   border-color: rgba(240, 237, 229, 0.16) !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
@@ -1118,7 +1108,6 @@ html {
 
 .site-shell.site-shell-public footer {
   background: #050505 !important;
-  background-image: none !important;
   border-color: rgba(240, 237, 229, 0.16) !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
@@ -1143,7 +1132,6 @@ html {
 
 .site-shell.site-shell-public .bg-neutral-900 {
   background: #0a0a0a !important;
-  background-image: none !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -1151,12 +1139,10 @@ html {
 
 .site-shell.site-shell-public .bg-neutral-950 {
   background: #050505 !important;
-  background-image: none !important;
 }
 
 .site-shell.site-shell-public .bg-neutral-800 {
   background: #141414 !important;
-  background-image: none !important;
 }
 
 /* INPUTS / SELECTS */
@@ -1165,7 +1151,6 @@ html {
 .site-shell.site-shell-public textarea,
 .site-shell.site-shell-public select {
   background: #070707 !important;
-  background-image: none !important;
   border-color: rgba(240, 237, 229, 0.22) !important;
   box-shadow: none !important;
 }
@@ -1362,7 +1347,6 @@ aspect-ratio: 4 / 5 !important;
   border: 1px solid rgba(5, 5, 5, 0.35) !important;
   border-radius: 0 !important;
   background: rgba(255, 255, 255, 0.22) !important;
-  background-image: none !important;
   color: #111 !important;
   box-shadow: none !important;
 }
@@ -1388,7 +1372,6 @@ aspect-ratio: 4 / 5 !important;
   border: 1px solid #111 !important;
   border-radius: 0 !important;
   background: transparent !important;
-  background-image: none !important;
   color: #111 !important;
   box-shadow: none !important;
   font-weight: 700;
@@ -2016,26 +1999,19 @@ aspect-ratio: 4 / 5 !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 10px !important;
-
   width: 100% !important;
   min-height: 52px !important;
-
   padding: 16px 24px !important;
-
   background: #c51f1f !important;
-  background-image: none !important;
   color: #050505 !important;
-
   border: 0 !important;
   border-radius: 0 !important;
-
   font-family: Arial, Helvetica, sans-serif !important;
   font-size: 0.8rem !important;
   font-weight: 800 !important;
   line-height: 1 !important;
   letter-spacing: 0.16em !important;
   text-transform: uppercase !important;
-
   box-shadow: none !important;
 }
 
@@ -2889,7 +2865,6 @@ border-radius: 0 !important;
 .site-shell.site-shell-public
 .ab-custom-options select {
   background: #d6d0c6 !important;
-  background-color: #d6d0c6 !important;
   color: #111 !important;
   border: 1px solid rgba(17, 17, 17, 0.35) !important;
   box-shadow: none !important;
@@ -3039,7 +3014,6 @@ border-radius: 0 !important;
   margin: 10px 0 0 !important;
   padding: 16px 24px !important;
   background: #c51f1f !important;
-  background-image: none !important;
   color: #050505 !important;
   border: 0 !important;
   border-radius: 0 !important;
