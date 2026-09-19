@@ -3939,3 +3939,14 @@ line-height: 1.2 !important;
     100% 100%,
     90px 90px !important;
 }
+
+/* =========================================================
+   HOME — RETOUR DU MOUVEMENT AU SURVOL
+   ========================================================= */
+
+@media (min-width: 801px) {
+  .site-shell.site-shell-public .ab2-card-custom:hover {
+    transform: translateY(-4px) !important;
+    filter: brightness(1.05) !important;
+  }
+}
