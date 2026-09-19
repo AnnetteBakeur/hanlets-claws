@@ -171,6 +171,19 @@ export async function createOrder(order) {
   }
 }
 
+export async function notifyOrder(orderId) {
+  const { data, error } = await supabase.functions.invoke('notify-order', {
+    body: { orderId }
+  })
+
+  if (error) {
+    console.error('notifyOrder error:', error)
+    throw error
+  }
+
+  return data
+}
+
 export async function listOrders() {
   const { data, error } = await supabase
     .from('orders')

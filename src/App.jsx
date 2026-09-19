@@ -326,24 +326,14 @@ useEffect(() => {
     }
 
     try {
-      const response = await fetch('/api/notify-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderId: o.id })
-      });
-
-      if (!response.ok) {
-        console.warn('Order email notification failed:', await response.text());
-      }
-    } catch (emailError) {
-      console.warn('Order email notification failed:', emailError);
-    }
-
-    setConfirmation(o);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    return true;
-  }
-
+  await db.notifyOrder(o.id);
+} catch (emailError) {
+  console.warn('Order email notification failed:', emailError);
+}
+  setConfirmation(o);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  return true;
+}
 
   function goTo(p, d = null) {
   setSelectedDesign(d);
