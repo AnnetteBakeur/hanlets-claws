@@ -139,6 +139,71 @@ function orderDetailsHtml(order) {
   `
 }
 
+function simpleSetHtml(order) {
+  if (!order.simpleSet) return ''
+
+  return `
+    <tr>
+      <td style="padding:6px 12px 6px 0;color:#777;">
+        Set simple
+      </td>
+      <td>
+        Oui — +${escapeHtml(order.simpleSetSurcharge || 10)} €
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:6px 12px 6px 0;color:#777;">
+        Couleur du Set simple
+      </td>
+      <td>
+        ${escapeHtml(order.simpleSetColor || '-')}
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:6px 12px 6px 0;color:#777;">
+        Style du Set simple
+      </td>
+      <td>
+        ${escapeHtml(order.simpleSetStyle || '-')}
+      </td>
+    </tr>
+
+    ${
+      order.type === 'design'
+        ? `
+          <tr>
+            <td style="padding:6px 12px 6px 0;color:#777;">
+              Montant total
+            </td>
+            <td>
+              <strong>
+                ${escapeHtml(
+                  order.totalPrice ??
+                  (
+                    Number(order.designPrice || 0) +
+                    Number(order.simpleSetSurcharge || 10)
+                  )
+                )} €
+              </strong>
+            </td>
+          </tr>
+        `
+        : `
+          <tr>
+            <td style="padding:6px 12px 6px 0;color:#777;">
+              Supplément au montant final
+            </td>
+            <td>
+              <strong>+10 €</strong>
+            </td>
+          </tr>
+        `
+    }
+  `
+}
+
 function collectPhotoEntries(order) {
   const photos = []
 
@@ -390,6 +455,7 @@ export default async function handler(req, res) {
         </tr>
 
         ${details}
+        ${simpleSetHtml(order)}
       </table>
 
       <p>
@@ -434,7 +500,13 @@ export default async function handler(req, res) {
               <p>
                 Montant :
                 <strong>
-                  ${escapeHtml(order.designPrice ?? '-')} €
+                  ${escapeHtml(
+  order.totalPrice ??
+  (
+    Number(order.designPrice || 0) +
+    (order.simpleSet ? Number(order.simpleSetSurcharge || 10) : 0)
+  )
+)} €
                 </strong>
               </p>
             `
@@ -526,6 +598,7 @@ export default async function handler(req, res) {
         </tr>
 
         ${details}
+        ${simpleSetHtml(order)}
 
         ${shippingHtml(order)}
       </table>

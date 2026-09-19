@@ -603,6 +603,9 @@ function OrderForm({ design, saveOrder, goTo }) {
   country: 'France',
 });
   const [modifications, setModifications] = useState('');
+  const [simpleSet, setSimpleSet] = useState(false);
+const [simpleSetColor, setSimpleSetColor] = useState('');
+const [simpleSetStyle, setSimpleSetStyle] = useState('');
   const [shape, setShape] = useState(null);
   const [measurements, setMeasurements] = useState({});
   const [showMeasurements, setShowMeasurements] = useState(false);
@@ -619,6 +622,13 @@ function OrderForm({ design, saveOrder, goTo }) {
     if (!shipping.postalCode.trim()) return alert('Renseignez votre code postal');
     if (!shipping.city.trim()) return alert('Renseignez votre ville');
     if (!shape) return alert('Choisissez une forme/longueur');
+    if (simpleSet && !simpleSetColor.trim()) {
+  return alert('Renseignez la couleur du Set simple');
+}
+
+if (simpleSet && !simpleSetStyle) {
+  return alert('Choisissez Plein ou French pour le Set simple');
+}
     setSubmitting(true);
     await saveOrder({
   type: 'design',
@@ -630,6 +640,11 @@ instagram: instagram.trim(),
 contact: email.trim(),
 shipping,
 modifications: modifications.trim(),
+simpleSet,
+simpleSetColor: simpleSet ? simpleSetColor.trim() : '',
+simpleSetStyle: simpleSet ? simpleSetStyle : '',
+simpleSetSurcharge: simpleSet ? 10 : 0,
+totalPrice: Number(design.price) + (simpleSet ? 10 : 0),
   shape,
   measurements
 });
@@ -653,7 +668,14 @@ modifications: modifications.trim(),
   {design.name}
 </h1>
             <p className="ab-order-desc text-neutral-400 text-sm mb-2">{design.desc}</p>
-            <p className="ab-order-price text-xl text-neutral-50 font-medium">{design.price} €</p>
+            <p className="ab-order-price text-xl text-neutral-50 font-medium">
+  {Number(design.price) + (simpleSet ? 10 : 0)} €
+  {simpleSet && (
+    <span className="ab-order-price-extra">
+      {' '}dont +10 € Set simple
+    </span>
+  )}
+</p>
           </div>
         </div>
       </div>
@@ -778,6 +800,19 @@ modifications: modifications.trim(),
 </Section>
 
 <Section
+  title="Set simple"
+  className="ab-order-simple-set"
+>
+  <SimpleSetOption
+    enabled={simpleSet}
+    onEnabledChange={setSimpleSet}
+    color={simpleSetColor}
+    onColorChange={setSimpleSetColor}
+    selectedStyle={simpleSetStyle}
+    onStyleChange={setSimpleSetStyle}
+  />
+</Section>
+<Section
   title="Longueur & forme"
   className="ab-order-shape"
 >
@@ -831,6 +866,9 @@ function CustomOrderForm({ saveOrder, goTo }) {
   const [jewelry, setJewelry] = useState('');
   const [relief, setRelief] = useState('');
   const [desc, setDesc] = useState('');
+  const [simpleSet, setSimpleSet] = useState(false);
+const [simpleSetColor, setSimpleSetColor] = useState('');
+const [simpleSetStyle, setSimpleSetStyle] = useState('');
   const [shape, setShape] = useState(null);
   const [inspirations, setInspirations] = useState([]);
   const [measurements, setMeasurements] = useState({});
@@ -870,6 +908,14 @@ function CustomOrderForm({ saveOrder, goTo }) {
     return alert('Choisissez une forme/longueur');
   }
 
+  if (simpleSet && !simpleSetColor.trim()) {
+  return alert('Renseignez la couleur du Set simple');
+}
+
+if (simpleSet && !simpleSetStyle) {
+  return alert('Choisissez Plein ou French pour le Set simple');
+}
+
   setSubmitting(true);
 
   await saveOrder({
@@ -883,7 +929,11 @@ shipping,
     jewelry,
     relief,
     desc,
-    shape,
+simpleSet,
+simpleSetColor: simpleSet ? simpleSetColor.trim() : '',
+simpleSetStyle: simpleSet ? simpleSetStyle : '',
+simpleSetSurcharge: simpleSet ? 10 : 0,
+shape,
     inspirations,
     measurements
   });
@@ -1015,6 +1065,19 @@ shipping,
         <Section num="2" title="Chrome" className="ab-custom-chrome"><ChoiceRow options={['Doré', 'Argenté', 'Les deux', 'Aucun']} value={chrome} onChange={setChrome} /></Section>
         <Section num="3" title="Bijoux (strass, perles)" className="ab-custom-jewelry"><ChoiceRow options={['Oui', 'Non']} value={jewelry} onChange={setJewelry} /></Section>
         <Section num="4" title="Relief" className="ab-custom-relief"><ChoiceRow options={['Oui', 'Non']} value={relief} onChange={setRelief} /></Section>
+        <Section
+  title="Set simple"
+  className="ab-custom-simple-set"
+>
+  <SimpleSetOption
+    enabled={simpleSet}
+    onEnabledChange={setSimpleSet}
+    color={simpleSetColor}
+    onColorChange={setSimpleSetColor}
+    selectedStyle={simpleSetStyle}
+    onStyleChange={setSimpleSetStyle}
+  />
+</Section>
         </div>
         <div className="ab-custom-panel-details">
         <Section num="5" title="Descriptif personnel" className="ab-custom-description">
@@ -1154,6 +1217,93 @@ function ChoiceRow({ options, value, onChange }) {
   return (
     <div className="flex flex-wrap gap-2">
       {options.map(o => <button key={o} onClick={() => onChange(o)} className={`px-5 py-2.5 rounded-full text-sm transition-all ${value === o ? 'bg-neutral-50 text-neutral-950' : 'border border-neutral-700 text-neutral-300 hover:border-neutral-400'}`}>{o}</button>)}
+    </div>
+  );
+}
+
+function SimpleSetOption({
+  enabled,
+  onEnabledChange,
+  color,
+  onColorChange,
+  selectedStyle,
+  onStyleChange
+}) {
+  return (
+    <div className="ab-simple-set">
+
+      <label className="ab-simple-set-toggle">
+        <input
+          type="checkbox"
+          checked={enabled}
+          onChange={e => onEnabledChange(e.target.checked)}
+          className="sr-only"
+        />
+
+        <span
+          className={`ab-simple-set-checkbox ${
+            enabled ? 'is-active' : ''
+          }`}
+        >
+          {enabled && <Check size={14} strokeWidth={3} />}
+        </span>
+
+        <span className="ab-simple-set-toggle-text">
+          <strong>Ajouter un Set simple</strong>
+          <small>+10 €</small>
+        </span>
+      </label>
+
+      {enabled && (
+        <div className="ab-simple-set-details">
+
+          <input
+            type="text"
+            value={color}
+            onChange={e => onColorChange(e.target.value)}
+            placeholder="Couleur souhaitée"
+            className="ab-simple-set-color"
+          />
+
+          <p className="ab-simple-set-question">
+            Style souhaité
+          </p>
+
+          <div className="ab-simple-set-styles">
+
+            <button
+              type="button"
+              onClick={() => onStyleChange('Plein')}
+              className={`ab-simple-set-style ${
+                selectedStyle === 'Plein'
+                  ? 'is-active'
+                  : ''
+              }`}
+            >
+              PLEIN
+            </button>
+
+            <button
+              type="button"
+              onClick={() => onStyleChange('French')}
+              className={`ab-simple-set-style ${
+                selectedStyle === 'French'
+                  ? 'is-active'
+                  : ''
+              }`}
+            >
+              FRENCH
+            </button>
+
+          </div>
+
+          <p className="ab-simple-set-surcharge">
+            Supplément ajouté à la commande : +10 €
+          </p>
+
+        </div>
+      )}
+
     </div>
   );
 }
@@ -1775,6 +1925,36 @@ function OrderDetail({ order, onBack, onUpdate, onDelete }) {
     <p className="text-neutral-200">
       {shape.id} — {shape.label}
     </p>
+  </DetailRow>
+)}
+
+{order.simpleSet && (
+  <DetailRow label="Set simple">
+    <div className="space-y-1">
+      <p>
+        <strong>Oui</strong> — supplément +
+        {order.simpleSetSurcharge || 10} €
+      </p>
+
+      <p>
+        Couleur : {order.simpleSetColor || '-'}
+      </p>
+
+      <p>
+        Style : {order.simpleSetStyle || '-'}
+      </p>
+
+      {order.type === 'design' && (
+        <p className="pt-1">
+          Montant total :{' '}
+          <strong>
+            {order.totalPrice ??
+              Number(order.designPrice) +
+                (order.simpleSetSurcharge || 10)} €
+          </strong>
+        </p>
+      )}
+    </div>
   </DetailRow>
 )}
 

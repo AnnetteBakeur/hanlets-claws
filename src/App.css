@@ -4017,3 +4017,237 @@ line-height: 1.2 !important;
     font-size: 10px;
   }
 }
+
+/* =========================================================
+   SET SIMPLE — OPTION +10 €
+   ========================================================= */
+
+.ab-simple-set {
+  width: 100%;
+}
+
+.ab-simple-set-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.ab-simple-set-checkbox {
+  width: 25px;
+  height: 25px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #777;
+  background: #050505;
+  color: #050505;
+
+  transition: 160ms ease;
+}
+
+.ab-simple-set-checkbox.is-active {
+  border-color: #f21b1b;
+  background: #f21b1b;
+}
+
+.ab-simple-set-toggle-text {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.ab-simple-set-toggle-text strong {
+  color: #f0ede5;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.ab-simple-set-toggle-text small {
+  color: #f21b1b;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.ab-simple-set-details {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid rgba(240, 237, 229, 0.18);
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.ab-simple-set-color {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 13px;
+
+  border: 1px solid #333;
+  border-radius: 0;
+  outline: none;
+
+  background: #050505;
+  color: #f0ede5;
+  font-size: 14px;
+}
+
+.ab-simple-set-color:focus {
+  border-color: #777;
+}
+
+.ab-simple-set-color::placeholder {
+  color: #666;
+}
+
+.ab-simple-set-question {
+  margin: 18px 0 9px;
+  color: #888;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.ab-simple-set-styles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.ab-simple-set-style {
+  min-height: 42px;
+  padding: 10px 14px;
+
+  border: 1px solid #444;
+  background: transparent;
+  color: #f0ede5;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+
+  cursor: pointer;
+}
+
+.ab-simple-set-style:hover {
+  border-color: #888;
+}
+
+.ab-simple-set-style.is-active {
+  border-color: #f21b1b;
+  background: #f21b1b;
+  color: #050505;
+}
+
+.ab-simple-set-surcharge {
+  margin-top: 14px;
+  color: #f21b1b;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.ab-order-price-extra {
+  display: block;
+  margin-top: 7px;
+
+  color: #f21b1b;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 620px) {
+  .ab-simple-set-details {
+    padding: 14px;
+  }
+
+  .ab-simple-set-toggle-text {
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+}
+
+/* =========================================================
+   SET SIMPLE — INTÉGRATION PANNEAU PERSONNALISÉ
+   ========================================================= */
+
+.site-shell.site-shell-public
+.ab-custom-options > .ab-custom-simple-set {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
+  color: #111 !important;
+}
+
+/* Titre "Set simple" sur le papier */
+.site-shell.site-shell-public
+.ab-custom-options > .ab-custom-simple-set h3 {
+  color: #111 !important;
+}
+
+/* Texte principal */
+.site-shell.site-shell-public
+.ab-custom-simple-set .ab-simple-set-toggle-text strong {
+  color: #111 !important;
+}
+
+/* Case non cochée */
+.site-shell.site-shell-public
+.ab-custom-simple-set .ab-simple-set-checkbox {
+  background: transparent !important;
+  border-color: rgba(17, 17, 17, 0.55) !important;
+  color: #050505 !important;
+}
+
+/* Case cochée */
+.site-shell.site-shell-public
+.ab-custom-simple-set .ab-simple-set-checkbox.is-active {
+  background: #c51f1f !important;
+  border-color: #c51f1f !important;
+}
+
+/* Zone qui apparaît après avoir coché */
+.site-shell.site-shell-public
+.ab-custom-simple-set .ab-simple-set-details {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(17, 17, 17, 0.22) !important;
+}
+
+/* Champ couleur dans le thème papier */
+.site-shell.site-shell-public
+.ab-custom-simple-set .ab-simple-set-color {
+  background: #d6d0c6 !important;
+  color: #111 !important;
+  border-color: rgba(17, 17, 17, 0.35) !important;
+}
+
+.site-shell.site-shell-public
+.ab-custom-simple-set .ab-simple-set-color::placeholder {
+  color: #817d76 !important;
+}
+
+/* Libellé "Style souhaité" */
+.site-shell.site-shell-public
+.ab-custom-simple-set .ab-simple-set-question {
+  color: #55514b !important;
+}
+
+/* Plein / French */
+.site-shell.site-shell-public
+.ab-custom-simple-set .ab-simple-set-style {
+  color: #111 !important;
+  border-color: rgba(17, 17, 17, 0.45) !important;
+}
+
+.site-shell.site-shell-public
+.ab-custom-simple-set .ab-simple-set-style.is-active {
+  background: #c51f1f !important;
+  border-color: #c51f1f !important;
+  color: #050505 !important;
+}
