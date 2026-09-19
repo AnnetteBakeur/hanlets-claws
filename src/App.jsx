@@ -20,6 +20,7 @@ const SHAPES = [
   { id: 8, label: 'Modèle 8', image: '/shapes/shape 8.jpeg' },
   { id: 9, label: 'Modèle 9', image: '/shapes/shape 9.jpeg' },
   { id: 10, label: 'Modèle 10', image: '/shapes/shape 10.jpeg' },
+  {id: 11,label: 'Ongle court, forme naturelle', image: null },
 ];
 
 const MEASUREMENT_PHOTOS = [
@@ -67,6 +68,10 @@ async function compressImage(file, maxSize = 900, quality = 0.65) {
 
 function uid() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 }
 
 function exportOrdersCSV(orders) {
@@ -587,7 +592,8 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
 }
 
 function OrderForm({ design, saveOrder, goTo }) {
-  const [contact, setContact] = useState('');
+  const [email, setEmail] = useState('');
+  const [instagram, setInstagram] = useState('');
   const [shipping, setShipping] = useState({
   name: '',
   address: '',
@@ -605,7 +611,9 @@ function OrderForm({ design, saveOrder, goTo }) {
   if (!design) { goTo('designs'); return null; }
 
   async function submit() {
-    if (!contact.trim()) return alert('Renseignez un contact');
+    if (!isValidEmail(email)) {
+  return alert('Renseignez une adresse email valide');
+}
     if (!shipping.name.trim()) return alert('Renseignez votre prénom et votre nom');
     if (!shipping.address.trim()) return alert('Renseignez votre adresse');
     if (!shipping.postalCode.trim()) return alert('Renseignez votre code postal');
@@ -617,9 +625,11 @@ function OrderForm({ design, saveOrder, goTo }) {
   designId: design.id,
   designName: design.name,
   designPrice: design.price,
-  contact: contact.trim(),
-  shipping,
-  modifications: modifications.trim(),
+  email: email.trim(),
+instagram: instagram.trim(),
+contact: email.trim(),
+shipping,
+modifications: modifications.trim(),
   shape,
   measurements
 });
@@ -654,15 +664,29 @@ function OrderForm({ design, saveOrder, goTo }) {
   className="ab-order-contact"
 >
   <p className="text-neutral-500 text-sm mb-3">
-    Mail ou Instagram pour que je puisse vous recontacter.
+    Votre adresse email est obligatoire pour recevoir la confirmation de commande.
   </p>
 
   <input
-    value={contact}
-    onChange={e => setContact(e.target.value)}
-    placeholder="email@exemple.com ou @votrepseudo"
+    type="email"
+    value={email}
+    onChange={e => setEmail(e.target.value)}
+    placeholder="email@exemple.com"
+    required
     className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600"
   />
+
+  <input
+    type="text"
+    value={instagram}
+    onChange={e => setInstagram(e.target.value)}
+    placeholder="Instagram (optionnel) — @votrepseudo"
+    className="w-full px-4 py-3 mt-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600"
+  />
+
+  <p className="text-neutral-500 text-xs mt-2">
+    Plus pratique pour moi pour vous recontacter.
+  </p>
 </Section>
 
 <Section
@@ -792,7 +816,8 @@ function OrderForm({ design, saveOrder, goTo }) {
 }
 
 function CustomOrderForm({ saveOrder, goTo }) {
-  const [contact, setContact] = useState('');
+  const [email, setEmail] = useState('');
+  const [instagram, setInstagram] = useState('');
   const [shipping, setShipping] = useState({
   name: '',
   address: '',
@@ -821,9 +846,9 @@ function CustomOrderForm({ saveOrder, goTo }) {
   }
 
   async function submit() {
-  if (!contact.trim()) {
-    return alert('Renseignez un contact');
-  }
+  if (!isValidEmail(email)) {
+  return alert('Renseignez une adresse email valide');
+}
 
   if (!shipping.name.trim()) {
     return alert('Renseignez votre prénom et votre nom');
@@ -849,8 +874,10 @@ function CustomOrderForm({ saveOrder, goTo }) {
 
   await saveOrder({
     type: 'custom',
-    contact: contact.trim(),
-    shipping,
+email: email.trim(),
+instagram: instagram.trim(),
+contact: email.trim(),
+shipping,
     colors,
     chrome,
     jewelry,
@@ -886,9 +913,31 @@ function CustomOrderForm({ saveOrder, goTo }) {
       <div className="ab-custom-form space-y-5">
         <div className="ab-custom-panel ab-custom-panel-contact">
         <Section num="0" title="Votre contact" className="ab-custom-contact">
-          <p className="text-neutral-500 text-sm mb-3">Mail ou Instagram pour que je puisse vous recontacter.</p>
-          <input value={contact} onChange={e => setContact(e.target.value)} placeholder="email@exemple.com ou @votrepseudo" className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600" />
-        </Section>
+  <p className="text-neutral-500 text-sm mb-3">
+    Votre adresse email est obligatoire pour recevoir la confirmation de commande.
+  </p>
+
+  <input
+    type="email"
+    value={email}
+    onChange={e => setEmail(e.target.value)}
+    placeholder="email@exemple.com"
+    required
+    className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600"
+  />
+
+  <input
+    type="text"
+    value={instagram}
+    onChange={e => setInstagram(e.target.value)}
+    placeholder="Instagram (optionnel) — @votrepseudo"
+    className="w-full px-4 py-3 mt-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600"
+  />
+
+  <p className="text-neutral-500 text-xs mt-2">
+    Plus pratique pour moi pour vous recontacter.
+  </p>
+</Section>
         <Section
   title="Informations de livraison"
   className="ab-custom-shipping"
@@ -1110,6 +1159,9 @@ function ChoiceRow({ options, value, onChange }) {
 }
 
 function ShapeSelector({ value, onChange }) {
+  const photoShapes = SHAPES.filter(shape => shape.image);
+  const naturalShape = SHAPES.find(shape => shape.id === 11);
+
   return (
     <div>
       <p className="text-neutral-400 text-sm mb-5 leading-relaxed">
@@ -1117,7 +1169,7 @@ function ShapeSelector({ value, onChange }) {
       </p>
 
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-        {SHAPES.map((shape, index) => {
+        {photoShapes.map((shape, index) => {
           const selected = value === shape.id;
 
           return (
@@ -1159,6 +1211,35 @@ function ShapeSelector({ value, onChange }) {
           );
         })}
       </div>
+
+      {naturalShape && (
+        <label
+          className={`ab-shape-natural cursor-pointer border transition-all ${
+            value === naturalShape.id
+              ? 'border-neutral-50 is-selected'
+              : 'border-neutral-800 hover:border-neutral-500'
+          }`}
+        >
+          <input
+            type="radio"
+            name="shape-choice"
+            value={naturalShape.id}
+            checked={value === naturalShape.id}
+            onChange={() => onChange(naturalShape.id)}
+            className="sr-only"
+          />
+
+          <span className="ab-shape-natural-number">11</span>
+
+          <strong>ONGLE COURT, FORME NATURELLE</strong>
+
+          {value === naturalShape.id && (
+            <span className="ab-shape-natural-check">
+              <Check size={14} strokeWidth={3} />
+            </span>
+          )}
+        </label>
+      )}
 
       {value && (
         <p className="mt-4 text-sm text-neutral-300">
@@ -1662,8 +1743,48 @@ function OrderDetail({ order, onBack, onUpdate, onDelete }) {
             {['new', 'processing', 'done'].map(s => <button key={s} onClick={() => onUpdate(s)} className={`px-3 py-1.5 text-xs rounded-full transition-colors ${order.status === s ? 'bg-neutral-50 text-neutral-950' : 'border border-neutral-700 text-neutral-400 hover:border-neutral-400'}`}>{s === 'new' ? 'Nouvelle' : s === 'processing' ? 'En cours' : 'Traitée'}</button>)}
           </div>
         </div>
-        <DetailRow label="Contact"><p className="font-medium text-neutral-100">{order.contact}</p></DetailRow>
-        {shape && <DetailRow label="Forme & longueur"><p className="text-neutral-200">{shape.id} — {shape.label}</p></DetailRow>}
+        <DetailRow label="Email">
+  <p className="font-medium text-neutral-100">
+    {order.email || order.contact || '-'}
+  </p>
+</DetailRow>
+
+{order.instagram && (
+  <DetailRow label="Instagram">
+    <p className="text-neutral-200">{order.instagram}</p>
+  </DetailRow>
+)}
+
+{order.shipping && (
+  <DetailRow label="Adresse de livraison">
+    <div className="text-neutral-200 leading-relaxed">
+      {order.shipping.name && <p>{order.shipping.name}</p>}
+      {order.shipping.address && <p>{order.shipping.address}</p>}
+      {order.shipping.address2 && <p>{order.shipping.address2}</p>}
+      <p>
+        {order.shipping.postalCode || ''}{' '}
+        {order.shipping.city || ''}
+      </p>
+      {order.shipping.country && <p>{order.shipping.country}</p>}
+    </div>
+  </DetailRow>
+)}
+
+{shape && (
+  <DetailRow label="Forme & longueur">
+    <p className="text-neutral-200">
+      {shape.id} — {shape.label}
+    </p>
+  </DetailRow>
+)}
+
+{order.type === 'design' && order.modifications && (
+  <DetailRow label="Modifications souhaitées">
+    <p className="text-neutral-200 whitespace-pre-wrap">
+      {order.modifications}
+    </p>
+  </DetailRow>
+)}
         {order.type === 'custom' && (<>
           {order.colors && <DetailRow label="Couleurs">{order.colors}</DetailRow>}
           {order.chrome && <DetailRow label="Chrome">{order.chrome}</DetailRow>}

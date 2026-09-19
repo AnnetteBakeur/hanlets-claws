@@ -3950,3 +3950,70 @@ line-height: 1.2 !important;
     filter: brightness(1.05) !important;
   }
 }
+
+/* =========================================================
+   FORME 11 — ONGLE COURT NATUREL
+   ========================================================= */
+
+.ab-shape-natural {
+  position: relative;
+  width: 100%;
+  min-height: 58px;
+  margin-top: 12px;
+  padding: 14px 52px 14px 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  background: #050505;
+  color: #f0ede5;
+}
+
+.ab-shape-natural-number {
+  flex-shrink: 0;
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.ab-shape-natural strong {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ab-shape-natural.is-selected {
+  border-color: #f21b1b !important;
+  background: rgba(242, 27, 27, 0.08);
+}
+
+.ab-shape-natural-check {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #f21b1b;
+  color: #050505;
+}
+
+@media (max-width: 620px) {
+  .ab-shape-natural {
+    min-height: 54px;
+    padding: 12px 48px 12px 14px;
+    gap: 11px;
+  }
+
+  .ab-shape-natural strong {
+    font-size: 10px;
+  }
+}
