@@ -74,6 +74,14 @@ function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 }
 
+function getShippingFee(country) {
+  const normalizedCountry = String(country || '').trim().toLowerCase();
+
+  if (!normalizedCountry) return 0;
+
+  return normalizedCountry === 'france' ? 0 : 3;
+}
+
 function exportOrdersCSV(orders) {
   const headers = ['ID', 'Date', 'Type', 'Design', 'Prix', 'Contact', 'Forme', 'Statut'];
   const rows = orders.map(o => [
@@ -603,6 +611,13 @@ const [simpleSetStyle, setSimpleSetStyle] = useState('');
 
   if (!design) { goTo('designs'); return null; }
 
+const shippingFee = getShippingFee(shipping.country);
+
+const orderTotal =
+  Number(design.price) +
+  (simpleSet ? 10 : 0) +
+  shippingFee;
+
   async function submit() {
     if (!isValidEmail(email)) {
   return alert('Renseignez une adresse email valide');
@@ -611,6 +626,7 @@ const [simpleSetStyle, setSimpleSetStyle] = useState('');
     if (!shipping.address.trim()) return alert('Renseignez votre adresse');
     if (!shipping.postalCode.trim()) return alert('Renseignez votre code postal');
     if (!shipping.city.trim()) return alert('Renseignez votre ville');
+    if (!shipping.country.trim()) return alert('Renseignez votre pays');
     if (!shape) return alert('Choisissez une forme/longueur');
     if (simpleSet && !simpleSetColor.trim()) {
   return alert('Renseignez la couleur du Set simple');
@@ -634,8 +650,9 @@ simpleSet,
 simpleSetColor: simpleSet ? simpleSetColor.trim() : '',
 simpleSetStyle: simpleSet ? simpleSetStyle : '',
 simpleSetSurcharge: simpleSet ? 10 : 0,
-totalPrice: Number(design.price) + (simpleSet ? 10 : 0),
-  shape,
+shippingFee,
+totalPrice: orderTotal,
+shape,
   measurements
 });
     setSubmitting(false);
@@ -659,10 +676,17 @@ totalPrice: Number(design.price) + (simpleSet ? 10 : 0),
 </h1>
             <p className="ab-order-desc text-neutral-400 text-sm mb-2">{design.desc}</p>
             <p className="ab-order-price text-xl text-neutral-50 font-medium">
-  {Number(design.price) + (simpleSet ? 10 : 0)} €
+  {orderTotal} €
+
   {simpleSet && (
     <span className="ab-order-price-extra">
       {' '}dont +10 € Set simple
+    </span>
+  )}
+
+  {shippingFee > 0 && (
+    <span className="ab-order-price-extra">
+      {' '}dont +3 € de livraison hors France
     </span>
   )}
 </p>
@@ -767,6 +791,12 @@ totalPrice: Number(design.price) + (simpleSet ? 10 : 0),
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 md:col-span-2"
     />
 
+    {shippingFee > 0 && (
+  <p className="ab-shipping-fee-note">
+    Livraison hors France : +3 €
+  </p>
+)}
+
   </div>
 </Section>
 </div>
@@ -864,6 +894,7 @@ const [simpleSetStyle, setSimpleSetStyle] = useState('');
   const [measurements, setMeasurements] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const inspRef = useRef(null);
+  const shippingFee = getShippingFee(shipping.country);
 
   async function handleInspirations(e) {
     const files = Array.from(e.target.files);
@@ -890,11 +921,15 @@ const [simpleSetStyle, setSimpleSetStyle] = useState('');
     return alert('Renseignez votre code postal');
   }
 
-  if (!shipping.city.trim()) {
-    return alert('Renseignez votre ville');
-  }
+ if (!shipping.city.trim()) {
+  return alert('Renseignez votre ville');
+}
 
-  if (!shape) {
+if (!shipping.country.trim()) {
+  return alert('Renseignez votre pays');
+}
+
+if (!shape) {
     return alert('Choisissez une forme/longueur');
   }
 
@@ -913,7 +948,8 @@ if (simpleSet && !simpleSetStyle) {
 email: email.trim(),
 instagram: instagram.trim(),
 contact: email.trim(),
-shipping,
+shipping, 
+shippingFee,
     colors,
     chrome,
     jewelry,
@@ -1043,6 +1079,12 @@ shape,
       placeholder="Pays"
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 md:col-span-2"
     />
+
+    {shippingFee > 0 && (
+  <p className="ab-shipping-fee-note">
+    Livraison hors France : +3 €
+  </p>
+)}
 
   </div>
 </Section>
@@ -1910,6 +1952,25 @@ function OrderDetail({ order, onBack, onUpdate, onDelete }) {
   </DetailRow>
 )}
 
+{Number(order.shippingFee || 0) > 0 && (
+  <DetailRow label="Frais de livraison">
+    <p className="text-neutral-200">
+      +{Number(order.shippingFee)} € — hors France
+    </p>
+  </DetailRow>
+)}
+
+{order.type === 'design' && (
+  <DetailRow label="Montant total">
+    <p className="text-neutral-200 font-semibold">
+      {order.totalPrice ??
+        Number(order.designPrice || 0) +
+          (order.simpleSet ? Number(order.simpleSetSurcharge || 10) : 0) +
+          Number(order.shippingFee || 0)} €
+    </p>
+  </DetailRow>
+)}
+
 {shape && (
   <DetailRow label="Forme & longueur">
     <p className="text-neutral-200">
@@ -1934,16 +1995,6 @@ function OrderDetail({ order, onBack, onUpdate, onDelete }) {
         Style : {order.simpleSetStyle || '-'}
       </p>
 
-      {order.type === 'design' && (
-        <p className="pt-1">
-          Montant total :{' '}
-          <strong>
-            {order.totalPrice ??
-              Number(order.designPrice) +
-                (order.simpleSetSurcharge || 10)} €
-          </strong>
-        </p>
-      )}
     </div>
   </DetailRow>
 )}

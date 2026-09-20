@@ -4159,6 +4159,17 @@ line-height: 1.2 !important;
   text-transform: uppercase;
 }
 
+.ab-shipping-fee-note {
+  grid-column: 1 / -1;
+  margin: -2px 0 0;
+
+  color: #f21b1b;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 @media (max-width: 620px) {
   .ab-simple-set-details {
     padding: 14px;
