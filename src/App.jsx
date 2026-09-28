@@ -82,6 +82,12 @@ function getShippingFee(country) {
   return normalizedCountry === 'france' ? 0 : 3;
 }
 
+function hasAllMeasurements(measurements) {
+  return MEASUREMENT_PHOTOS.every(
+    photo => Boolean(measurements?.[photo.id])
+  );
+}
+
 function exportOrdersCSV(orders) {
   const headers = ['ID', 'Date', 'Type', 'Design', 'Prix', 'Contact', 'Forme', 'Statut'];
   const rows = orders.map(o => [
@@ -120,6 +126,9 @@ function Placeholder({ label, className = '' }) {
 // ===== APP =====
 export default function App() {
   const [page, setPage] = useState('home');
+  const [language, setLanguage] = useState(() => {
+  return localStorage.getItem('annette-language') || 'fr';
+});
   const [selectedDesign, setSelectedDesign] = useState(null);
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -141,6 +150,11 @@ export default function App() {
     window.location.hash.includes('type=recovery') ||
     Boolean(recoveryCode);
   const isPasswordReset = passwordRecovery || hasRecoveryUrl;
+
+useEffect(() => {
+  localStorage.setItem('annette-language', language);
+  document.documentElement.lang = language;
+}, [language]);
 
   async function loadAll() {
   const [g, d] = await Promise.all([
@@ -365,9 +379,20 @@ useEffect(() => {
 } ${page === 'order' ? 'site-shell-order' : ''}`}
   style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}
 >
-      <Header page={page} goTo={goTo} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <Header
+  page={page}
+  goTo={goTo}
+  menuOpen={menuOpen}
+  setMenuOpen={setMenuOpen}
+  language={language}
+  setLanguage={setLanguage}
+/>
       {confirmation ? (
-        <ConfirmationScreen order={confirmation} goTo={goTo} />
+        <ConfirmationScreen
+  order={confirmation}
+  goTo={goTo}
+  language={language}
+/>
       ) : loading ? (
         <div className="flex items-center justify-center h-96">
           <div className="w-8 h-8 border-2 border-neutral-800 border-t-neutral-100 rounded-full animate-spin" />
@@ -378,11 +403,13 @@ useEffect(() => {
   gallery={gallery}
   designs={designs}
   goTo={goTo}
+  language={language}
 />}
           {(page === 'designs' || page === 'designs-original' || page === 'designs-soft') && (
   <DesignsPage
     designs={designs}
     goTo={goTo}
+    language={language}
     category={
       page === 'designs-original'
         ? 'original'
@@ -392,8 +419,8 @@ useEffect(() => {
     }
   />
 )}
-          {page === 'order' && <OrderForm design={selectedDesign} saveOrder={saveOrder} goTo={goTo} />}
-          {page === 'custom' && <CustomOrderForm saveOrder={saveOrder} goTo={goTo} />}
+          {page === 'order' && <OrderForm design={selectedDesign} saveOrder={saveOrder} goTo={goTo} language={language}/>}
+          {page === 'custom' && <CustomOrderForm saveOrder={saveOrder} goTo={goTo} language={language}/>}
           {page === 'admin' && <AdminPage user={user} setUser={setUser} orders={orders} setOrders={setOrders} gallery={gallery} setGallery={setGallery} designs={designs} setDesigns={setDesigns} goTo={goTo} />}
         </>
       )}
@@ -402,12 +429,26 @@ useEffect(() => {
   );
 }
 
-function Header({ page, goTo, menuOpen, setMenuOpen }) {
-  const links = [
-    { id: 'home', label: 'LA BAKEURY' },
-    { id: 'designs', label: 'DESIGNS' },
-    { id: 'custom', label: 'PERSONNALISÉS' }
-  ];
+function Header({
+  page,
+  goTo,
+  menuOpen,
+  setMenuOpen,
+  language,
+  setLanguage
+}) {
+  const links =
+  language === 'fr'
+    ? [
+        { id: 'home', label: 'LA BAKEURY' },
+        { id: 'designs', label: 'DESIGNS' },
+        { id: 'custom', label: 'PERSONNALISÉS' }
+      ]
+    : [
+        { id: 'home', label: 'THE BAKEURY' },
+        { id: 'designs', label: 'DESIGNS' },
+        { id: 'custom', label: 'CUSTOM' }
+      ];
 
   const navigate = (id) => {
     goTo(id);
@@ -444,14 +485,17 @@ function Header({ page, goTo, menuOpen, setMenuOpen }) {
         </nav>
 
         <div className="ab-header-actions">
-          <button
-            onClick={() => goTo('admin')}
-            className="ab-header-admin"
-            title="Espace admin"
-            aria-label="Espace admin"
-          >
-            <Lock />
-          </button>
+          <div className="ab-language-switcher">
+  <button
+  type="button"
+  className="ab-language-toggle"
+  onClick={() =>
+    setLanguage(language === 'fr' ? 'en' : 'fr')
+  }
+>
+  {language === 'fr' ? 'English' : 'Français'}
+</button>
+</div>
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -477,13 +521,6 @@ function Header({ page, goTo, menuOpen, setMenuOpen }) {
             </button>
           ))}
 
-          <button
-            onClick={() => navigate('admin')}
-            className="ab-mobile-admin"
-          >
-            <Lock />
-            <strong>ADMIN</strong>
-          </button>
         </div>
       )}
     </header>
@@ -499,8 +536,43 @@ function BackButton({ onClick, label = "Retour à l'accueil", icon = 'home' }) {
   );
 }
 
-function DesignsPage({ designs, goTo, category = 'all' }) {
+function DesignsPage({
+  designs,
+  goTo,
+  category = 'all',
+  language = 'fr'
+}) {
   const [sort, setSort] = useState('recent');
+  const text =
+  language === 'fr'
+    ? {
+        back: "Retour à l'accueil",
+        shop: 'Boutique',
+        title: 'Designs disponibles',
+        sort: 'Trier',
+        recent: 'Plus récents',
+        priceAsc: 'Prix croissant',
+        priceDesc: 'Prix décroissant',
+        all: 'TOUS',
+        originals: 'DESIGNS ORIGINAUX',
+        soft: 'PRIX DOUX',
+        empty: "Aucun design disponible pour l'instant.",
+        order: 'Commander'
+      }
+    : {
+        back: 'Back to home',
+        shop: 'Shop',
+        title: 'Available designs',
+        sort: 'Sort',
+        recent: 'Newest',
+        priceAsc: 'Price: low to high',
+        priceDesc: 'Price: high to low',
+        all: 'ALL',
+        originals: 'ORIGINAL DESIGNS',
+        soft: 'SOFT PRICES',
+        empty: 'No designs available at the moment.',
+        order: 'Order'
+      };
 
   const filteredDesigns =
     category === 'all'
@@ -508,27 +580,33 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
       : designs.filter(
           d => (d.category || 'original') === category
         );
-  const pageTitle = 'Designs disponibles';
   const sorted = [...filteredDesigns].sort((a, b) => sort === 'price-asc' ? a.price - b.price : sort === 'price-desc' ? b.price - a.price : 0);
   return (
     <div className="ab-designs-page max-w-7xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
-      <BackButton onClick={() => goTo('home')} />
+      <BackButton
+  onClick={() => goTo('home')}
+  label={text.back}
+/>
       <div className="ab-designs-head flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10 lg:mb-14">
         <div className="ab-designs-intro">
-          <p className="ab-designs-kicker text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">Boutique</p>
+          <p className="ab-designs-kicker text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">
+  {text.shop}
+</p>
           <h1
   className="ab-designs-title font-serif text-4xl lg:text-5xl text-neutral-50 mb-3"
   style={{ fontFamily: 'ui-serif, Georgia, serif' }}
 >
-  {pageTitle}
+  {text.title}
 </h1>
         </div>
         <div className="ab-designs-sort flex items-center gap-2">
-          <span className="text-xs text-neutral-500 uppercase tracking-widest">Trier</span>
+          <span className="text-xs text-neutral-500 uppercase tracking-widest">
+  {text.sort}
+</span>
           <select value={sort} onChange={e => setSort(e.target.value)} className="ab-designs-select bg-neutral-900 border border-neutral-800 text-neutral-100 text-sm rounded-full px-4 py-2 focus:outline-none focus:border-neutral-600">
-            <option value="recent">Plus récents</option>
-            <option value="price-asc">Prix croissant</option>
-            <option value="price-desc">Prix décroissant</option>
+            <option value="recent">{text.recent}</option>
+<option value="price-asc">{text.priceAsc}</option>
+<option value="price-desc">{text.priceDesc}</option>
           </select>
         </div>
       </div>
@@ -540,7 +618,7 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
     className={`ab-designs-filter-button ab-filter-all ${category === 'all' ? 'is-active' : ''}`}
   >
     <span>00</span>
-    TOUS
+    {text.all}
   </button>
 
   <button
@@ -549,7 +627,7 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
     className={`ab-designs-filter-button ab-filter-original ${category === 'original' ? 'is-active' : ''}`}
   >
     <span>01</span>
-    DESIGNS ORIGINAUX
+    {text.originals}
   </button>
 
   <button
@@ -558,12 +636,14 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
     className={`ab-designs-filter-button ab-filter-soft ${category === 'soft' ? 'is-active' : ''}`}
   >
     <span>02</span>
-    PRIX DOUX
+    {text.soft}
   </button>
 
 </div>
       {filteredDesigns.length === 0 ? (
-        <p className="text-neutral-500 text-center py-20">Aucun design disponible pour l'instant.</p>
+        <p className="text-neutral-500 text-center py-20">
+  {text.empty}
+</p>
       ) : (
         <div className="ab-designs-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 lg:gap-5">
           {sorted.map(d => (
@@ -579,7 +659,9 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
               <p className="text-neutral-500 text-xs lg:text-sm mb-2 line-clamp-1">{d.desc}</p>
               <div className="flex items-center justify-between">
                 <span className="text-neutral-50 font-medium">{d.price} €</span>
-                <span className="text-xs text-neutral-500 group-hover:text-neutral-100 transition-colors flex items-center gap-1">Commander <ChevronRight className="w-3 h-3" /></span>
+                <span className="text-xs text-neutral-500 group-hover:text-neutral-100 transition-colors flex items-center gap-1">
+  {text.order} <ChevronRight className="w-3 h-3" />
+</span>
               </div>
             </div>
           ))}
@@ -589,7 +671,12 @@ function DesignsPage({ designs, goTo, category = 'all' }) {
   );
 }
 
-function OrderForm({ design, saveOrder, goTo }) {
+function OrderForm({
+  design,
+  saveOrder,
+  goTo,
+  language = 'fr'
+}) {
   const [email, setEmail] = useState('');
   const [instagram, setInstagram] = useState('');
   const [shipping, setShipping] = useState({
@@ -606,8 +693,91 @@ const [simpleSetColor, setSimpleSetColor] = useState('');
 const [simpleSetStyle, setSimpleSetStyle] = useState('');
   const [shape, setShape] = useState(null);
   const [measurements, setMeasurements] = useState({});
+  const [existingCustomer, setExistingCustomer] = useState(false);
   const [showMeasurements, setShowMeasurements] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const text =
+  language === 'fr'
+    ? {
+        back: 'Retour aux designs',
+        order: 'Commande',
+        contact: 'Votre contact',
+        contactInfo:
+          'Votre adresse email est obligatoire pour recevoir la confirmation de commande.',
+        instagram: 'Instagram (optionnel) — @votrepseudo',
+        instagramInfo: 'Plus pratique pour moi pour vous recontacter.',
+        shipping: 'Informations de livraison',
+        name: 'Prénom et nom',
+        address: 'Adresse',
+        address2: 'Complément d’adresse (optionnel)',
+        postalCode: 'Code postal',
+        city: 'Ville',
+        country: 'Pays',
+        internationalShipping: 'Livraison hors France : +3 €',
+        internationalPrice: 'dont +3 € de livraison hors France',
+        modifications: 'Modifications souhaitées',
+        modificationsInfo:
+          'Indiquez ici les couleurs, motifs ou détails que vous souhaitez modifier.',
+        modificationsPlaceholder:
+          'Ex. : remplacer le orange par du rouge, retirer certains motifs...',
+        simpleSet: 'Set simple',
+        shape: 'Longueur & forme',
+        measurements: 'Vos mesures',
+        measurementsInfo:
+          'À renseigner uniquement si vous commandez pour la première fois.',
+        measurementsButton: 'Renseigner mes mesures',
+        submit: 'Envoyer ma commande',
+        submitting: 'Envoi en cours...',
+        invalidEmail: 'Renseignez une adresse email valide',
+        missingName: 'Renseignez votre prénom et votre nom',
+        missingAddress: 'Renseignez votre adresse',
+        missingPostalCode: 'Renseignez votre code postal',
+        missingCity: 'Renseignez votre ville',
+        missingCountry: 'Renseignez votre pays',
+        missingShape: 'Choisissez une forme/longueur',
+        missingSimpleColor: 'Renseignez la couleur du Set simple',
+        missingSimpleStyle: 'Choisissez Plein ou French pour le Set simple'
+      }
+    : {
+        back: 'Back to designs',
+        order: 'Order',
+        contact: 'Your contact details',
+        contactInfo:
+          'Your email address is required to receive your order confirmation.',
+        instagram: 'Instagram (optional) — @yourusername',
+        instagramInfo: 'Easier for me to contact you.',
+        shipping: 'Shipping information',
+        name: 'Full name',
+        address: 'Address',
+        address2: 'Additional address information (optional)',
+        postalCode: 'Postal code',
+        city: 'City',
+        country: 'Country',
+        internationalShipping: 'Shipping outside France: +€3',
+        internationalPrice: 'including +€3 shipping outside France',
+        modifications: 'Requested changes',
+        modificationsInfo:
+          'Tell me which colours, patterns or details you would like to change.',
+        modificationsPlaceholder:
+          'E.g. replace orange with red, remove certain patterns...',
+        simpleSet: 'Simple set',
+        shape: 'Length & shape',
+        measurements: 'Your measurements',
+        measurementsInfo:
+          'Required if this is your first order.',
+        measurementsButton: 'Enter my measurements',
+        submit: 'Place my order',
+        submitting: 'Sending...',
+        invalidEmail: 'Please enter a valid email address',
+        missingName: 'Please enter your full name',
+        missingAddress: 'Please enter your address',
+        missingPostalCode: 'Please enter your postal code',
+        missingCity: 'Please enter your city',
+        missingCountry: 'Please enter your country',
+        missingShape: 'Please choose a length/shape',
+        missingSimpleColor: 'Please enter the colour of your Simple set',
+        missingSimpleStyle: 'Please choose Full colour or French for your Simple set'
+      };
 
   if (!design) { goTo('designs'); return null; }
 
@@ -620,20 +790,27 @@ const orderTotal =
 
   async function submit() {
     if (!isValidEmail(email)) {
-  return alert('Renseignez une adresse email valide');
+  return alert(text.invalidEmail);
 }
-    if (!shipping.name.trim()) return alert('Renseignez votre prénom et votre nom');
-    if (!shipping.address.trim()) return alert('Renseignez votre adresse');
-    if (!shipping.postalCode.trim()) return alert('Renseignez votre code postal');
-    if (!shipping.city.trim()) return alert('Renseignez votre ville');
-    if (!shipping.country.trim()) return alert('Renseignez votre pays');
-    if (!shape) return alert('Choisissez une forme/longueur');
-    if (simpleSet && !simpleSetColor.trim()) {
-  return alert('Renseignez la couleur du Set simple');
+    if (!shipping.name.trim()) return alert(text.missingName);
+if (!shipping.address.trim()) return alert(text.missingAddress);
+if (!shipping.postalCode.trim()) return alert(text.missingPostalCode);
+if (!shipping.city.trim()) return alert(text.missingCity);
+if (!shipping.country.trim()) return alert(text.missingCountry);
+if (!shape) return alert(text.missingShape);
+  if (simpleSet && !simpleSetColor.trim()) {
+  return alert(text.missingSimpleColor);
 }
 
 if (simpleSet && !simpleSetStyle) {
-  return alert('Choisissez Plein ou French pour le Set simple');
+  return alert(text.missingSimpleStyle);
+}
+if (!existingCustomer && !hasAllMeasurements(measurements)) {
+  return alert(
+    language === 'fr'
+      ? 'Ajoutez les 4 photos de vos mesures ou cochez que vous êtes déjà cliente.'
+      : 'Please add all 4 measurement photos or indicate that you are already a customer.'
+  );
 }
     setSubmitting(true);
     await saveOrder({
@@ -641,6 +818,7 @@ if (simpleSet && !simpleSetStyle) {
   designId: design.id,
   designName: design.name,
   designPrice: design.price,
+  language,
   email: email.trim(),
 instagram: instagram.trim(),
 contact: email.trim(),
@@ -653,21 +831,21 @@ simpleSetSurcharge: simpleSet ? 10 : 0,
 shippingFee,
 totalPrice: orderTotal,
 shape,
-  measurements
+  measurements, existingCustomer
 });
     setSubmitting(false);
   }
 
   return (
     <div className="ab-order-page max-w-3xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
-      <BackButton onClick={() => goTo('designs')} label="Retour aux designs" icon="arrow" />
+      <BackButton onClick={() => goTo('designs')} label={text.back} icon="arrow" />
       <div className="ab-order-product bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden mb-8">
         <div className="ab-order-product-inner flex flex-col sm:flex-row gap-5 p-5 lg:p-7">
           <div className="ab-order-image w-full sm:w-40 aspect-square rounded-xl overflow-hidden bg-neutral-800 flex-shrink-0 border border-neutral-800">
             {design.image ? <img src={design.image} alt={design.name} className="w-full h-full object-cover" /> : <Placeholder label={design.name} className="w-full h-full" />}
           </div>
           <div className="ab-order-summary flex-1">
-            <p className="ab-order-kicker text-xs tracking-[0.2em] uppercase text-neutral-500 mb-2">Commande</p>
+            <p className="ab-order-kicker text-xs tracking-[0.2em] uppercase text-neutral-500 mb-2">{text.order}</p>
             <h1
   className="ab-order-title font-serif text-2xl lg:text-3xl text-neutral-50 mb-2"
   style={{ fontFamily: 'ui-serif, Georgia, serif' }}
@@ -686,7 +864,7 @@ shape,
 
   {shippingFee > 0 && (
     <span className="ab-order-price-extra">
-      {' '}dont +3 € de livraison hors France
+      {' '}{text.internationalPrice}
     </span>
   )}
 </p>
@@ -696,11 +874,11 @@ shape,
       <div className="ab-order-form space-y-5">
         <div className="ab-order-side-top">
         <Section
-  title="Votre contact"
+  title={text.contact}
   className="ab-order-contact"
 >
   <p className="text-neutral-500 text-sm mb-3">
-    Votre adresse email est obligatoire pour recevoir la confirmation de commande.
+    {text.contactInfo}
   </p>
 
   <input
@@ -716,17 +894,17 @@ shape,
     type="text"
     value={instagram}
     onChange={e => setInstagram(e.target.value)}
-    placeholder="Instagram (optionnel) — @votrepseudo"
+    placeholder={text.instagram}
     className="w-full px-4 py-3 mt-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600"
   />
 
   <p className="text-neutral-500 text-xs mt-2">
-    Plus pratique pour moi pour vous recontacter.
+    {text.instagramInfo}
   </p>
 </Section>
 
 <Section
-  title="Informations de livraison"
+  title={text.shipping}
   className="ab-order-shipping"
 >
   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -737,7 +915,7 @@ shape,
       onChange={(e) =>
         setShipping({ ...shipping, name: e.target.value })
       }
-      placeholder="Prénom et nom"
+      placeholder={text.name}
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 md:col-span-2"
     />
 
@@ -747,7 +925,7 @@ shape,
       onChange={(e) =>
         setShipping({ ...shipping, address: e.target.value })
       }
-      placeholder="Adresse"
+      placeholder={text.address}
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 md:col-span-2"
     />
 
@@ -757,7 +935,7 @@ shape,
       onChange={(e) =>
         setShipping({ ...shipping, address2: e.target.value })
       }
-      placeholder="Complément d’adresse (optionnel)"
+      placeholder={text.address2}
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 md:col-span-2"
     />
 
@@ -767,7 +945,7 @@ shape,
       onChange={(e) =>
         setShipping({ ...shipping, postalCode: e.target.value })
       }
-      placeholder="Code postal"
+      placeholder={text.postalCode}
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600"
     />
 
@@ -777,7 +955,7 @@ shape,
       onChange={(e) =>
         setShipping({ ...shipping, city: e.target.value })
       }
-      placeholder="Ville"
+      placeholder={text.city}
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600"
     />
 
@@ -787,7 +965,7 @@ shape,
       onChange={(e) =>
         setShipping({ ...shipping, country: e.target.value })
       }
-      placeholder="Pays"
+      placeholder={text.country}
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 md:col-span-2"
     />
 
@@ -802,25 +980,26 @@ shape,
 </div>
 
 <Section
-  title="Modifications souhaitées"
+  title={text.modifications}
   optional
+  language={language}
   className="ab-order-modifications"
 >
   <p className="text-neutral-500 text-sm mb-3">
-    Indiquez ici les couleurs, motifs ou détails que vous souhaitez modifier.
+    {text.modificationsInfo}
   </p>
 
   <textarea
     value={modifications}
     onChange={e => setModifications(e.target.value)}
     rows={4}
-    placeholder="Ex. : remplacer le orange par du rouge, retirer certains motifs..."
+    placeholder={text.modificationsPlaceholder}
     className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 resize-none"
   />
 </Section>
 
 <Section
-  title="Set simple"
+  title={text.simpleSet}
   className="ab-order-simple-set"
 >
   <SimpleSetOption
@@ -830,47 +1009,72 @@ shape,
     onColorChange={setSimpleSetColor}
     selectedStyle={simpleSetStyle}
     onStyleChange={setSimpleSetStyle}
+    language={language}
   />
 </Section>
 <Section
-  title="Longueur & forme"
+  title={text.shape}
   className="ab-order-shape"
 >
-  <ShapeSelector value={shape} onChange={setShape} />
+  <ShapeSelector
+  value={shape}
+  onChange={setShape}
+  language={language}
+/>
 </Section>
 
 <Section
-  title="Vos mesures"
-  optional
+  title={text.measurements}
+  language={language}
   className="ab-order-measurements"
 >
   <p className="text-neutral-500 text-sm mb-4">
-    À renseigner uniquement si vous commandez pour la première fois.
+    {text.measurementsInfo}
   </p>
 
-  {!showMeasurements ? (
-    <button
-      onClick={() => setShowMeasurements(true)}
-      className="px-5 py-2.5 border border-neutral-700 hover:border-neutral-300 text-neutral-100 text-sm rounded-full transition-colors"
-    >
-      Renseigner mes mesures
-    </button>
-  ) : (
+  <label className="flex items-start gap-3 mb-5 cursor-pointer">
+    <input
+      type="checkbox"
+      checked={existingCustomer}
+      onChange={e => setExistingCustomer(e.target.checked)}
+      className="mt-1"
+    />
+
+    <span className="text-sm text-neutral-300">
+      {language === 'fr'
+        ? 'Je suis déjà cliente et mes mesures sont déjà enregistrées.'
+        : 'I am already a customer and my measurements are already on file.'}
+    </span>
+  </label>
+
+  {!existingCustomer && (
     <MeasurementsBlock
       measurements={measurements}
       setMeasurements={setMeasurements}
+      language={language}
     />
   )}
 </Section>
         <button onClick={submit} disabled={submitting} className="ab-custom-submit w-full px-6 py-4 bg-neutral-50 text-neutral-950 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-full flex items-center justify-center gap-2 text-sm tracking-wide font-medium">
-          {submitting ? 'Envoi en cours...' : <>Envoyer ma commande <Send className="w-4 h-4" /></>}
+          {submitting ? (
+  text.submitting
+) : (
+  <>
+    {text.submit}
+    <Send className="w-4 h-4" />
+  </>
+)}
         </button>
       </div>
     </div>
   );
 }
 
-function CustomOrderForm({ saveOrder, goTo }) {
+function CustomOrderForm({
+  saveOrder,
+  goTo,
+  language = 'fr'
+}) {
   const [email, setEmail] = useState('');
   const [instagram, setInstagram] = useState('');
   const [shipping, setShipping] = useState({
@@ -892,9 +1096,142 @@ const [simpleSetStyle, setSimpleSetStyle] = useState('');
   const [shape, setShape] = useState(null);
   const [inspirations, setInspirations] = useState([]);
   const [measurements, setMeasurements] = useState({});
+  const [existingCustomer, setExistingCustomer] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const inspRef = useRef(null);
   const shippingFee = getShippingFee(shipping.country);
+  const text =
+  language === 'fr'
+    ? {
+        back: "Retour à l'accueil",
+        kicker: 'PERSONNALISÉ',
+        title: 'COMMANDE PERSONNALISÉE',
+
+        contact: 'Votre contact',
+        contactInfo:
+          'Votre adresse email est obligatoire pour recevoir la confirmation de commande.',
+        instagram: 'Instagram (optionnel) — @votrepseudo',
+        instagramInfo: 'Plus pratique pour moi pour vous recontacter.',
+
+        shipping: 'Informations de livraison',
+        name: 'Prénom et nom',
+        address: 'Adresse',
+        address2: 'Complément d’adresse (optionnel)',
+        postalCode: 'Code postal',
+        city: 'Ville',
+        country: 'Pays',
+        internationalShipping: 'Livraison hors France : +3 €',
+
+        colors: 'Couleurs',
+        colorsPlaceholder: 'Décrivez les couleurs souhaitées...',
+        chrome: 'Chrome',
+        jewelry: 'Bijoux (strass, perles)',
+        relief: 'Relief',
+        simpleSet: 'Set simple',
+
+        gold: 'Doré',
+        silver: 'Argenté',
+        both: 'Les deux',
+        none: 'Aucun',
+        yes: 'Oui',
+        no: 'Non',
+
+        description: 'Descriptif personnel',
+        descriptionPlaceholder:
+          'Décrivez-moi le niveau de détails que vous souhaitez pour vos ongles + requêtes complémentaires',
+        descriptionExample:
+          "Exemple : j'aimerais des ongles tous différents, avec des spirales, mais pas d'étoiles.",
+
+        shape: 'Longueur & forme',
+
+        inspirations: 'Inspirations',
+        inspirationsInfo:
+          'Importez vos photos / inspirations (10 maximum)',
+        add: 'Ajouter',
+        photos: 'photos',
+
+        measurements: 'Vos mesures',
+        measurementsInfo:
+          'À renseigner uniquement si je n’ai pas déjà vos mesures enregistrées.',
+
+        submit: 'ENVOYER MA COMMANDE',
+        submitting: 'Envoi en cours...',
+
+        invalidEmail: 'Renseignez une adresse email valide',
+        missingName: 'Renseignez votre prénom et votre nom',
+        missingAddress: 'Renseignez votre adresse',
+        missingPostalCode: 'Renseignez votre code postal',
+        missingCity: 'Renseignez votre ville',
+        missingCountry: 'Renseignez votre pays',
+        missingShape: 'Choisissez une forme/longueur',
+        missingSimpleColor: 'Renseignez la couleur du Set simple',
+        missingSimpleStyle: 'Choisissez Plein ou French pour le Set simple'
+      }
+    : {
+        back: 'Back to home',
+        kicker: 'CUSTOM',
+        title: 'CUSTOM ORDER',
+
+        contact: 'Your contact details',
+        contactInfo:
+          'Your email address is required to receive your order confirmation.',
+        instagram: 'Instagram (optional) — @yourusername',
+        instagramInfo: 'Useful if I need to contact you.',
+
+        shipping: 'Shipping information',
+        name: 'Full name',
+        address: 'Address',
+        address2: 'Additional address information (optional)',
+        postalCode: 'Postal code',
+        city: 'City',
+        country: 'Country',
+        internationalShipping: 'Shipping outside France: +€3',
+
+        colors: 'Colours',
+        colorsPlaceholder: 'Describe the colours you would like...',
+        chrome: 'Chrome',
+        jewelry: 'Jewels (rhinestones, pearls)',
+        relief: '3D details',
+        simpleSet: 'Simple set',
+
+        gold: 'Gold',
+        silver: 'Silver',
+        both: 'Both',
+        none: 'None',
+        yes: 'Yes',
+        no: 'No',
+
+        description: 'Personal description',
+        descriptionPlaceholder:
+          'Describe the level of detail you would like for your nails and any additional requests',
+        descriptionExample:
+          'Example: I would like every nail to be different, with spirals but no stars.',
+
+        shape: 'Length & shape',
+
+        inspirations: 'Inspiration',
+        inspirationsInfo:
+          'Upload your photos / inspiration images (10 maximum)',
+        add: 'Add',
+        photos: 'photos',
+
+        measurements: 'Your measurements',
+        measurementsInfo:
+          'Required if I do not already have your measurements.',
+
+        submit: 'PLACE MY ORDER',
+        submitting: 'Sending...',
+
+        invalidEmail: 'Please enter a valid email address',
+        missingName: 'Please enter your full name',
+        missingAddress: 'Please enter your address',
+        missingPostalCode: 'Please enter your postal code',
+        missingCity: 'Please enter your city',
+        missingCountry: 'Please enter your country',
+        missingShape: 'Please choose a length/shape',
+        missingSimpleColor: 'Please enter the colour of your Simple set',
+        missingSimpleStyle: 'Please choose Full colour or French for your Simple set'
+      };
 
   async function handleInspirations(e) {
     const files = Array.from(e.target.files);
@@ -906,46 +1243,54 @@ const [simpleSetStyle, setSimpleSetStyle] = useState('');
 
   async function submit() {
   if (!isValidEmail(email)) {
-  return alert('Renseignez une adresse email valide');
+  return alert(text.invalidEmail);
 }
 
-  if (!shipping.name.trim()) {
-    return alert('Renseignez votre prénom et votre nom');
-  }
+if (!shipping.name.trim()) {
+  return alert(text.missingName);
+}
 
-  if (!shipping.address.trim()) {
-    return alert('Renseignez votre adresse');
-  }
+if (!shipping.address.trim()) {
+  return alert(text.missingAddress);
+}
 
-  if (!shipping.postalCode.trim()) {
-    return alert('Renseignez votre code postal');
-  }
+if (!shipping.postalCode.trim()) {
+  return alert(text.missingPostalCode);
+}
 
- if (!shipping.city.trim()) {
-  return alert('Renseignez votre ville');
+if (!shipping.city.trim()) {
+  return alert(text.missingCity);
 }
 
 if (!shipping.country.trim()) {
-  return alert('Renseignez votre pays');
+  return alert(text.missingCountry);
 }
 
 if (!shape) {
-    return alert('Choisissez une forme/longueur');
-  }
+  return alert(text.missingShape);
+}
 
-  if (simpleSet && !simpleSetColor.trim()) {
-  return alert('Renseignez la couleur du Set simple');
+if (simpleSet && !simpleSetColor.trim()) {
+  return alert(text.missingSimpleColor);
 }
 
 if (simpleSet && !simpleSetStyle) {
-  return alert('Choisissez Plein ou French pour le Set simple');
+  return alert(text.missingSimpleStyle);
 }
 
+if (!existingCustomer && !hasAllMeasurements(measurements)) {
+  return alert(
+    language === 'fr'
+      ? 'Ajoutez les 4 photos de vos mesures ou cochez que vous êtes déjà cliente.'
+      : 'Please add all 4 measurement photos or indicate that you are already a customer.'
+  );
+}
   setSubmitting(true);
 
   await saveOrder({
     type: 'custom',
 email: email.trim(),
+language,
 instagram: instagram.trim(),
 contact: email.trim(),
 shipping, 
@@ -961,6 +1306,7 @@ simpleSetStyle: simpleSet ? simpleSetStyle : '',
 simpleSetSurcharge: simpleSet ? 10 : 0,
 shape,
     inspirations,
+    existingCustomer,
     measurements
   });
 
@@ -969,28 +1315,35 @@ shape,
 
   return (
     <div className="ab-designs-page ab-custom-page-v2 max-w-7xl mx-auto px-5 lg:px-10 py-10 lg:py-16">
-      <BackButton onClick={() => goTo('home')} />
+      <BackButton
+  onClick={() => goTo('home')}
+  label={text.back}
+/>
       <div className="ab-designs-head flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10 lg:mb-14">
   <div className="ab-designs-intro">
 
     <p className="ab-designs-kicker text-xs tracking-[0.3em] uppercase text-neutral-500 mb-3">
-      PERSONNALISÉ
-    </p>
+  {text.kicker}
+</p>
 
     <h1
       className="ab-designs-title ab-custom-title-red font-serif text-4xl lg:text-5xl mb-3"
       style={{ fontFamily: 'ui-serif, Georgia, serif' }}
     >
-      COMMANDE PERSONNALISÉE
+      {text.title}
     </h1>
 
   </div>
 </div>
       <div className="ab-custom-form space-y-5">
         <div className="ab-custom-panel ab-custom-panel-contact">
-        <Section num="0" title="Votre contact" className="ab-custom-contact">
+        <Section
+  num="0"
+  title={text.contact}
+  className="ab-custom-contact"
+>
   <p className="text-neutral-500 text-sm mb-3">
-    Votre adresse email est obligatoire pour recevoir la confirmation de commande.
+    {text.contactInfo}
   </p>
 
   <input
@@ -1006,16 +1359,16 @@ shape,
     type="text"
     value={instagram}
     onChange={e => setInstagram(e.target.value)}
-    placeholder="Instagram (optionnel) — @votrepseudo"
+    placeholder={text.instagram}
     className="w-full px-4 py-3 mt-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600"
   />
 
   <p className="text-neutral-500 text-xs mt-2">
-    Plus pratique pour moi pour vous recontacter.
+    {text.instagramInfo}
   </p>
 </Section>
         <Section
-  title="Informations de livraison"
+  title={text.shipping}
   className="ab-custom-shipping"
 >
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1026,7 +1379,7 @@ shape,
       onChange={(e) =>
         setShipping({ ...shipping, name: e.target.value })
       }
-      placeholder="Prénom et nom"
+      placeholder={text.name}
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 md:col-span-2"
     />
 
@@ -1036,7 +1389,7 @@ shape,
       onChange={(e) =>
         setShipping({ ...shipping, address: e.target.value })
       }
-      placeholder="Adresse"
+      placeholder={text.address}
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 md:col-span-2"
     />
 
@@ -1046,7 +1399,7 @@ shape,
       onChange={(e) =>
         setShipping({ ...shipping, address2: e.target.value })
       }
-      placeholder="Complément d’adresse (optionnel)"
+      placeholder={text.address2}
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 md:col-span-2"
     />
 
@@ -1056,7 +1409,7 @@ shape,
       onChange={(e) =>
         setShipping({ ...shipping, postalCode: e.target.value })
       }
-      placeholder="Code postal"
+      placeholder={text.postalCode}
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600"
     />
 
@@ -1066,7 +1419,7 @@ shape,
       onChange={(e) =>
         setShipping({ ...shipping, city: e.target.value })
       }
-      placeholder="Ville"
+      placeholder={text.city}
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600"
     />
 
@@ -1076,14 +1429,14 @@ shape,
       onChange={(e) =>
         setShipping({ ...shipping, country: e.target.value })
       }
-      placeholder="Pays"
+      placeholder={text.country}
       className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 md:col-span-2"
     />
 
     {shippingFee > 0 && (
   <p className="ab-shipping-fee-note">
-    Livraison hors France : +3 €
-  </p>
+  {text.internationalShipping}
+</p>
 )}
 
   </div>
@@ -1091,12 +1444,41 @@ shape,
 </div>
 
 <div className="ab-custom-options">
-        <Section num="1" title="Couleurs" className="ab-custom-colors">
-          <textarea value={colors} onChange={e => setColors(e.target.value)} rows={2} placeholder="Décrivez les couleurs souhaitées..." className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 resize-none" />
+        <Section num="1" title={text.colors} className="ab-custom-colors">
+          <textarea value={colors} onChange={e => setColors(e.target.value)} rows={2} placeholder={text.colorsPlaceholder} className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 resize-none" />
         </Section>
-        <Section num="2" title="Chrome" className="ab-custom-chrome"><ChoiceRow options={['Doré', 'Argenté', 'Les deux', 'Aucun']} value={chrome} onChange={setChrome} /></Section>
-        <Section num="3" title="Bijoux (strass, perles)" className="ab-custom-jewelry"><ChoiceRow options={['Oui', 'Non']} value={jewelry} onChange={setJewelry} /></Section>
-        <Section num="4" title="Relief" className="ab-custom-relief"><ChoiceRow options={['Oui', 'Non']} value={relief} onChange={setRelief} /></Section>
+        <Section num="2" title={text.chrome} className="ab-custom-chrome">
+  <ChoiceRow
+    options={[
+      { value: 'Doré', label: text.gold },
+      { value: 'Argenté', label: text.silver },
+      { value: 'Les deux', label: text.both },
+      { value: 'Aucun', label: text.none }
+    ]}
+    value={chrome}
+    onChange={setChrome}
+  />
+</Section>
+        <Section num="3" title={text.jewelry} className="ab-custom-jewelry">
+  <ChoiceRow
+    options={[
+      { value: 'Oui', label: text.yes },
+      { value: 'Non', label: text.no }
+    ]}
+    value={jewelry}
+    onChange={setJewelry}
+  />
+</Section>
+        <Section num="4" title={text.relief} className="ab-custom-relief">
+  <ChoiceRow
+    options={[
+      { value: 'Oui', label: text.yes },
+      { value: 'Non', label: text.no }
+    ]}
+    value={relief}
+    onChange={setRelief}
+  />
+</Section>
         <Section
   title="Set simple"
   className="ab-custom-simple-set"
@@ -1108,18 +1490,42 @@ shape,
     onColorChange={setSimpleSetColor}
     selectedStyle={simpleSetStyle}
     onStyleChange={setSimpleSetStyle}
+    language={language}
   />
 </Section>
         </div>
         <div className="ab-custom-panel-details">
-        <Section num="5" title="Descriptif personnel" className="ab-custom-description">
-          <textarea value={desc} onChange={e => setDesc(e.target.value)} rows={4} placeholder="Décrivez-moi le niveau de détails que vous souhaitez pour vos ongles + requêtes complémentaires" className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 resize-none mb-2" />
-          <p className="text-neutral-500 text-sm italic">Exemple : j'aimerais des ongles tous différents, avec des spirales, mais pas d'étoiles. </p>
-        </Section>
-        <Section num="6" title="Longueur & forme" className="ab-custom-shape"><ShapeSelector value={shape} onChange={setShape} /></Section></div>
+        <Section
+  num="5"
+  title={text.description}
+  className="ab-custom-description"
+>
+  <textarea
+    value={desc}
+    onChange={e => setDesc(e.target.value)}
+    rows={4}
+    placeholder={text.descriptionPlaceholder}
+    className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded-lg focus:outline-none focus:border-neutral-500 transition-colors text-neutral-100 placeholder-neutral-600 resize-none mb-2"
+  />
+
+  <p className="text-neutral-500 text-sm italic">
+    {text.descriptionExample}
+  </p>
+</Section>
+        <Section
+  num="6"
+  title={text.shape}
+  className="ab-custom-shape"
+>
+  <ShapeSelector
+    value={shape}
+    onChange={setShape}
+    language={language}
+  />
+</Section></div>
         <div className="ab-custom-panel-inspirations">
-        <Section num="7" title="Inspirations" className="ab-custom-inspirations">
-          <p className="text-neutral-500 text-sm mb-4">Importez vos photos / inspirations (10 maximum)</p>
+        <Section num="7" title={text.inspirations} className="ab-custom-inspirations">
+          <p className="text-neutral-500 text-sm mb-4">{text.inspirationsInfo}</p>
           <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 mb-3">
             {inspirations.map((img, i) => (
               <div key={i} className="relative aspect-square rounded-lg overflow-hidden bg-neutral-800 border border-neutral-800">
@@ -1129,28 +1535,46 @@ shape,
             ))}
             {inspirations.length < 10 && (
               <button onClick={() => inspRef.current?.click()} className="aspect-square rounded-lg border-2 border-dashed border-neutral-700 hover:border-neutral-400 hover:bg-neutral-900 transition-colors flex flex-col items-center justify-center gap-1 text-neutral-500">
-                <ImagePlus className="w-5 h-5" /><span className="text-xs">Ajouter</span>
+                <ImagePlus className="w-5 h-5" /><span className="text-xs">{text.add}</span>
               </button>
             )}
           </div>
           <input ref={inspRef} type="file" accept="image/*" multiple onChange={handleInspirations} className="hidden" />
-          <p className="text-neutral-600 text-xs">{inspirations.length}/10 photos</p>
+          <p className="text-neutral-600 text-xs">{inspirations.length}/10 {text.photos}</p>
         </Section>
         </div>
         <div className="ab-custom-panel-measurements">
         <Section
-  title="Vos mesures"
-  optional
+  title={text.measurements}
+  language={language}
   className="ab-custom-measurements"
 >
   <p className="text-neutral-500 text-sm mb-4">
-    À renseigner uniquement si je n’ai pas déjà vos mesures enregistrées.
+    {text.measurementsInfo}
   </p>
 
-  <MeasurementsBlock
-    measurements={measurements}
-    setMeasurements={setMeasurements}
-  />
+  <label className="flex items-start gap-3 mb-5 cursor-pointer">
+    <input
+      type="checkbox"
+      checked={existingCustomer}
+      onChange={e => setExistingCustomer(e.target.checked)}
+      className="mt-1"
+    />
+
+    <span className="text-sm text-neutral-300">
+      {language === 'fr'
+        ? 'Je suis déjà cliente et mes mesures sont déjà enregistrées.'
+        : 'I am already a customer and my measurements are already on file.'}
+    </span>
+  </label>
+
+  {!existingCustomer && (
+    <MeasurementsBlock
+      measurements={measurements}
+      setMeasurements={setMeasurements}
+      language={language}
+    />
+  )}
 </Section>
 </div>
         <button
@@ -1159,58 +1583,86 @@ shape,
   className="ab-custom-submit"
 >
   {submitting ? (
-    'Envoi en cours...'
-  ) : (
-    <>
-      ENVOYER MA COMMANDE
-      <Send className="w-4 h-4" />
-    </>
-  )}
+  text.submitting
+) : (
+  <>
+    {text.submit}
+    <Send className="w-4 h-4" />
+  </>
+)}
 </button>
       </div>
     </div>
   );
 }
 
-function ConfirmationScreen({ order, goTo }) {
+function ConfirmationScreen({
+  order,
+  goTo,
+  language = 'fr'
+}) {
   const isCustom = order.type === 'custom';
+  const text =
+  language === 'fr'
+    ? {
+        confirmation: 'CONFIRMATION',
+        received: 'COMMANDE REÇUE !',
+        thanks: 'Merci pour votre confiance.',
+        email:
+          'Un mail de confirmation vient de vous être envoyé. Vérifiez vos spams !!',
+        payment:
+          'Je commence votre commande uniquement après réception du virement.',
+        orderNumber: 'NUMÉRO DE COMMANDE',
+        keepNumber:
+          'Conservez ce numéro pour toute correspondance ultérieure.',
+        home: 'RETOUR À L’ACCUEIL',
+        designs: 'VOIR LES DESIGNS'
+      }
+    : {
+        confirmation: 'CONFIRMATION',
+        received: 'ORDER RECEIVED!',
+        thanks: 'Thank you for your order.',
+        email:
+          'A confirmation email has just been sent to you. Please check your spam folder!',
+        payment:
+          'I will start your order only after receiving your bank transfer.',
+        orderNumber: 'ORDER NUMBER',
+        keepNumber:
+          'Please keep this number for any future correspondence.',
+        home: 'BACK TO HOME',
+        designs: 'VIEW DESIGNS'
+      };
 
   return (
     <div className="ab-confirmation-page">
       <div className="ab-confirmation-card">
 
         <div className="ab-confirmation-top">
-          <span>CONFIRMATION</span>
+          <span>{text.confirmation}</span>
           <span>ANNETTE BAKEUR</span>
         </div>
 
-        <h1>
-          COMMANDE
-          <br />
-          REÇUE !
-        </h1>
+        <h1>{text.received}</h1>
 
         <div className="ab-confirmation-content">
           <div className="ab-confirmation-message">
-            <p>Merci pour votre confiance.</p>
+            <p>{text.thanks}</p>
 
-            <p>
-              Je reviens vers vous via{' '}
-              <strong>{order.contact}</strong>{' '}
-              {isCustom
-                ? 'pour le croquis et le paiement.'
-                : 'pour le paiement.'}
-            </p>
+            <p>{text.email}</p>
+            <p className="ab-confirmation-payment-warning">
+  {text.payment}
+</p>
+
           </div>
 
           <div className="ab-confirmation-number">
-            <span>NUMÉRO DE COMMANDE</span>
+            <span>{text.orderNumber}</span>
             <strong>#{order.id}</strong>
           </div>
         </div>
 
         <p className="ab-confirmation-note">
-          Conservez ce numéro pour toute correspondance ultérieure.
+          {text.keepNumber}
         </p>
 
         <div className="ab-confirmation-actions">
@@ -1218,14 +1670,14 @@ function ConfirmationScreen({ order, goTo }) {
             className="ab-confirmation-home"
             onClick={() => goTo('home')}
           >
-            RETOUR À L’ACCUEIL
+            {text.home}
           </button>
 
           <button
             className="ab-confirmation-designs"
             onClick={() => goTo('designs')}
           >
-            VOIR LES DESIGNS
+            {text.designs}
           </button>
         </div>
 
@@ -1234,11 +1686,17 @@ function ConfirmationScreen({ order, goTo }) {
   );
 }
 
-function Section({ title, optional, children, className = '' }) {
+function Section({
+  title,
+  optional,
+  children,
+  className = '',
+  language = 'fr'
+}) {
   return (
     <div className={`bg-neutral-900 rounded-2xl border border-neutral-800 p-5 lg:p-7 ${className}`}>
       <div className="flex items-center gap-3 mb-4">
-        <h3 className="font-serif text-lg lg:text-xl text-neutral-50" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>{title}{optional && <span className="text-neutral-500 text-sm ml-2 italic font-sans">(Optionnel)</span>}</h3>
+        <h3 className="font-serif text-lg lg:text-xl text-neutral-50" style={{ fontFamily: 'ui-serif, Georgia, serif' }}>{title}{optional && <span className="text-neutral-500 text-sm ml-2 italic font-sans">{language === 'fr' ? '(Optionnel)' : '(Optional)'}</span>}</h3>
       </div>
       {children}
     </div>
@@ -1248,7 +1706,27 @@ function Section({ title, optional, children, className = '' }) {
 function ChoiceRow({ options, value, onChange }) {
   return (
     <div className="flex flex-wrap gap-2">
-      {options.map(o => <button key={o} onClick={() => onChange(o)} className={`px-5 py-2.5 rounded-full text-sm transition-all ${value === o ? 'bg-neutral-50 text-neutral-950' : 'border border-neutral-700 text-neutral-300 hover:border-neutral-400'}`}>{o}</button>)}
+      {options.map(option => {
+        const optionValue =
+          typeof option === 'string' ? option : option.value;
+
+        const optionLabel =
+          typeof option === 'string' ? option : option.label;
+
+        return (
+          <button
+            key={optionValue}
+            onClick={() => onChange(optionValue)}
+            className={`px-5 py-2.5 rounded-full text-sm transition-all ${
+              value === optionValue
+                ? 'bg-neutral-50 text-neutral-950'
+                : 'border border-neutral-700 text-neutral-300 hover:border-neutral-400'
+            }`}
+          >
+            {optionLabel}
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -1259,8 +1737,28 @@ function SimpleSetOption({
   color,
   onColorChange,
   selectedStyle,
-  onStyleChange
+  onStyleChange,
+  language = 'fr'
 }) {
+
+  const text =
+  language === 'fr'
+    ? {
+        add: 'Ajouter un Set simple',
+        color: 'Couleur souhaitée',
+        style: 'Style souhaité',
+        full: 'PLEIN',
+        french: 'FRENCH',
+        surcharge: 'Supplément ajouté à la commande : +10 €'
+      }
+    : {
+        add: 'Add a Simple set',
+        color: 'Desired colour',
+        style: 'Desired style',
+        full: 'FULL COLOUR',
+        french: 'FRENCH',
+        surcharge: 'Added to your order: +€10'
+      };
   return (
     <div className="ab-simple-set">
 
@@ -1281,7 +1779,7 @@ function SimpleSetOption({
         </span>
 
         <span className="ab-simple-set-toggle-text">
-          <strong>Ajouter un Set simple</strong>
+          <strong>{text.add}</strong>
           <small>+10 €</small>
         </span>
       </label>
@@ -1293,12 +1791,12 @@ function SimpleSetOption({
             type="text"
             value={color}
             onChange={e => onColorChange(e.target.value)}
-            placeholder="Couleur souhaitée"
+            placeholder={text.color}
             className="ab-simple-set-color"
           />
 
           <p className="ab-simple-set-question">
-            Style souhaité
+            {text.style}
           </p>
 
           <div className="ab-simple-set-styles">
@@ -1312,7 +1810,7 @@ function SimpleSetOption({
                   : ''
               }`}
             >
-              PLEIN
+              {text.full}
             </button>
 
             <button
@@ -1330,7 +1828,7 @@ function SimpleSetOption({
           </div>
 
           <p className="ab-simple-set-surcharge">
-            Supplément ajouté à la commande : +10 €
+            {text.surcharge}
           </p>
 
         </div>
@@ -1340,14 +1838,30 @@ function SimpleSetOption({
   );
 }
 
-function ShapeSelector({ value, onChange }) {
+function ShapeSelector({
+  value,
+  onChange,
+  language = 'fr'
+}) {
   const photoShapes = SHAPES.filter(shape => shape.image);
   const naturalShape = SHAPES.find(shape => shape.id === 11);
+const text =
+  language === 'fr'
+    ? {
+        intro: 'Sélectionnez directement la forme et la longueur souhaitées.',
+        natural: 'ONGLE COURT, FORME NATURELLE',
+        selected: 'Modèle sélectionné'
+      }
+    : {
+        intro: 'Select your desired shape and length.',
+        natural: 'SHORT NAIL, NATURAL SHAPE',
+        selected: 'Selected shape'
+      };
 
   return (
     <div>
       <p className="text-neutral-400 text-sm mb-5 leading-relaxed">
-        Sélectionnez directement la forme et la longueur souhaitées.
+        {text.intro}
       </p>
 
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
@@ -1387,7 +1901,11 @@ function ShapeSelector({ value, onChange }) {
 
               <div className="ab-shape-choice-caption">
                 <span>{String(index + 1).padStart(2, '0')}</span>
-                <strong>{shape.label}</strong>
+                <strong>
+  {language === 'fr'
+    ? shape.label
+    : `MODEL ${shape.id}`}
+</strong>
               </div>
             </label>
           );
@@ -1413,7 +1931,7 @@ function ShapeSelector({ value, onChange }) {
 
           <span className="ab-shape-natural-number">11</span>
 
-          <strong>ONGLE COURT, FORME NATURELLE</strong>
+          <strong>{text.natural}</strong>
 
           {value === naturalShape.id && (
             <span className="ab-shape-natural-check">
@@ -1425,14 +1943,18 @@ function ShapeSelector({ value, onChange }) {
 
       {value && (
         <p className="mt-4 text-sm text-neutral-300">
-          Modèle sélectionné : <strong>n° {value}</strong>
+          {text.selected} : <strong>n° {value}</strong>
         </p>
       )}
     </div>
   );
 }
 
-function MeasurementsBlock({ measurements, setMeasurements }) {
+function MeasurementsBlock({
+  measurements,
+  setMeasurements,
+  language = 'fr'
+}) {
   async function handlePhotoUpload(photoId, file) {
     if (!file) return;
 
@@ -1452,17 +1974,30 @@ function MeasurementsBlock({ measurements, setMeasurements }) {
     });
   }
 
+  const text =
+  language === 'fr'
+    ? {
+        instruction:
+          'Prenez en photo chacun de vos pouces ainsi que vos deux mains entières, à côté d’une pièce de monnaie en euro.',
+        reference:
+          'La pièce doit être visible sur chaque photo afin de servir de référence pour les dimensions.'
+      }
+    : {
+        instruction:
+          'Take a photo of each thumb and both of your full hands next to a euro coin.',
+        reference:
+          'The coin must be visible in every photo so it can be used as a size reference.'
+      };
+
   return (
     <div>
       <p className="text-neutral-300 text-sm mb-2 leading-relaxed">
-        Prenez en photo chacun de vos pouces ainsi que vos deux mains entières,
-        à côté d’une pièce de monnaie en euro.
-      </p>
+  {text.instruction}
+</p>
 
-      <p className="text-neutral-500 text-sm mb-5 leading-relaxed">
-        La pièce doit être visible sur chaque photo afin de servir de référence
-        pour les dimensions.
-      </p>
+<p className="text-neutral-500 text-sm mb-5 leading-relaxed">
+  {text.reference}
+</p>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {MEASUREMENT_PHOTOS.map((photo) => (
@@ -1472,6 +2007,7 @@ function MeasurementsBlock({ measurements, setMeasurements }) {
             image={measurements[photo.id]}
             onUpload={(file) => handlePhotoUpload(photo.id, file)}
             onRemove={() => removePhoto(photo.id)}
+            language={language}
           />
         ))}
       </div>
@@ -1479,7 +2015,13 @@ function MeasurementsBlock({ measurements, setMeasurements }) {
   );
 }
 
-function MeasurementUpload({ photo, image, onUpload, onRemove }) {
+function MeasurementUpload({
+  photo,
+  image,
+  onUpload,
+  onRemove,
+  language = 'fr'
+}) {
   const inputRef = useRef(null);
 
   return (
@@ -1509,7 +2051,7 @@ function MeasurementUpload({ photo, image, onUpload, onRemove }) {
           <div className="h-full flex flex-col items-center justify-center gap-2 px-2">
             <Camera className="w-6 h-6 text-neutral-500" />
             <span className="text-[11px] text-neutral-500 text-center">
-              Ajouter une photo
+              {language === 'fr' ? 'Ajouter une photo' : 'Add a photo'}
             </span>
           </div>
         )}
@@ -2216,7 +2758,18 @@ function Footer({ goTo }) {
             <p className="text-neutral-600 text-xs mt-3">{INSTAGRAM}</p>
           </div>
         </div>
-        <div className="border-t border-neutral-900 mt-8 pt-6 text-xs text-neutral-600 text-center">© {new Date().getFullYear()} {BRAND}. Tous droits réservés.</div>
+        <div className="border-t border-neutral-900 mt-8 pt-6 text-xs text-neutral-600 text-center">
+  <span>
+    © {new Date().getFullYear()} {BRAND}. Tous droits réservés.
+  </span>
+
+  <button
+    onClick={() => goTo('admin')}
+    className="ab-footer-admin"
+  >
+    Admin
+  </button>
+</div>
       </div>
     </footer>
   );

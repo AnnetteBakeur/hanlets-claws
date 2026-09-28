@@ -8,8 +8,44 @@ function Placeholder({ label }) {
   );
 }
 
-export default function HomePage({ gallery = [], designs = [], goTo }) {
+export default function HomePage({
+  gallery = [],
+  designs = [],
+  goTo,
+  language = 'fr'
+}) {
   const latestDesigns = [...designs].slice(-4).reverse();
+
+  const text =
+    language === 'fr'
+      ? {
+          welcome: 'Bienvenue dans la Bakeury',
+          chapter1: 'CHAPITRE 01',
+          bakeury: 'LA BAKEURY',
+          originalDesigns: 'DESIGNS ORIGINAUX',
+          selection: 'SÉLECTION',
+          softPrices: 'PRIX DOUX',
+          customOrder: 'COMMANDE PERSONNALISÉE',
+          chapter2: 'CHAPITRE 02',
+          newIn: 'NOUVEAUTÉS',
+          viewDesigns: 'VOIR LES DESIGNS',
+          chapter3: 'CHAPITRE 03',
+          archives: 'LES ARCHIVES'
+        }
+      : {
+          welcome: 'Welcome to the Bakeury',
+          chapter1: 'CHAPTER 01',
+          bakeury: 'THE BAKEURY',
+          originalDesigns: 'ORIGINAL DESIGNS',
+          selection: 'SELECTION',
+          softPrices: 'SOFT PRICES',
+          customOrder: 'CUSTOM ORDER',
+          chapter2: 'CHAPTER 02',
+          newIn: 'NEW IN',
+          viewDesigns: 'VIEW DESIGNS',
+          chapter3: 'CHAPTER 03',
+          archives: 'THE ARCHIVES'
+        };
 
   return (
     <main className="ab2-home">
@@ -30,7 +66,7 @@ export default function HomePage({ gallery = [], designs = [], goTo }) {
       </h1>
 
       <p className="ab-home-welcome">
-  Bienvenue dans la Bakeury
+  {text.welcome}
 </p>
     </div>
 
@@ -54,9 +90,9 @@ export default function HomePage({ gallery = [], designs = [], goTo }) {
       <section className="ab2-menu" id="ab2-menu">
 
   <div className="ab2-section-meta">
-    <span>CHAPITRE 01</span>
-    <span>LA BAKEURY</span>
-  </div>
+  <span>{text.chapter1}</span>
+  <span>{text.bakeury}</span>
+</div>
 
   <div className="ab2-menu-grid">
 
@@ -69,11 +105,7 @@ export default function HomePage({ gallery = [], designs = [], goTo }) {
 
       <div className="ab2-card-content">
         <span className="ab2-card-small">ANNETTE BAKEUR</span>
-        <h2>
-          DESIGNS
-          <br />
-          ORIGINAUX
-        </h2>
+        <h2>{text.originalDesigns}</h2>
       </div>
     </button>
 
@@ -85,8 +117,8 @@ export default function HomePage({ gallery = [], designs = [], goTo }) {
       <span className="ab2-card-number">02</span>
 
       <div className="ab2-card-content">
-        <span className="ab2-card-small">SÉLECTION</span>
-        <h2>PRIX DOUX</h2>
+        <span className="ab2-card-small">{text.selection}</span>
+<h2>{text.softPrices}</h2>
       </div>
     </button>
 
@@ -99,11 +131,7 @@ export default function HomePage({ gallery = [], designs = [], goTo }) {
 
       <div className="ab2-card-content">
         <span className="ab2-card-small">ANNETTE BAKEUR</span>
-        <h2>
-          COMMANDE
-          <br />
-          PERSONNALISÉE
-        </h2>
+        <h2>{text.customOrder}</h2>
       </div>
     </button>
 
@@ -119,12 +147,12 @@ export default function HomePage({ gallery = [], designs = [], goTo }) {
 
         <div className="ab2-new-head">
           <div>
-            <span className="ab2-section-label">CHAPITRE 02</span>
-            <h2>NOUVEAUTÉS</h2>
+            <span className="ab2-section-label">{text.chapter2}</span>
+<h2>{text.newIn}</h2>
           </div>
 
           <button onClick={() => goTo('designs')}>
-            VOIR LES DESIGNS
+            {text.viewDesigns}
             <ArrowRight size={16} />
           </button>
         </div>
@@ -182,13 +210,9 @@ export default function HomePage({ gallery = [], designs = [], goTo }) {
       <section className="ab2-archives">
 
         <div className="ab2-archives-head">
-          <span className="ab2-section-label">CHAPITRE 03</span>
+          <span className="ab2-section-label">{text.chapter3}</span>
 
-          <h2>
-            LES
-            <br />
-            ARCHIVES
-          </h2>
+<h2>{text.archives}</h2>
 
           <div className="ab2-archive-note">
   <span>ANNETTE BAKEUR</span>
@@ -217,13 +241,13 @@ export default function HomePage({ gallery = [], designs = [], goTo }) {
           </div>
         ) : (
           <div className="ab2-empty">
-            <Placeholder label="LES ARCHIVES" />
+            <Placeholder label={text.archives} />
           </div>
         )}
 
         <footer className="ab2-archive-footer">
           <span>ANNETTE BAKEUR</span>
-          <span>LA BAKEURY</span>
+          <span>{text.bakeury}</span>
           <span>03</span>
         </footer>
 

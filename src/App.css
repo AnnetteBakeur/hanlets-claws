@@ -2416,6 +2416,10 @@ aspect-ratio: 4 / 5 !important;
   font-family: Arial, Helvetica, sans-serif !important;
 }
 
+.ab-confirmation-message .ab-confirmation-payment-warning {
+  color: #f21b1b !important;
+  font-weight: 800 !important;
+}
 
 /* MOBILE */
 @media (max-width: 700px) {
@@ -4261,4 +4265,35 @@ line-height: 1.2 !important;
   background: #c51f1f !important;
   border-color: #c51f1f !important;
   color: #050505 !important;
+}
+
+.ab-footer-admin {
+  margin-left: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #3f3f3f;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.ab-footer-admin:hover {
+  color: #777;
+}
+
+.ab-language-toggle {
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  color: #8a8a8a;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: 160ms ease;
+}
+
+.ab-language-toggle:hover {
+  color: #f0ede5;
+  border-color: rgba(255, 255, 255, 0.4);
 }
