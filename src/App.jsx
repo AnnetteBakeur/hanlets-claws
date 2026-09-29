@@ -1558,7 +1558,7 @@ shape,
       type="checkbox"
       checked={existingCustomer}
       onChange={e => setExistingCustomer(e.target.checked)}
-      className="mt-1"
+      className="ab-existing-customer-checkbox mt-1"
     />
 
     <span className="text-sm text-neutral-300">
